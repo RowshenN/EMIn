@@ -2,13 +2,10 @@ import React from "react";
 
 import "./GalleryCard.css";
 
-const GalleryCard = ({ header, img, index, setIndexSlide, setOpenSlide }) => {
+const GalleryCard = ({ header, img, index }) => {
   return (
-    <div
-      onClick={() => setIndexSlide(index)}
-      className="gallery_card_container"
-    >
-      <div onClick={() => setOpenSlide(true)} className="gallery_img_div">
+    <div className="gallery_card_container">
+      <div className="gallery_img_div">
         <img src={img} alt="surat" />
       </div>
 

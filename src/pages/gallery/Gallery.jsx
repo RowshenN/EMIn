@@ -15,8 +15,8 @@ import Navigation2 from "../../components/Navigation2/Navigation2";
 
 const Gallery = () => {
   const [gallery, setGallery] = useState([]);
-  const [openSlide, setOpenSlide] = useState(false);
-  const [indexSlide, setIndexSlide] = useState(0);
+  // const [openSlide, setOpenSlide] = useState(false);
+  // const [indexSlide, setIndexSlide] = useState(0);
   const { dil } = useContext(SebedimContext);
   useEffect(() => {
     getGallery();
@@ -34,21 +34,21 @@ const Gallery = () => {
 
   // console.log(gallery);
 
-  const nextSlide = () => {
-    if (indexSlide == gallery.length - 1) {
-      setIndexSlide(0);
-    }
-    setIndexSlide((prev) => prev + 1);
-    console.log(indexSlide);
-  };
+  // const nextSlide = () => {
+  //   if (indexSlide == gallery.length - 1) {
+  //     setIndexSlide(0);
+  //   }
+  //   setIndexSlide((prev) => prev + 1);
+  //   console.log(indexSlide);
+  // };
 
-  const prevSlide = () => {
-    if (indexSlide == 0) {
-      setIndexSlide(gallery.length - 1);
-    }
-    setIndexSlide((prev) => prev - 1);
-    console.log(indexSlide);
-  };
+  // const prevSlide = () => {
+  //   if (indexSlide == 0) {
+  //     setIndexSlide(gallery.length - 1);
+  //   }
+  //   setIndexSlide((prev) => prev - 1);
+  //   console.log(indexSlide);
+  // };
 
   return (
     <React.Fragment>
@@ -64,7 +64,7 @@ const Gallery = () => {
                   key={item.id + "t"}
                   img={item.img}
                   index={i}
-                  setIndexSlide={setIndexSlide}
+                  // setIndexSlide={setIndexSlide}
                   header={
                     dil === "tm"
                       ? item?.name_tm
@@ -72,14 +72,14 @@ const Gallery = () => {
                       ? item?.name_ru
                       : item?.name_en
                   }
-                  setOpenSlide={setOpenSlide}
+                  // setOpenSlide={setOpenSlide}
                 />
               </React.Fragment>
             );
           })}
         </div>
 
-        {openSlide && (
+        {/* {openSlide && (
           <div data-aos="fade-up" className="gallery_image_slider">
             <div className="gallery_image_slider_inner">
               <button
@@ -110,7 +110,7 @@ const Gallery = () => {
               </button>
             </div>
           </div>
-        )}
+        )} */}
       </div>
       <Footer />
     </React.Fragment>
