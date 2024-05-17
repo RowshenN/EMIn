@@ -42,6 +42,22 @@
     color: #fff;
 }
 
+.address_icons_inner_div {
+    display: flex;
+    position: absolute;
+    right: 140px;
+    top: 8px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.address_icons_inner_div>a {
+    width: 27px;
+    height: 27px;
+    object-fit: contain;
+}
+
 @media only screen and (max-width: 991px) {
     .address_container {
         display: none;

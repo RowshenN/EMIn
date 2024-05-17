@@ -15,17 +15,11 @@
     height: 100%;
 }
 .gallery_img_div img{
-
     width: 100%;
     object-fit: cover;
     background-size: cover;
     height: 100%;
     background-position: center;
-}
-
-.gallery_img_div:hover .gallery_img_div img{
-    transform: scale(0.9);
-    cursor: pointer;
 }
 
 .gallery_img_description {

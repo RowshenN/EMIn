@@ -118,14 +118,12 @@ const Navigation2 = () => {
           <div className="nav_lang_div">
             <div
               // style={{ color: "white" }}
-              onMouseEnter={() => setLang(true)}
-              onMouseOut={() => setLang(false)}
+              onClick={() => setLang(!lang)}
               className="nav_lang_item2 text-[18px] cursor-pointer h-[30px]"
             >
               {dil === "tm" ? "TM" : dil === "ru" ? "RU" : "EN"}
             </div>
             <div
-              onMouseEnter={() => setLang(true)}
               onMouseLeave={() => setLang(false)}
               className={
                 (lang === true ? "flex " : " hidden ") +
@@ -174,43 +172,67 @@ const Navigation2 = () => {
                 className={location.pathname === "/" ? "active" : ""}
                 onClick={() => navigate("/")}
               >
-                Home
+                {dil === "tm" ? "Esasy" : dil === "ru" ? "Главная" : "Home"}
               </li>
               <li
                 className={location.pathname === "/about" ? "active" : ""}
                 onClick={() => navigate("/about")}
               >
-                About
+                {dil === "tm"
+                  ? "Biz barada"
+                  : dil === "ru"
+                  ? "О нас"
+                  : "About Us"}
               </li>
               <li
                 className={location.pathname === "/service" ? "active" : ""}
                 onClick={() => navigate("/service")}
               >
-                Services
+                {dil === "tm"
+                  ? "Hyzmatlar"
+                  : dil === "ru"
+                  ? "Услуги"
+                  : "Services"}
               </li>
               <li
                 className={location.pathname === "/packages" ? "active" : ""}
                 onClick={() => navigate("/packages")}
               >
-                Packages
+                {dil === "tm"
+                  ? "Syýahatlar"
+                  : dil === "ru"
+                  ? "Экскурсии"
+                  : "Tours"}
               </li>
               <li
                 className={location.pathname === "/news" ? "active" : ""}
                 onClick={() => navigate("/news")}
               >
-                News
+                {dil === "tm"
+                  ? "Täzelikler"
+                  : dil === "ru"
+                  ? "Новости"
+                  : "News"}
               </li>
               <li
                 className={location.pathname === "/gallery" ? "active" : ""}
                 onClick={() => navigate("/gallery")}
               >
-                Gallery
+                {dil === "tm"
+                  ? "Suratlar"
+                  : dil === "ru"
+                  ? "Галерея"
+                  : "Gallery"}
               </li>
               <li
                 className={location.pathname === "/contact" ? "active" : ""}
                 onClick={() => navigate("/contact")}
               >
-                Contact
+                {dil === "tm"
+                  ? "Habarlaşmak"
+                  : dil === "ru"
+                  ? "Для Контакт"
+                  : "Contact"}
               </li>
             </ul>
 

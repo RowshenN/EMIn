@@ -5,6 +5,8 @@ import "./Address.css";
 import phone from "../../images/phone.png";
 import email from "../../images/email.png";
 import location from "../../images/location.png";
+import telegram from "../../images/telegram.png";
+import whatsapp from "../../images/whatsapp.png";
 import { axiosInstance } from "../../utils/axiosInstance";
 import { SebedimContext } from "../../context/Context";
 
@@ -56,6 +58,15 @@ const Address = () => {
             </div>
           );
         })}
+
+        <div className="address_icons_inner_div">
+          <a href="https://t.me/+993">
+            <img src={telegram} alt="svg" />
+          </a>
+          <a href="https://wa.me/+993">
+            <img src={whatsapp} alt="svg" />
+          </a>
+        </div>
 
         <div className="address_inner_icons_div">
           <div
