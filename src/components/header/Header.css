@@ -1,0 +1,27 @@
+.header_container h1{
+    font-size: 39px;
+    font-family: "rale-bold",sans-serif;
+    color: #2c3e50;
+    margin-bottom: 48px;
+    text-align: center;
+}
+
+.header_div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+@media only screen and (max-width: 991px) {
+    .header_container h1 {
+        font-size: 31px;
+    }
+}
+
+@media only screen and (max-width: 770px) {
+    .header_container h1  {
+        font-size: 25px;
+        margin-top: 12px;
+    }
+}

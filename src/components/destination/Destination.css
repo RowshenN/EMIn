@@ -1,0 +1,126 @@
+:root {
+    --color-primary: #86B817;
+    --color-text-secondary: #808B8D;
+}
+
+.destination_container {
+    width: 100%;
+    margin-bottom: 60px;
+}
+
+.destination_inner_container {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.destination_photos_container {
+    padding: 0 20px;
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.destination_photo_div1 {
+    /* position: relative; */
+    display: grid;
+    grid-column: span 2;
+    height: auto;
+    overflow: hidden;
+}
+
+.destination_photo_div1:hover .destination_photo_div1>img{
+    transform: scale3d(1.1,1.1,1.1);
+    transition: all .3s ease-in-out;
+}
+
+.destination_photo_div1 img {
+    width: 100%;
+    object-fit: cover;
+    height: 40vh;
+    background-size: cover;
+    background-position: center;
+}
+
+.destination_photo_div2 {
+    /* position: relative; */
+    display: grid;
+    grid-row: span 2;
+}
+
+.destination_photo_div2 img{
+    width: 100%;
+    object-fit: cover;
+    height: 100%;
+}
+
+.destination_photo_div2:hover .destination_photo_div2>img{
+    transform: scale3d(1.1,1.1,1.1);
+    transition: all .3s ease-in-out;
+}
+
+.destination_photo_div img{
+    width: 100%;
+    object-fit: cover;
+    height: 100%;
+}
+
+@media only screen and (max-width: 990px) {
+    .destination_photos_container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .destination_photo_div1 {
+        display: grid;
+        grid-column: span 1;
+    }
+
+    .destination_photo_div1 img {
+        width: 100%;
+        object-fit: cover;
+        height: 100%;
+    }
+
+    .destination_photo_div2 {
+        display: grid;
+        grid-row: span 3;
+    }
+}
+
+@media only screen and (max-width: 837px) {
+    .destination_photos_container {
+        grid-template-columns: repeat(auto-fit, minmax(355px, 1fr));
+    }
+
+    .destination_photo_div1 {
+        display: grid;
+        grid-column: span 1;
+    }
+
+    .destination_photo_div1 img {
+        width: 100%;
+        object-fit: cover;
+        height: 100%;
+    }
+
+    .destination_photo_div2 {
+        display: grid;
+        grid-row: span 1;
+    }
+}
+
+@media only screen and (max-width: 435px) {
+    .destination_photos_container {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+}
+
+@media only screen and (max-width: 370px) {
+    .destination_photos_container {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}

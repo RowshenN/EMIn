@@ -1,0 +1,40 @@
+:root {
+    --color-primary: #86B817;
+    --color-text-secondary: #808B8D;
+}
+
+.services_container {
+    width: 100%;
+    margin-bottom: 60px;
+}
+
+.services_container_inner {
+    width: 90%;
+    margin: 30px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 20px;
+}
+
+.service_card_container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    -webkit-display: grid;
+    -ms-display: grid;
+    grid-gap: 30px; 
+}
+
+@media only screen and (max-width: 370px) {
+    .service_card_container {
+        grid-template-columns: repeat(auto-fit, minmax(275px, 1fr));
+    }
+}
+
+@media only screen and (max-width: 340px) {
+    .service_card_container {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+}

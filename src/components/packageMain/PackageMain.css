@@ -1,0 +1,30 @@
+.packages_container {
+    width: 100%;
+    margin-bottom: 60px;
+}
+
+.packages_inner_container {
+    width: 90%;
+    margin: 30px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}  
+
+.packages_inner_cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+}
+
+@media only screen and (max-width: 844px) {
+    .packages_container {
+        padding: 0;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .packages_inner_cards {
+        grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+    }
+}

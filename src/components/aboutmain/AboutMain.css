@@ -1,0 +1,152 @@
+:root {
+    --color-primary: #86B817;
+    --color-text-secondary: #808B8D;
+}
+
+.about_container {
+    width: 100%;
+    margin-bottom: 60px;
+}
+
+.about_container_inner {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.about_img_div {
+    width: 50%;
+    padding: 0 24px;
+}
+
+.about_img_div img {
+    width: 100%;
+    object-fit: contain;
+}
+
+.about_inner_text_container {
+    padding: 0 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: baseline;
+    width: 70%;
+}
+
+.about_text_header_div {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.about_text_text_div {
+    width: 90%;
+}
+
+.about_text_text_div h1 {
+    font-size: 39px;
+    font-family: "rale-bold",sans-serif;
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+.about_text_text_div h1 span {
+    color: var(--color-primary);
+}
+
+.about_text_text_div p {
+    margin-bottom: 20px;
+    font-size: 16px;
+    font-family: "rale-light",sans-serif;
+    color: var(--color-text-secondary);
+}
+
+.about_service_div {
+    margin-bottom: 20px;
+    display: grid;
+    gap: 10px;
+    /* max-width: 50%; */
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.about_button {
+    width: 176px;
+    height: 57px;
+    color: #fff;
+    background-color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-family: "rale-regular",sans-serif;
+}
+
+@media only screen and (max-width: 991px) {
+    .about_text_text_div h1 {
+        font-size: 31px;
+    }
+
+    .about_text_text_div p {
+        font-size: 15px;
+    }
+
+    .about_text_header_div {
+        justify-content: center;
+    }
+
+    .about_container_inner {
+        flex-direction: column;
+        display: flex;
+        align-items: baseline;
+        justify-content: flex-start;
+    }
+
+    .about_img_div {
+        margin-bottom: 30px;
+        width: 100%;
+    }
+
+    .about_inner_text_container {
+        width: 100%;
+    }
+
+    .about_button {
+        width: 146px;
+        height: 40px;
+        font-size: 15px;
+    }
+}
+
+@media only screen and (max-width: 770px) {
+    .about_container_inner {
+        width: 80%;
+    }
+
+    .about_text_text_div h1 {
+        font-size: 25px;
+    }
+
+    .about_text_text_div p {
+        font-size: 14px;
+    }
+
+    .about_button {
+        width: 106px;
+        height: 30px;
+        font-size: 14px;
+    }
+}
+
+@media only screen and (max-width: 550px) {
+    .about_img_div {
+        padding: 0;
+    }
+
+    .about_inner_text_container {
+        padding: 0;
+    }
+}

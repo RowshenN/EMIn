@@ -1,0 +1,40 @@
+.cyzyk_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.iki_cyzyk_cep {
+    gap: 8px;
+    display: flex;
+    flex-direction: column;
+    transform: rotateY(180deg);
+}
+
+.iki_cyzyk_sag {
+    gap: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+.birinji_cyzyk, .ikinji_cyzyk {
+    background-color: #86B817;
+}
+
+.birinji_cyzyk {
+    width: 40px;
+    height: 2px;
+}
+
+.ikinji_cyzyk {
+    height: 1.5px;
+    width: 65px;
+}
+
+.cyzyk_container p {
+    color: var(--color-primary);
+    font-size: 16px;
+    font-family: "rale-bold",sans-serif;
+    white-space: nowrap;
+}
