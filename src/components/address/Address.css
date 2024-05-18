@@ -39,14 +39,15 @@
 }
 
 .address_inner_icons_div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
     color: #fff;
 }
 
 .address_icons_inner_div {
     display: flex;
-    position: absolute;
-    right: 140px;
-    top: 8px;
     align-items: center;
     justify-content: center;
     gap: 10px;

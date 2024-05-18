@@ -19,7 +19,7 @@ const PackageMain = () => {
       .get("guest/tours/getAll")
       .then((res) => {
         setPakages(res.data);
-        console.log(res.data);
+        console.log(res.data[0][0].price);
       })
       .catch((err) => console.log(err));
   };
@@ -61,7 +61,7 @@ const PackageMain = () => {
                     ? item?.desc_ru
                     : item?.desc_en
                 }
-                price={item?.price}
+                price={item?.price == 0 ? "" : item?.price}
               />
             );
           })}

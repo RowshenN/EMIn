@@ -57,19 +57,19 @@ const Address = () => {
           </div>
         </div>
 
-        <div className="address_icons_inner_div">
-          <a href={`https://t.me/${aboutUs.teleNum}`}>
-            <img src={telegram} alt="svg" />
-          </a>
-          <a href={`https://wa.me/${aboutUs.whatNum}`}>
-            <img src={whatsapp} alt="svg" />
-          </a>
-        </div>
-
         <div className="address_inner_icons_div">
+          <div className="address_icons_inner_div">
+            <a href={`https://t.me/${aboutUs.teleNum}`}>
+              <img src={telegram} alt="svg" />
+            </a>
+            <a href={`https://wa.me/${aboutUs.whatNum}`}>
+              <img src={whatsapp} alt="svg" />
+            </a>
+          </div>
+
           <div
             onClick={() => setLang(!lang)}
-            className="absolute top-2 text-[18px] right-[7%] cursor-pointer h-[30px]"
+            className="text-[18px] right-[7%] cursor-pointer h-[30px]"
           >
             {dil === "tm" ? "TM" : dil === "ru" ? "RU" : "EN"}
           </div>
