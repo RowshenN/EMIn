@@ -178,7 +178,7 @@ const Contact = () => {
             <iframe
               title="karta"
               className="contact_map"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d787.1252198375015!2d58.37216432147364!3d37.89535366633695!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f6ffd7fce0e0049%3A0x2f5c389e27643b5d!2sI%C5%9F%20merkezi!5e0!3m2!1sen!2s!4v1715597978412!5m2!1sen!2s"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3461.828623581166!2d58.3219098662465!3d37.97640742206497!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f700199b3355ad7%3A0x2b4a8e4fb892d4ff!2sGurtly%2045!5e0!3m2!1sen!2s!4v1716030764356!5m2!1sen!2s"
               allowfullscreen=""
               loading="lazy"
               referrerpolicy="no-referrer-when-downgrade"
