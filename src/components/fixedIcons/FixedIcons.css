@@ -1,0 +1,9 @@
+.static_icons_div {
+    visibility: hidden;
+}
+
+@media only screen and (max-width: 990px) {
+    .static_icons_div {
+        visibility: visible;
+    }
+}

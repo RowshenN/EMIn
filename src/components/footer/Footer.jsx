@@ -8,6 +8,8 @@ import { FaGreaterThan } from "react-icons/fa6";
 import phone from "../../images/phone.png";
 import email from "../../images/email.png";
 import location from "../../images/location.png";
+import telegram2 from "../../images/telegram.svg";
+import whatsapp from "../../images/whatsapp.svg";
 import { axiosInstance } from "../../utils/axiosInstance";
 import { SebedimContext } from "../../context/Context";
 
@@ -36,8 +38,8 @@ const Footer = () => {
     await axiosInstance
       .get("guest/contact")
       .then((res) => {
+        setAboutUs(res.data[0]);
         console.log(res.data);
-        setAboutUs(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -118,52 +120,70 @@ const Footer = () => {
                 ? "Для Контакт"
                 : "Contact"}
             </h1>
-            {aboutUs.map((item) => {
-              return (
-                <div key={item.id} className="footer_contact_inner_div">
-                  <div className="footer_contact">
-                    <img src={location} alt="surat" />
-                    <p>
-                      {dil === "tm"
-                        ? item.adress
-                        : dil === "ru"
-                        ? "Дом 25, Гуртлы жилой комплекс"
-                        : "Gurtly residential complex 25th house"}
-                    </p>
-                  </div>
+            <div key={aboutUs.id} className="footer_contact_inner_div">
+              <div className="footer_contact">
+                <img src={location} alt="surat" />
+                <p>
+                  {dil === "tm"
+                    ? aboutUs.adress
+                    : dil === "ru"
+                    ? "Дом 25, Гуртлы жилой комплекс"
+                    : "Gurtly residential complex 25th house"}
+                </p>
+              </div>
 
-                  <div className="footer_contact">
-                    <img src={phone} alt="surat" />
-                    <p>{item.telNum}</p>
-                  </div>
+              <div className="footer_contact">
+                <img src={phone} alt="surat" />
+                <p>{aboutUs.telNum}</p>
+              </div>
 
-                  <div className="footer_contact">
-                    <img src={email} alt="surat" />
-                    <p>{item.email}</p>
-                  </div>
-                </div>
-              );
-            })}
+              <div className="footer_contact">
+                <img src={telegram2} alt="surat" />
+                <p>
+                  <a href={`https://t.me/${aboutUs.teleNum}`}>
+                    {aboutUs.teleNum}
+                  </a>
+                </p>
+              </div>
+
+              <div className="footer_contact">
+                <img src={whatsapp} alt="surat" />
+                <p>
+                  <a href={`https://t.me/${aboutUs.whatNum}`}>
+                    {aboutUs.teleNum}
+                  </a>
+                </p>
+              </div>
+
+              <div className="footer_contact">
+                <img src={email} alt="surat" />
+                <p>
+                  <a href={`mailto:${aboutUs.email}`}>{aboutUs.email}</a>
+                </p>
+              </div>
+            </div>
           </div>
         )}
 
-        <div className="footer_gallery_div">
-          <h1>
-            {dil === "tm" ? "Suratlar" : dil === "ru" ? "Галерея" : "Gallery"}
-          </h1>
-          <div
-            onClick={() => navigate("/gallery")}
-            className="footer_gallery_iner_div"
-          >
-            {gallery.map((item) => {
-              return (
-                <div key={item.id} className="footer_gallery_img_div">
-                  <img src={item.img} alt="about" />
-                </div>
-              );
-            })}
+        {locationUse.pathname !== "/gallery" && (
+          <div className="footer_gallery_div">
+            <h1>
+              {dil === "tm" ? "Suratlar" : dil === "ru" ? "Галерея" : "Gallery"}
+            </h1>
+            <div
+              onClick={() => navigate("/gallery")}
+              className="footer_gallery_iner_div"
+            >
+              {gallery.map((item) => {
+                return (
+                  <div key={item.id} className="footer_gallery_img_div">
+                    <img src={item.img} alt="about" />
+                  </div>
+                );
+              })}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

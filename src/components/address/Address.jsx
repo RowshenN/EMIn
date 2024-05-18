@@ -5,8 +5,8 @@ import "./Address.css";
 import phone from "../../images/phone.png";
 import email from "../../images/email.png";
 import location from "../../images/location.png";
-import telegram from "../../images/telegram.png";
-import whatsapp from "../../images/whatsapp.png";
+import telegram from "../../images/telegram.svg";
+import whatsapp from "../../images/whatsapp.svg";
 import { axiosInstance } from "../../utils/axiosInstance";
 import { SebedimContext } from "../../context/Context";
 
@@ -22,8 +22,8 @@ const Address = () => {
     await axiosInstance
       .get("guest/contact")
       .then((res) => {
+        setAboutUs(res.data[0]);
         console.log(res.data);
-        setAboutUs(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -32,38 +32,36 @@ const Address = () => {
   return (
     <div className="address_container">
       <div className="address_big_div">
-        {Array.from(aboutUs).map((item) => {
-          return (
-            <div key={item.id} className="address_inner">
-              <div className="address_inner_div">
-                <img src={location} alt="location" />
-                <p>
-                  {dil === "tm"
-                    ? item.adress
-                    : dil === "ru"
-                    ? "Дом 25, Гуртлы жилой комплекс"
-                    : "Gurtly residential complex 25th house"}
-                </p>
-              </div>
+        <div key={aboutUs.id} className="address_inner">
+          <div className="address_inner_div">
+            <img src={location} alt="location" />
+            <p>
+              {dil === "tm"
+                ? aboutUs.adress
+                : dil === "ru"
+                ? "Дом 25, Гуртлы жилой комплекс"
+                : "Gurtly residential complex 25th house"}
+            </p>
+          </div>
 
-              <div className="address_inner_div">
-                <img src={phone} alt="location" />
-                <p>{item.telNum}</p>
-              </div>
+          <div className="address_inner_div">
+            <img src={phone} alt="location" />
+            <p>{aboutUs.telNum}</p>
+          </div>
 
-              <div className="address_inner_div">
-                <img src={email} alt="location" />
-                <p>{item.email}</p>
-              </div>
-            </div>
-          );
-        })}
+          <div className="address_inner_div">
+            <img src={email} alt="location" />
+            <p>
+              <a href={`mailto:${aboutUs.email}`}>{aboutUs.email}</a>
+            </p>
+          </div>
+        </div>
 
         <div className="address_icons_inner_div">
-          <a href="https://t.me/+993">
+          <a href={`https://t.me/${aboutUs.teleNum}`}>
             <img src={telegram} alt="svg" />
           </a>
-          <a href="https://wa.me/+993">
+          <a href={`https://wa.me/${aboutUs.whatNum}`}>
             <img src={whatsapp} alt="svg" />
           </a>
         </div>
