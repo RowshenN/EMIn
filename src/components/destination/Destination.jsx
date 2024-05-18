@@ -90,7 +90,7 @@ const Destination = () => {
             </div>
           </div>
 
-          <div data-aos="zoom-in-up" className="destination_photo_div">
+          <div className="destination_photo_div">
             <img src={gallery[3]?.img} alt="surat" />
 
             <div className="destination_img_description">
