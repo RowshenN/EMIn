@@ -6,6 +6,8 @@ import Footer from "../../components/footer/Footer";
 import location from "../../images/location.png";
 import phone from "../../images/phone.png";
 import mail from "../../images/email.png";
+import telegtram from "../../images/telegram.svg";
+import whatsapp from "../../images/whatsapp.svg";
 import { axiosInstance } from "../../utils/axiosInstance";
 import { SebedimContext } from "../../context/Context";
 import Address from "../../components/address/Address";
@@ -30,8 +32,8 @@ const Contact = () => {
     await axiosInstance
       .get("guest/contact")
       .then((res) => {
+        setAboutUs(res.data[0]);
         console.log(res.data);
-        setAboutUs(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -75,71 +77,102 @@ const Contact = () => {
         />
         <div className="contact_inner_container">
           <div className="contact_inner_form_div">
-            {Array.from(aboutUs).map((item) => {
-              return (
-                <div key={item.id} className="contact_form_header">
-                  <h1 className="contact_form_h1">
-                    {dil === "tm"
-                      ? item?.header_tm
-                      : dil === "ru"
-                      ? item?.header_ru
-                      : item?.header_en}
-                  </h1>
-                  <p className="contact_form_p">
-                    {dil === "tm"
-                      ? item?.desc_tm
-                      : dil === "ru"
-                      ? item?.desc_ru
-                      : item?.desc_en}{" "}
-                    s;ldfv,
-                  </p>
+            <div className="contact_form_header">
+              <h1 className="contact_form_h1">
+                {dil === "tm"
+                  ? aboutUs?.header_tm
+                  : dil === "ru"
+                  ? aboutUs?.header_ru
+                  : aboutUs?.header_en}
+              </h1>
+              <p className="contact_form_p">
+                {dil === "tm"
+                  ? aboutUs?.desc_tm
+                  : dil === "ru"
+                  ? aboutUs?.desc_ru
+                  : aboutUs?.desc_en}{" "}
+              </p>
 
-                  <div className="contact_icons_div">
-                    <div className="contact_icon_inner">
-                      <div className="contact_icon">
-                        <img src={location} alt="afef" />
-                      </div>
-                      <div className="contact_icon_text">
-                        <h1>
-                          {dil === "tm"
-                            ? "Salgy"
-                            : dil === "ru"
-                            ? "Адрес"
-                            : "Office"}
-                        </h1>
-                        <p>{item.adress}</p>
-                      </div>
-                    </div>
-
-                    <div className="contact_icon_inner">
-                      <div className="contact_icon">
-                        <img src={phone} alt="fwreg" />
-                      </div>
-                      <div className="contact_icon_text">
-                        <h1>
-                          {dil === "tm"
-                            ? "Telefon"
-                            : dil === "ru"
-                            ? "Мобильный"
-                            : "Mobile"}
-                        </h1>
-                        <p>{item.telNum}</p>
-                      </div>
-                    </div>
-
-                    <div className="contact_icon_inner">
-                      <div className="contact_icon">
-                        <img src={mail} alt="wrger" />
-                      </div>
-                      <div className="contact_icon_text">
-                        <h1>Email</h1>
-                        <p>{item.email}</p>
-                      </div>
-                    </div>
+              <div className="contact_icons_div">
+                <div className="contact_icon_inner">
+                  <div className="contact_icon">
+                    <img src={location} alt="afef" />
+                  </div>
+                  <div className="contact_icon_text">
+                    <h1>
+                      {dil === "tm"
+                        ? "Salgy"
+                        : dil === "ru"
+                        ? "Адрес"
+                        : "Office"}
+                    </h1>
+                    <p>{aboutUs.adress}</p>
                   </div>
                 </div>
-              );
-            })}
+
+                <div className="contact_icon_inner">
+                  <div className="contact_icon">
+                    <img src={phone} alt="fwreg" />
+                  </div>
+                  <div className="contact_icon_text">
+                    <h1>
+                      {dil === "tm"
+                        ? "Telefon"
+                        : dil === "ru"
+                        ? "Мобильный"
+                        : "Mobile"}
+                    </h1>
+                    <p>
+                      <a href={`tel:${aboutUs.telNum?.split(" ")[0]}`}>
+                        {aboutUs.telNum}
+                      </a>
+                    </p>
+                  </div>
+                </div>
+
+                <div className="contact_icon_inner">
+                  <div className="contact_icon">
+                    <img src={telegtram} alt="fwreg" />
+                  </div>
+                  <div className="contact_icon_text">
+                    <h1>
+                      {dil === "tm"
+                        ? "Telegram"
+                        : dil === "ru"
+                        ? "Мобильный"
+                        : "Mobile"}
+                    </h1>
+                    <p>{aboutUs.teleNum}</p>
+                  </div>
+                </div>
+
+                <div className="contact_icon_inner">
+                  <div className="contact_icon">
+                    <img src={whatsapp} alt="fwreg" />
+                  </div>
+                  <div className="contact_icon_text">
+                    <h1>
+                      {dil === "tm"
+                        ? "Telefon"
+                        : dil === "ru"
+                        ? "Мобильный"
+                        : "Mobile"}
+                    </h1>
+                    <p>{aboutUs.whatNum}</p>
+                  </div>
+                </div>
+
+                <div className="contact_icon_inner">
+                  <div className="contact_icon">
+                    <img src={mail} alt="wrger" />
+                  </div>
+                  <div className="contact_icon_text">
+                    <h1>Email</h1>
+                    <p>{aboutUs.email}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
           <div className="contact_form_map_container">
             <iframe

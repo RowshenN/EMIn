@@ -56,7 +56,7 @@
     justify-content: flex-start;
     width: 100%;
     flex-direction: column;
-    gap: 24px;
+    gap: 15px;
 }
 
 .contact_icon_inner {
@@ -67,8 +67,8 @@
 }
 
 .contact_icon {
-    width: 50px;
-    height: 50px;
+    width: 45px;
+    height: 45px;
     background-color: var(--color-primary);
     display: flex;
     align-items: center;
@@ -76,12 +76,12 @@
 }
 
 .contact_icon img{
-    width: 40%;
+    width: 50%;
     object-fit: contain;
 }
 
 .contact_icon_text h1 {
-    font-size: 20px;
+    font-size: 18px;
     font-family: "rale-bold",sans-serif;
     color: var(--color-primary);
     margin: 0;
@@ -89,7 +89,7 @@
 
 .contact_icon_text p {
     color: var(--color-text-secondary);
-    font-size: 16px;
+    font-size: 14px;
     font-family: "rale-regular";
 }
 
