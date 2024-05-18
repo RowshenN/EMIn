@@ -105,7 +105,7 @@ const Destination = () => {
           </div>
         </div>
 
-        <div className="w-full flex items-center justify-end">
+        <div className="w-full flex items-center justify-center md:justify-end">
           {location.pathname !== "/gallery" && (
             <button
               onClick={() => navigate("/gallery")}

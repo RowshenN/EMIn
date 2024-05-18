@@ -24,6 +24,10 @@
 }
 
 @media only screen and (max-width: 500px) {
+    .packages_container {
+        margin-bottom: 0;
+    }
+
     .packages_inner_cards {
         grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
     }

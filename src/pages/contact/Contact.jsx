@@ -139,8 +139,8 @@ const Contact = () => {
                       {dil === "tm"
                         ? "Telegram"
                         : dil === "ru"
-                        ? "Мобильный"
-                        : "Mobile"}
+                        ? "Телеграмма"
+                        : "Telegram"}
                     </h1>
                     <p>{aboutUs.teleNum}</p>
                   </div>
@@ -153,10 +153,10 @@ const Contact = () => {
                   <div className="contact_icon_text">
                     <h1>
                       {dil === "tm"
-                        ? "Telefon"
+                        ? "Whatsapp"
                         : dil === "ru"
-                        ? "Мобильный"
-                        : "Mobile"}
+                        ? "Whatsapp"
+                        : "Whatsapp"}
                     </h1>
                     <p>{aboutUs.whatNum}</p>
                   </div>
