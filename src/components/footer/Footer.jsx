@@ -109,6 +109,16 @@ const Footer = () => {
               {dil === "tm" ? "Täzelikler" : dil === "ru" ? "Новости" : "News"}
             </p>
           </div>
+
+          <div
+            onClick={() => navigate("/history")}
+            className="footer_company_inner"
+          >
+            <FaGreaterThan className="company_inner_icon" />
+            <p>
+              {dil === "tm" ? "Taryh" : dil === "ru" ? "История" : "History"}
+            </p>
+          </div>
         </div>
 
         {locationUse.pathname !== "/contact" && (
@@ -117,7 +127,7 @@ const Footer = () => {
               {dil === "tm"
                 ? "Habarlaşmak"
                 : dil === "ru"
-                ? "Для Контакт"
+                ? "Контакты"
                 : "Contact"}
             </h1>
             <div key={aboutUs.id} className="footer_contact_inner_div">

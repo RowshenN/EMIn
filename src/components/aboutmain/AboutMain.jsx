@@ -55,6 +55,13 @@ const AboutMain = () => {
 
                   <div data-aos="fade-up" className="about_text_text_div">
                     <h1>
+                      <span>
+                        {dil === "tm"
+                          ? "Meşhur-Syýahata "
+                          : dil === "ru"
+                          ? ""
+                          : ""}
+                      </span>
                       {dil === "tm"
                         ? "Hoş Geldiňiz"
                         : dil === "ru"
@@ -64,8 +71,8 @@ const AboutMain = () => {
                         {dil === "tm"
                           ? ""
                           : dil === "ru"
-                          ? "Турист"
-                          : "Tourist"}
+                          ? "Мешхур сыяхат"
+                          : "Meshhur tour"}
                       </span>
                       {/* {aboutUs.name_en} */}
                     </h1>

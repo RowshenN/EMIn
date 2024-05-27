@@ -7,6 +7,7 @@
     border-bottom: 1px solid rgba(256, 256, 256, .1);
     left: 0;
     z-index: 100;
+    /* padding: 5px 0 0 0; */
     /* background: linear-gradient(rgba(20, 20, 31, .7), rgba(20, 20, 31, .7)); */
 }
 
@@ -222,7 +223,7 @@
     font-family: "rale-bold",sans-serif;
 }
 
-@media only screen and (max-width: 990px) {
+@media only screen and (max-width: 1040px) {
     .nav_inner {
         top: 0 !important;
     }

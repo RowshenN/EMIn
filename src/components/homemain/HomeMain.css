@@ -1,3 +1,34 @@
+.carousel {
+    position: absolute;
+    top: -60px;
+    left: 0;
+    bottom: 0;
+    z-index: -2;
+    width: 100%;
+    height: 70%;
+}
+
+.carousel_img_div {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.carousel-overlay {
+    z-index: 1;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    background: linear-gradient( rgba(20, 20, 31, 0.7), rgba(20, 20, 31, 0.7));
+}
+
+.carousel_img_div>img{
+    object-fit: contain;
+    width: 100%;
+}
+
 .home_container {
     height: 100vh;
     background-position: center center;

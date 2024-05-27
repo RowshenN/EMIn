@@ -57,9 +57,9 @@ const Gallery = () => {
             return (
               <React.Fragment>
                 <GalleryCard
-                  key={item.id + "t"}
+                  key={item.id}
+                  uuid={item.uuid}
                   img={item.img}
-                  index={i}
                   // setIndexSlide={setIndexSlide}
                   header={
                     dil === "tm"

@@ -43,3 +43,9 @@
     white-space: wrap;
     overflow-wrap: break-word;
 }
+
+@media only screen and (max-width: 480px) {
+    .news_card_text_div h1 {
+        font-size: 18px !important;
+    }
+}

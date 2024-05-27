@@ -10,6 +10,8 @@ const Packages = lazy(() => import("../pages/packages/Packages"));
 const News = lazy(() => import("../pages/news/News"));
 const Gallery = lazy(() => import("../pages/gallery/Gallery"));
 const Contact = lazy(() => import("../pages/contact/Contact"));
+const GalleryInner = lazy(() => import("../pages/gallery/GalleryInner"));
+const History = lazy(() => import("../pages/history/History"));
 
 const Router = () => {
   return (
@@ -56,6 +58,17 @@ const Router = () => {
             </Suspense>
           }
         />
+
+        <Route
+          path="/history"
+          exact
+          element={
+            <Suspense fallback={<PageLoading />}>
+              {" "}
+              <History />
+            </Suspense>
+          }
+        />
         <Route
           path="/gallery"
           exact
@@ -73,6 +86,17 @@ const Router = () => {
             <Suspense fallback={<PageLoading />}>
               {" "}
               <Contact />
+            </Suspense>
+          }
+        />
+
+        <Route
+          path="/galleryInner/:uuid"
+          exact
+          element={
+            <Suspense fallback={<PageLoading />}>
+              {" "}
+              <GalleryInner />
             </Suspense>
           }
         />

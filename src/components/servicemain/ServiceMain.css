@@ -1,6 +1,6 @@
 :root {
     --color-primary: #86B817;
-    --color-text-secondary: #808B8D;
+    --color-text-secondary: #484a4a;
 }
 
 .services_container {
@@ -21,9 +21,9 @@
 .service_card_container {
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     -webkit-display: grid;
     -ms-display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     grid-gap: 30px; 
 }
 

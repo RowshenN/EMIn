@@ -90,6 +90,13 @@ const Navigation = () => {
             >
               {dil === "tm" ? "Täzelikler" : dil === "ru" ? "Новости" : "News"}
             </li>
+
+            <li
+              className={location.pathname === "/history" ? "active" : ""}
+              onClick={() => navigate("/history")}
+            >
+              {dil === "tm" ? "Taryh" : dil === "ru" ? "История" : "History"}
+            </li>
             <li
               className={location.pathname === "/gallery" ? "active" : ""}
               onClick={() => navigate("/gallery")}
@@ -103,7 +110,7 @@ const Navigation = () => {
               {dil === "tm"
                 ? "Habarlaşmak"
                 : dil === "ru"
-                ? "Для Контакт"
+                ? "Контакты"
                 : "Contact"}
             </li>
           </ul>
@@ -209,6 +216,13 @@ const Navigation = () => {
                   ? "Новости"
                   : "News"}
               </li>
+
+              <li
+                className={location.pathname === "/history" ? "active" : ""}
+                onClick={() => navigate("/history")}
+              >
+                {dil === "tm" ? "Taryh" : dil === "ru" ? "История" : "History"}
+              </li>
               <li
                 className={location.pathname === "/gallery" ? "active" : ""}
                 onClick={() => navigate("/gallery")}
@@ -226,7 +240,7 @@ const Navigation = () => {
                 {dil === "tm"
                   ? "Habarlaşmak"
                   : dil === "ru"
-                  ? "Для Контакт"
+                  ? "Контакты"
                   : "Contact"}
               </li>
             </ul>

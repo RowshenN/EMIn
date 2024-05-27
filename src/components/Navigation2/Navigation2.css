@@ -226,7 +226,7 @@
     font-family: "rale-bold",sans-serif;
 }
 
-@media only screen and (max-width: 990px) {
+@media only screen and (max-width: 1040px) {
     .nav_inner2 {
         top: 0 !important;
     }

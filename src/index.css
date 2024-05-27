@@ -20,26 +20,26 @@ body {
 @font-face {
     font-family: rale-light;
     /* 300 */
-    src: url("./fonts/Raleway-Light.ttf");
+    src: url("./fonts/Inter-Light.ttf");
   }
   @font-face {
     font-family: rale-regular;
     /* 400 */
-    src: url("./fonts/Raleway-Regular.ttf");
+    src: url("./fonts/Inter-Regular.ttf");
   }
   @font-face {
     font-family: rale-medium; 
     /* 500 */
-    src: url("./fonts/Raleway-Medium.ttf");
+    src: url("./fonts/Inter-Medium.ttf");
   }
   @font-face {
     font-family: rale-semibold;
     /* 600 */
-    src: url("./fonts/Raleway-SemiBold.ttf");
+    src: url("./fonts/Inter-SemiBold.ttf");
   }
   @font-face {
     font-family: rale-bold;
     /* 700 */
-    src: url("./fonts/Raleway-Bold.ttf");
+    src: url("./fonts/Inter-Bold.ttf");
   }
   
