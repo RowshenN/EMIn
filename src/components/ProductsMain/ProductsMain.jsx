@@ -77,25 +77,11 @@ const ProductsMain = ({ visibility }) => {
             className="relative h-[460px] w-full"
             scrollbar={false}
           >
-            <SwiperSlide>
-              <ProductSliderCard />{" "}
-            </SwiperSlide>
-
-            <SwiperSlide>
-              <ProductSliderCard />{" "}
-            </SwiperSlide>
-
-            <SwiperSlide>
-              <ProductSliderCard />{" "}
-            </SwiperSlide>
-
-            <SwiperSlide>
-              <ProductSliderCard />{" "}
-            </SwiperSlide>
-
-            <SwiperSlide>
-              <ProductSliderCard />{" "}
-            </SwiperSlide>
+            {catDatas?.map((item, i) => (
+              <SwiperSlide className="h-full">
+                <ProductSliderCard item={item} key={i} />
+              </SwiperSlide>
+            ))}
           </Swiper>
 
           <div
@@ -110,7 +96,7 @@ const ProductsMain = ({ visibility }) => {
         </div>
 
         <div className="grid lg:hidden sm:grid-cols-2 md:grid-cols-3 gap-3   md:gap-4">
-          {catDatas.map((item, i) => (
+          {catDatas?.map((item, i) => (
             <ProductSliderCard item={item} key={i} />
           ))}
         </div>

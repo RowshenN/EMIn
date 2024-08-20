@@ -34,7 +34,7 @@ const Naviagation = () => {
               alt="cancel"
             />
             <div className="drawerContainer">
-              <p>Home</p>
+              <p className="">Home</p>
               <p>About Us</p>
               <p>Services</p>
               <p>Products</p>

@@ -7,14 +7,15 @@ import surat from "../../images/modalImg.png";
 
 const ProductSliderCard = ({ item }) => {
   const [modalOpen, setModalOpen] = useState(false);
+  console.log(item);
   return (
     <>
       <div
         onClick={() => setModalOpen(!modalOpen)}
-        className="relative cursor-pointer w-full z-10"
+        className="relative cursor-pointer w-full h-[400px] z-10"
       >
         <img
-          src={item?.img}
+          src={item?.img || surat}
           alt="surat"
           className="w-full object-cover rounded-[20px] -z-10 h-full "
         />
@@ -38,7 +39,7 @@ const ProductSliderCard = ({ item }) => {
         <div className="absolute top-0 right-0 left-0 bottom-0 rounded-[20px] bg-black bg-opacity-30"></div>
       </div>
 
-      {modalOpen && (
+      {/* {modalOpen && (
         <div className="  w-full fixed z-50 top-0 bottom-0 left-0 right-0 bg-black/50 flex items-center justify-center ">
           <div className="bg-white scrollHidden overflow-auto my-6 max-h-[70vh] relative p-[60px] rounded-[20px] w-[65%] h-fit">
             <img
@@ -68,7 +69,7 @@ const ProductSliderCard = ({ item }) => {
             </div>
           </div>
         </div>
-      )}
+      )} */}
     </>
   );
 };
