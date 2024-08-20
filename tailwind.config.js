@@ -6,6 +6,10 @@ module.exports = {
       colors: {
         red: "",
       },
+      gridTemplateColumns: {
+        "auto-fill-250": "repeat(auto-fill,minmax(250px,1fr))",
+        "auto-fit-250": "repeat(auto-fit,minmax(250px,1fr))",
+      },
       screens: {
         sm: "320px",
         // => @media (min-width: 320px) { ... }

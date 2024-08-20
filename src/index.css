@@ -12,34 +12,64 @@ p,h1,h2 {
     margin: 0;
     padding: 0;
 }
-
+.scrollHidden::-webkit-scrollbar {
+  display: none;
+}
 body {
+  width: 100%;
+  max-width: 1420px;
   overflow-x: hidden;
+  background-color: #007337;
 }
 
 @font-face {
-    font-family: rale-light;
+    font-family: outfit-light;
     /* 300 */
-    src: url("./fonts/Inter-Light.ttf");
+    src: url("./fonts/Outfit-Light.ttf");
   }
   @font-face {
-    font-family: rale-regular;
+    font-family: outfit-regular;
     /* 400 */
-    src: url("./fonts/Inter-Regular.ttf");
+    src: url("./fonts/Outfit-Regular.ttf");
   }
   @font-face {
-    font-family: rale-medium; 
+    font-family: outfit-medium; 
     /* 500 */
-    src: url("./fonts/Inter-Medium.ttf");
+    src: url("./fonts/Outfit-Medium.ttf");
   }
   @font-face {
-    font-family: rale-semibold;
+    font-family: outfit-semibold;
     /* 600 */
-    src: url("./fonts/Inter-SemiBold.ttf");
+    src: url("./fonts/Outfit-SemiBold.ttf");
   }
   @font-face {
-    font-family: rale-bold;
+    font-family: outfit-bold;
     /* 700 */
-    src: url("./fonts/Inter-Bold.ttf");
+    src: url("./fonts/Outfit-Bold.ttf");
+  }
+  @font-face {
+    font-family: manrope-light;
+    /* 300 */
+    src: url("./fonts/Manrope-Light.ttf");
+  }
+  @font-face {
+    font-family: manrope-regular;
+    /* 400 */
+    src: url("./fonts/Manrope-Regular.ttf");
+  }
+  @font-face {
+    font-family: manrope-medium; 
+    /* 500 */
+    src: url("./fonts/Manrope-Medium.ttf");
+  }
+  @font-face {
+    font-family: manrope-semibold;
+    /* 600 */
+    src: url("./fonts/Manrope-SemiBold.ttf");
+  }
+  @font-face {
+    font-family: manrope-bold;
+    /* 700 */
+    src: url("./fonts/Manrope-Bold.ttf");
   }
   
