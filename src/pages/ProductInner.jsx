@@ -7,16 +7,17 @@ import { axiosInstance } from "../utils/axiosInstance";
 import formatDate from "../components/formatDate";
 import { SebedimContext } from "../context/Context";
 
-const NewInner = () => {
+const ProductInner = () => {
   const { dil } = useContext(SebedimContext);
   const { id } = useParams();
   console.log(id);
   const [newsData, setNewsData] = useState();
   async function getAllNews(params) {
-    axiosInstance.get("/guest/news/getonenew/" + id).then((res) => {
+    axiosInstance.get("/guest/product/getOne/" + id).then((res) => {
       setNewsData(res?.data);
     });
   }
+
   useEffect(() => {
     getAllNews();
   }, []);
@@ -25,9 +26,9 @@ const NewInner = () => {
   return (
     <div className="w-full px-6 lg:w-[60%] mx-auto">
       <Header
-        header={dil == "en" ? "News" : "Habarlar"}
+        header={dil == "en" ? "Product" : "Haryt"}
         visible={true}
-        pathname={"/news-list"}
+        pathname={"/"}
       />
 
       <div className="w-full">
@@ -40,7 +41,11 @@ const NewInner = () => {
         </h1>
 
         <div>
-          <img src={newsData?.img} alt="surat" />
+          <img
+            className="h-[400px] object-cover w-full"
+            src={newsData?.img}
+            alt="surat"
+          />
         </div>
 
         <p className="text-white font-[outfit-light] text-[16px] my-[50px]">
@@ -51,4 +56,4 @@ const NewInner = () => {
   );
 };
 
-export default NewInner;
+export default ProductInner;

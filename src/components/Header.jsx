@@ -6,6 +6,7 @@ import button from "../images/left button.svg";
 
 const Header = ({ header, visible, pathname }) => {
   const navigate = useNavigate();
+
   return (
     <div className="w-full relative flex items-center justify-center mt-[60px] mb-[30px]">
       {visible && (

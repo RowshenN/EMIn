@@ -1,14 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import arrow from "../../images/news-arrow.svg";
+import { Link } from "react-router-dom";
+import { SebedimContext } from "../../context/Context";
 
-const SliderProductCard = () => {
+const SliderProductCard = ({ item }) => {
+  const { dil } = useContext(SebedimContext);
   return (
-    <div className="relative cursor-pointer">
+    <Link
+      to={`/category-inner?categoryId=${item?.id}`}
+      className="relative cursor-pointer h-full"
+    >
       <img
-        src="https://s3-alpha-sig.figma.com/img/e0cb/6948/7d7da702ca4bc15ac73887ee93cee6a2?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Cb9P7E7W9g2rvDccPm1Foz6dekXfXzXQaE31Ksgjrt5nGb1e~l4mi8HY~9~eUCov0mhshpNRgj49FQZnoXMZ-FTMV8L~sD3tS-S85XlckrULhKPiirBbozgCqODd9O~7XVppx1Anz2mq1fZ4u2DQtKz1vv4DiHvG4VsX2laiRNoslfyDzVqEQAueXhy70LvCpmEoSk3PShluT3Afswf-NkiOo1ZbnzDmPRY6G95wKF0lMQjyAQrYmWeKgtCDkUg3F5HqzmNUnF3HN0vxBLoanv5M04Tr9gBn4jAmfnkhBD7~5BYA~Ns0Fnv6OxxT2VFZflAIfjC6-AYVuNZyQKdQuQ__"
+        src={item?.img}
         alt="surat"
-        className="w-full object-cover rounded-[20px]"
+        className="w-full h-full object-cover rounded-[20px]"
       />
       <img
         src={arrow}
@@ -16,9 +22,9 @@ const SliderProductCard = () => {
         className="absolute top-3 right-2 w-[15%] "
       />
       <div className="text-[#007337] text-[13px] font-[manrope-medium] absolute bottom-3 right-3 bg-white bg-opacity-70 w-[91%] py-3 px-4 rounded-xl">
-        <p>Detergent</p>
+        <p>{dil == "en" ? item?.name_en : item?.name_tm}</p>
       </div>
-    </div>
+    </Link>
   );
 };
 

@@ -1,14 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import logo from "../images/footer-logo.svg";
+import { SebedimContext } from "../context/Context";
 
 const Footer = () => {
+  const { dil } = useContext(SebedimContext);
   return (
-    <div className="w-[75%] lg:block hidden bg-[#A0FB00D9] mx-auto rounded-[20px] py-[50px] mb-[50px] px-[70px]">
+    <div className="w-[95%] lg:block hidden bg-[#A0FB00D9] mx-auto rounded-[20px] py-[50px] mb-[50px] px-[70px]">
       <div className="flex items-start justify-between w-full gap-3">
         <div className="w-[40%] flex flex-col gap-[47px] items-baseline justify-start">
           <p className="font-[outfit-regular] text-[#00391A] text-[20px]">
-            Hero of Turkmenistan Atamurat Niyazov 154/4, Aşgabat, Turkmenistan
+            {dil === "en "
+              ? "Hero of Turkmenistan Atamyrat Niyazov 154/4, Aşgabat, Turkmenistan"
+              : "Türkmenistanyň gahrymany Atamyrat Niýazow 154/4, Aşgabat, Türkmenistan"}
           </p>
 
           <div>
@@ -16,7 +20,9 @@ const Footer = () => {
           </div>
 
           <p className="font-[outfit-regular] text-[#00391A] text-[20px]">
-            © 2024 Ragbat-dag, All rights reserved
+            {dil === "en"
+              ? "© 2024 Ragbat-dag, All rights reserved"
+              : "© 2024 Ragbat-dag, rightshli hukuklar goralan"}
           </p>
         </div>
 

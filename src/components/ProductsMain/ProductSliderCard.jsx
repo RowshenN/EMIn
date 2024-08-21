@@ -1,18 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 import arrow from "../../images/news-arrow.svg";
 import right from "../../images/arrow-right.svg";
 import cancel from "../../images/cancel.svg";
 import surat from "../../images/modalImg.png";
 
+import { SebedimContext } from "../../context/Context";
+
 const ProductSliderCard = ({ item }) => {
+  const { dil } = useContext(SebedimContext);
+  const navigate = useNavigate();
   const [modalOpen, setModalOpen] = useState(false);
   console.log(item);
   return (
     <>
       <div
-        onClick={() => setModalOpen(!modalOpen)}
-        className="relative cursor-pointer w-full h-[400px] z-10"
+        onClick={() => navigate("/product-inner/" + item?.id)}
+        className="relative cursor-pointer w-full h-[300px] md:h-[400px] z-10"
       >
         <img
           src={item?.img || surat}
@@ -26,11 +31,11 @@ const ProductSliderCard = ({ item }) => {
         />
         <div className="absolute bottom-3 z-10 right-[-10px] lg:right-3 w-full lg:w-[91%]">
           <p className="text-white break-words font-[manrope-semibold] text-[15px] w-full lg:w-[50%] mb-4">
-            {item?.name_en}
+            {dil === "en" ? item?.name_en : item?.name_tm}
           </p>
           <div className=" py-3 px-4 w-[90%] rounded-xl bg-white bg-opacity-70 flex items-center justify-between">
             <p className="text-[#007337] text-[13px] font-[manrope-medium] ">
-              See Details
+              {dil === "en" ? "See Details" : "Detallara serediň"}
             </p>
             <img src={right} alt="right" />
           </div>

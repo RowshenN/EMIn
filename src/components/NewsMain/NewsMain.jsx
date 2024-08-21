@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 import surat from "../../images/newsimg.png";
@@ -12,34 +12,46 @@ import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
+import { SebedimContext } from "../../context/Context";
 
 // import required modules
 import { Pagination } from "swiper/modules";
 import { axiosInstance } from "../../utils/axiosInstance";
+import formatDate from "../formatDate";
 
 const NewsMain = () => {
+  const { dil } = useContext(SebedimContext);
   const navigate = useNavigate();
   const [newsData, setNewsData] = useState([]);
   async function getAllNews(params) {
     axiosInstance.get("/guest/news/getAll").then((res) => {
-      setNewsData(res?.data);
+      setNewsData(res?.data?.news);
+      console.log(res?.data?.news);
     });
   }
+
   useEffect(() => {
     getAllNews();
   }, []);
+
   return (
     <div className="w-full lg:mb-[150px] mb-[100px]">
       <h1 className="w-full font-[outfit-semibold] text-white lg:text-[35px] text-[28px] mb-8 ">
-        News
+        {dil === "en" ? "News" : "Habarlar"}
       </h1>
 
       <div className="flex flex-col lg:flex-row items-start justify-center gap-6">
         <div
-          onClick={() => navigate("/new-inner/1")}
+          onClick={() => navigate("/new-inner/" + newsData?.[0]?.uuid)}
           className="relative w-full sm:hidden md:block lg:block lg:w-[70%] cursor-pointer"
         >
-          <img src={newsData?.[0]?.img} alt="surat" />
+          <div className="">
+            <img
+              src={newsData?.[0]?.img}
+              alt="surat"
+              className="w-full h-[460px] object-cover"
+            />
+          </div>
           <img
             src={arrow}
             alt="arrow"
@@ -47,122 +59,41 @@ const NewsMain = () => {
           />
           <div className="absolute rounded-xl bottom-6 left-5 bg-white bg-opacity-75 py-[10px] px-4 w-[94%] flex items-end justify-between">
             <p className="w-[70%] font-[outfit-regular] text-[#007337] text-[13px] ">
-              {newsData?.[0]?.name_en}
+              {dil === "en" ? newsData?.[0]?.name_en : newsData?.[0]?.name_tm}
             </p>
 
             <p className="w-[30%] flex items-center justify-end gap-1 pl-[2px] font-[outfit-light] text-[#00391A] text-[13px] text-right">
-              News <img src={dot} alt="dot" />{" "}
-              <span>{newsData?.[0]?.createdAt}</span>
+              {dil === "en" ? "News" : "Habarlar"} <img src={dot} alt="dot" />{" "}
+              <span>{formatDate(newsData?.[0]?.createdAt)}</span>
             </p>
           </div>
         </div>
 
         <div className="lg:w-[30%] w-full h-full">
-          {newsData.map((item, i) => (
+          {Array.from(newsData).map((item, i) => (
             <div
               key={i}
-              className="mb-3 overflow-hidden max-h-[460px] lg:flex hidden flex-col items-start justify-start gap-3 h-full"
+              className="mb-3 scrollHidden overflow-hidden max-h-[460px] lg:flex hidden flex-col items-start justify-start gap-3 h-full"
             >
               <NewsCards
-                header={item.name_en}
-                date={item.createdAt}
-                hour={"12:50"}
+                id={item?.uuid}
+                header={dil === "en" ? item.name_en : item.name_tm}
+                date={formatDate(item.createdAt)}
+                hour={""}
               />
             </div>
           ))}
 
-          <div className="hidden lg:hidden">
-            <Swiper
-              slidesPerView={3}
-              spaceBetween={20}
-              pagination={{
-                clickable: true,
-              }}
-              modules={[Pagination]}
-              className="relative h-[225px] flex w-full"
-              scrollbar={false}
-            >
-              <SwiperSlide>
-                <NewsCards
-                  header={
-                    "Absolut Bank has completed the implementation and adaptation of MaxPatrol SIEM to the updated infrastructure as part of import substitution"
-                  }
-                  date={"11 март 2023"}
-                  hour={"12:50"}
-                />
-              </SwiperSlide>
-
-              <SwiperSlide>
-                <NewsCards
-                  header={
-                    "Absolut Bank has completed the implementation and adaptation of MaxPatrol SIEM to the updated infrastructure as part of import substitution"
-                  }
-                  date={"11 март 2023"}
-                  hour={"12:50"}
-                />
-              </SwiperSlide>
-
-              <SwiperSlide>
-                <NewsCards
-                  header={
-                    "Absolut Bank has completed the implementation and adaptation of MaxPatrol SIEM to the updated infrastructure as part of import substitution"
-                  }
-                  date={"11 март 2023"}
-                  hour={"12:50"}
-                />
-              </SwiperSlide>
-
-              <SwiperSlide>
-                <NewsCards
-                  header={
-                    "Absolut Bank has completed the implementation and adaptation of MaxPatrol SIEM to the updated infrastructure as part of import substitution"
-                  }
-                  date={"11 март 2023"}
-                  hour={"12:50"}
-                />
-              </SwiperSlide>
-
-              <SwiperSlide>
-                <NewsCards
-                  header={
-                    "Absolut Bank has completed the implementation and adaptation of MaxPatrol SIEM to the updated infrastructure as part of import substitution"
-                  }
-                  date={"11 март 2023"}
-                  hour={"12:50"}
-                />
-              </SwiperSlide>
-            </Swiper>
-          </div>
-
           <div className="w-full lg:hidden flex flex-col gap-5 items-center justify-start mb-5">
-            <NewsCards
-              header={
-                "Absolut Bank has completed the implementation and adaptation of MaxPatrol SIEM to the updated infrastructure as part of import substitution"
-              }
-              date={"11 март 2023"}
-              hour={"12:50"}
-            />
-            <NewsCards
-              header={
-                "Absolut Bank has completed the implementation and adaptation of MaxPatrol SIEM to the updated infrastructure as part of import substitution"
-              }
-              date={"11 март 2023"}
-              hour={"12:50"}
-            />
-            <NewsCards
-              header={
-                "Absolut Bank has completed the implementation and adaptation of MaxPatrol SIEM to the updated infrastructure as part of import substitution"
-              }
-              date={"11 март 2023"}
-              hour={"12:50"}
-            />
-            <NewsCards
-              header={
-                "Absolut Bank has completed the implementation and adaptation of MaxPatrol SIEM to the updated infrastructure as part of import substitution"
-              }
-              date={"11 март 2023"}
-              hour={"12:50"}
-            />
+            {Array.from(newsData).map((item, i) => (
+              <NewsCards
+                header={dil === "en" ? item.name_en : item.name_tm}
+                date={formatDate(item.createdAt)}
+                hour={""}
+                id={item?.uuid}
+                key={i}
+              />
+            ))}
           </div>
 
           <button

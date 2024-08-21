@@ -15,6 +15,7 @@ import {
   CategoryInner,
   NewsList,
   NewInner,
+  ProductInner,
 } from "./lazy";
 
 const Router = () => {
@@ -95,6 +96,16 @@ const Router = () => {
               <Suspense fallback={<PageLoading />}>
                 {" "}
                 <NewInner />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/product-inner/:id"
+            exact
+            element={
+              <Suspense fallback={<PageLoading />}>
+                {" "}
+                <ProductInner />
               </Suspense>
             }
           />

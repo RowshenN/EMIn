@@ -15,3 +15,7 @@
 .swiper-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet, .swiper-pagination-horizontal.swiper-pagination-bullets .swiper-pagination-bullet {
     background-color: #fff !important;
 }
+
+.active_nav {
+    background-color: #A0FB00;
+}
