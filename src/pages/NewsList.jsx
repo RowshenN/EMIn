@@ -12,7 +12,7 @@ const NewsList = () => {
   const [newsData, setNewsData] = useState([]);
   async function getAllNews(params) {
     axiosInstance.get("/guest/news/getAll").then((res) => {
-      setNewsData(res?.data);
+      setNewsData(res?.data?.news);
     });
   }
   useEffect(() => {
