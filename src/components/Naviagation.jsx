@@ -35,7 +35,7 @@ const Naviagation = () => {
           />
         </div>
 
-        <div className="xl:flex hidden items-center justify-center gap-6">
+        <div className="lg:flex hidden items-center justify-center gap-6">
           <p
             onClick={() => navigate("/")}
             className="font-[manrope-medium] text-[#00391A] text-[14px] cursor-pointer "
@@ -71,7 +71,7 @@ const Naviagation = () => {
         <div className="flex items-center justify-center gap-3">
           <form
             onSubmit={Search}
-            className="bg-white hidden md:flex items-center justify-center gap-2 rounded-xl px-[14px] py-[11px]"
+            className="bg-white hidden lg:flex items-center justify-center gap-2 rounded-xl px-[14px] py-[11px]"
           >
             <img src={search} alt="search" className="w-[8%]" />
             <input
@@ -85,7 +85,7 @@ const Naviagation = () => {
 
           <button
             onClick={() => setLang(!lang)}
-            className="outline-0 relative hidden rounded-xl py-2 bg-white w-full font-[outfit-regular]  text-[#00391A] text-[14px] md:flex items-center justify-center"
+            className="outline-0 relative hidden rounded-xl py-2 bg-white w-full font-[outfit-regular]  text-[#00391A] text-[14px] lg:flex items-center justify-center"
           >
             {dil === "tm" ? "Türkmençe" : "English"}{" "}
             <img src={down} className="w-[22px]" alt="down" />
@@ -118,7 +118,7 @@ const Naviagation = () => {
             )}
           </button>
 
-          <div className="md:hidden block bg-white px-2 py-[10px] cursor-pointer rounded-xl">
+          <div className="lg:hidden block bg-white px-2 py-[10px] cursor-pointer rounded-xl">
             <img
               src={search}
               onClick={() => setIsSearch(!isSearch)}
@@ -127,7 +127,7 @@ const Naviagation = () => {
             />
           </div>
 
-          <div className="p-3 md:h-full h-[40px] w-[50px] md:hidden cursor-pointer bg-white rounded-xl flex items-center justify-center">
+          <div className="p-3 md:h-full h-[40px] w-[50px] lg:hidden cursor-pointer bg-white rounded-xl flex items-center justify-center">
             <img
               src={menu}
               className="w-[45px]"
