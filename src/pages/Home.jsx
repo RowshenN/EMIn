@@ -1,139 +1,208 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 
-import NewsMain from "../components/NewsMain/NewsMain";
-import HomeProductSlider from "../components/HomeProductSlider/HomeProductSlider";
-import star from "../images/star.svg";
-import up from "../images/status-up.svg";
-import lock from "../images/lock.svg";
-import message from "../images/messages.svg";
-import clock from "../images/clock.svg";
-import ProductsMain from "../components/ProductsMain/ProductsMain";
-import ContactMain from "../components/ContactMain/ContactMain";
-import { SebedimContext } from "../context/Context";
+import Navigation from "../components/navbars/Navigation";
+import Experience from "../components/Experience";
+
+import surat from "../images/home.png";
+import calendar from "../images/Calendar.svg";
+import to from "../images/to.svg";
+import refresh from "../images/refresh.svg";
+import passenger from "../images/passenger.svg";
+import turkish from "../images/turkish-logo.svg";
+import visa from "../images/online visa.png";
+import visa2 from "../images/online visa 2.png";
+import arrow from "../images/online arrow.svg";
+import DestinationMain from "../components/DestinationMain";
+import Turkmenistan from "../components/TurkmenMain";
+import Tours from "../components/tours/TourMain";
+import HotelMain from "../components/hotels/HotelMain";
+import Testimonials from "../components/testimonials/Testimonials";
+import BlogMain from "../components/BlogMain";
+import FAQ from "../components/faq/FAQ";
+import AreYouReady from "../components/AreYouReady";
 
 const Home = () => {
-  const { dil } = useContext(SebedimContext);
   const navigate = useNavigate();
-  console.log(useContext(SebedimContext));
   return (
-    <div className="lg:w-[95%] w-full px-6 mx-auto">
-      <div className="mt-[70px] lg:w-[55%] w-full lg:mb-[290px] mb-[100px] md:mb-[170px] ">
-        <h1 className="text-white lg:text-[55px] text-[40px] font-[outfit-semibold] mb-3 leading-snug ">
-          {dil == "en"
-            ? "Your Trusted Source of High-Quality Chemical Solutions"
-            : "Ýokary hilli himiki çözgütleriň ygtybarly çeşmesi"}
-        </h1>
+    <>
+      <div className="sm:w-[94%] md:w-[90%] mx-auto">
+        <Navigation />
 
-        <p className="text-white lg:text-[18px] text-[15px] w-[85%] font-[outfit-light] lg:mb-12 mb-8 ">
-          {dil == "en"
-            ? "Supplying Turkmenistan's diverse industries with essential chemicals for detergent, food, gas, paint solvents, plastics, and more"
-            : "Türkmenistanyň dürli pudaklaryny zerur himiki maddalar bilen üpjün etmek ýuwujy serişdeler, iýmit, gaz, boýag erginleri, plastmassa we ş.m."}
-        </p>
-
-        <button className="lg:w-[220px] w-[190px] bg-white rounded-2xl py-4 px-5 font-[outfit-regular] text-[#00391A] text-[15px]">
-          {dil == "en" ? "Explore Our Products" : "Önümlerimizi öwreniň"}
-        </button>
-      </div>
-
-      <NewsMain />
-      <HomeProductSlider />
-
-      {/* stars div */}
-      <div className="w-full flex flex-col lg:flex-row items-start justify-between mb-[100px]">
-        <div className="lg:w-[40%] md:w-full  w-full mb-[40px] md:mb-0">
-          <h1 className="text-white font-[outfit-semibold] text-[27px] md:text-[35px] mb-5">
-            {dil === "en"
-              ? "Your Complete Chemical Solutions Provider"
-              : "Doly himiki çözgütler bilen üpjün edijiňiz"}
-          </h1>
-          <p className="text-white font-[outfit-light] text-[15px] mb-8">
-            {dil === "en"
-              ? "We go beyond simply supplying chemicals. Ragbat-dag offers a comprehensive suite of services designed to streamline your operations and enhance your business performance. From expert sourcing and reliable delivery to technical support and specialized solutions, we're your partner in maximizing the potential of your chemical needs."
-              : "Diňe himiki maddalar bilen üpjün etmekden has ýokary. Ragbat-dag a tertipleşdirmek üçin döredilen giňişleýin hyzmatlar toplumy amallar we iş netijäňizi ýokarlandyrmak. Hünärmenden tehniki goldaw we ýöriteleşdirilen gözleg we ygtybarly gowşuryş çözgütler, potensialyňyzy artdyrmakda siziň hyzmatdaşyňyzdyrys himiki zerurlyklar."}
-          </p>
-          <button
-            onClick={() => navigate("/service")}
-            className="bg-white rounded-2xl py-4 px-5 font-[outfit-regular] w-[130px] text-[#00391A] text-[15px] "
-          >
-            More Info
-          </button>
+        <div
+          style={{ backgroundImage: `url(${surat})` }}
+          className="w-full bg-image sm:h-[30vh] md:h-[60vh] lg:h-[90vh] mt-6 -z-10 bg-cover bg-black/20 bg-center bg-no-repeat rounded-[23px]"
+        >
+          <div className="sm:w-[90%] md:w-[70%] lg:w-[50%] mx-auto flex items-center justify-center text-center sm:pt-[40px] md:pt-[70px] lg:pt-[100px]">
+            <h1 className=" text-white font-[poppins-semibold] sm:text-[25px] md:text-[60px] lg:text-[80px] ">
+              Explore The Majestic Asia Landscape Now
+            </h1>
+          </div>
         </div>
 
-        <div className=" flex justify-center w-full lg:w-[70%]   -z-10">
-          <div className="grid md:grid-cols-2 grid-cols-1 gap-4 items-center">
-            <div className="relative w-full">
-              <img className="w-full" src={star} alt="star" />
-              <div className="absolute px-2 top-[-12px] h-full right-1 flex items-center flex-col justify-center gap-4">
-                <img src={up} alt="up" className="" />
-                <p className="text-center w-[80%] text-[#00391A] font-[outfit-medium] text-[16px] ">
-                  {dil === "en"
-                    ? "Chemical Sourcing & Procurement"
-                    : "Himiki gözleg we satyn alyşlar"}
+        {/* Form div */}
+        <div className=" w-full flex items-center justify-center rounded-[35px] px-6 pt-[18px] pb-[48px] ">
+          <img
+            src={turkish}
+            alt="turkish"
+            className="bg-white rounded-[15px] px-4 py-3 mt-[-100px]"
+          />
+        </div>
+        <div className="w-[80%] mx-auto mb-[80px]">
+          <div className="bg-white px-5 pb-[30px] pt-[20px] mt-[-90px] z-30 rounded-[20px] shadow-xl ">
+            {/* radio inputs */}
+            <div className="flex items-start justify-start mb-[15px] gap-4">
+              <div className="flex items-center justify-center gap-1 p-1">
+                <input type="radio" />
+                <p className="font-[poppins-medium] sm:text-[13px] md:text-[16px]">
+                  Round Trip
                 </p>
-                <p className="text-center w-[80%] text-[#026533] font-[outfit-light] text-[14px] ">
-                  {dil === "en"
-                    ? "Finding the right chemicals at competitive prices, handling import logistics, and navigating international regulations."
-                    : "Bäsdeşlik bahalarynda dogry himiki serişdeleri tapmak, işlemek logistika import etmek we halkara düzgünnamalary nawigasiýa etmek."}
+              </div>
+              <div className="flex items-center justify-center gap-1 p-1">
+                <input type="radio" />
+                <p className="font-[poppins-medium] sm:text-[13px] md:text-[16px]">
+                  One way
                 </p>
               </div>
             </div>
 
-            <div className="relative w-full">
-              <img className="w-full" src={star} alt="star" />
-              <div className="absolute px-10 top-[-12px] h-full right-1 flex items-center flex-col justify-center gap-4">
-                <img src={clock} alt="up" className="" />
-                <p className="text-center w-[80%] text-[#00391A] font-[outfit-medium] text-[16px] ">
-                  {dil === "en" ? "Quality Assurance" : "Hil kepilligi"}
-                </p>
-                <p className="text-center w-[80%] text-[#026533] font-[outfit-light] text-[14px] ">
-                  {dil === "en"
-                    ? "Thorough product testing and/or working with suppliers who maintain strict quality control."
-                    : "Önümi düýpli barlamak we / ýa-da üpjün edijiler bilen işlemek berk hil gözegçiligini saklamaly."}
-                </p>
-              </div>
-            </div>
+            <div className="flex lg:flex-row sm:flex-col items-center w-full justify-center gap-2 relative">
+              {/* from to divs */}
+              <div className="flex sm:flex-col lg:flex-row sm:w-full lg:w-[40%] items-center justify-start gap-2 relative">
+                <div className="flex items-center justify-start gap-2 border border-[#D6D6D6] border-solid rounded-lg sm:py-4 md:py-6 px-4 cursor-pointer sm:w-full lg:w-[50%] ">
+                  <img src={to} alt="from" />
+                  <p className="font-[poppins-regular] sm:text-[13px] md:text-[16px] ">
+                    From
+                  </p>
+                </div>
 
-            <div className="relative w-full">
-              <img className="w-full" src={star} alt="star" />
-              <div className="absolute px-10 top-[-12px] h-full right-1 flex items-center flex-col justify-center gap-4">
-                <img src={lock} alt="up" className="" />
-                <p className="text-center w-[80%] text-[#00391A] font-[outfit-medium] text-[16px] ">
-                  {dil === "en"
-                    ? "Inventory Management"
-                    : "Öwreniş dolandyryşy"}
-                </p>
-                <p className="text-center w-[80%] text-[#026533] font-[outfit-light] text-[14px] ">
-                  {dil === "en"
-                    ? "Maintaining stock levels, ensuring product availability, and potentially offering just-in-time delivery services to clients."
-                    : "Müşderiler bir stocka derejesini saklamak, önümiň elýeterliligini üpjün etmek we wagtynda eltip bermek hyzmatlaryny hödürläp biler."}
-                </p>
-              </div>
-            </div>
+                <div className="flex items-center justify-start gap-2 border border-[#D6D6D6] border-solid rounded-lg sm:py-4 md:py-6 px-5 cursor-pointer sm:w-full lg:w-[50%] ">
+                  <img src={to} alt="from" />
+                  <p className="font-[poppins-regular] sm:text-[13px] md:text-[16px] ">
+                    To
+                  </p>
+                </div>
 
-            <div className="relative w-full">
-              <img className="w-full" src={star} alt="star" />
-              <div className="absolute px-10 top-[-12px] h-full right-1 flex items-center flex-col justify-center gap-4">
-                <img src={message} alt="up" className="" />
-                <p className="text-center w-[80%] text-[#00391A] font-[outfit-medium] text-[16px] ">
-                  {dil === "en" ? "Technical Support" : "Tehniki goldaw"}
-                </p>
-                <p className="text-center w-[80%] text-[#026533] font-[outfit-light] text-[14px] ">
-                  {dil === "en"
-                    ? "Providing safety data sheets (SDS), advice on chemical usage, appropriate handling, and waste disposal."
-                    : "Howpsuzlyk maglumatlary sahypalaryny (SDS) bermek, himiki ulanmak boýunça maslahatlar, degişli işlemek we galyndylary zyňmak."}
-                </p>
+                <div className="absolute w-fit sm:top-[35%] lg:top-[25%] cursor-pointer sm:right-0 lg:left-[46%] bg-white border border-solid border-[#D6D6D6] rounded-lg p-2 ">
+                  <img src={refresh} alt="from" />
+                </div>
+              </div>
+
+              {/* calendar divs */}
+              <div className="flex items-center py-[6px] justify-center border border-[#D6D6D6] border-solid rounded-lg cursor-pointer sm:w-full lg:w-[30%] ">
+                <div className="flex w-2/4 items-center px-4 sm:justify-start lg:justify-center gap-2 border-r border-solid border-[#D6D6D6] ">
+                  <img src={calendar} alt="cal" />
+                  <div>
+                    <p className="text-[#878787] font-[poppins-regular] text-[12px] ">
+                      Departure
+                    </p>
+                    <div className="flex md:flex-col sm:flexrow sm:items-center md:items-start sm:justify-center md:justify-start md:gap-0 sm:gap-2">
+                      <p className="font-[poppins-regular] sm:text-[13px] md:text-[16px]">
+                        23 Oct
+                      </p>
+                      <p className="text-[#878787] font-[poppins-regular] text-[12px]">
+                        2024
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex items-center px-4 sm:justify-start lg:justify-center gap-2 w-2/4">
+                  <img src={calendar} alt="cal" />
+                  <div>
+                    <p className="text-[#878787] font-[poppins-regular] text-[12px]">
+                      Return
+                    </p>
+                    <p className="font-[poppins-regular] sm:text-[13px] md:text-[16px]">
+                      Add
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Passenger div */}
+              <div className="flex items-center py-[6px] px-4 sm:justify-start lg:justify-center border border-[#D6D6D6] border-solid rounded-lg cursor-pointer sm:w-full lg:w-[15%] ">
+                <div className="flex items-center justify-center gap-2">
+                  <img src={passenger} alt="pas" />
+                  <div className="flex items-center flex-col justify-start">
+                    <p className="text-[#878787] w-full text-left font-[poppins-regular] text-[12px]">
+                      Passengers
+                    </p>
+                    <div className="flex md:flex-col sm:flexrow sm:items-center md:items-start sm:justify-center md:justify-start md:gap-0 sm:gap-2">
+                      <p className="font-[poppins-regular] whitespace-nowrap sm:text-[13px] md:text-[16px]">
+                        1 Passenger
+                      </p>
+                      <p className="text-[#878787] font-[poppins-regular] text-[12px]">
+                        Business
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-[#009833] cursor-pointer sm:py-4 md:py-6 rounded-lg sm:w-full lg:w-[12%] justify-center flex items-center text-white text-[16px] font-[poppins-regular] ">
+                <button>Search</button>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="w-full md:ml-[50px] lg:hidden grid md:hidden grid-cols-2 gap-4"></div>
+        <Experience />
+        <DestinationMain />
       </div>
+      <Turkmenistan />
+      <Tours />
+      <HotelMain />
+      <Testimonials />
+      <BlogMain />
+      <FAQ />
 
-      <ProductsMain visibility={true} />
-      <ContactMain />
-    </div>
+      {/* Online visa */}
+      <div className="w-[90%] mb-[103px] mx-auto flex lg:flex-row sm:flex-col items-start justify-center gap-[45px]">
+        <div onClick={() => navigate('/visa')} className="relative cursor-pointer sm:w-full lg:w-[55%] ">
+          <img
+            className="w-full object-cover rounded-[32px]"
+            src={visa2}
+            alt="visa"
+          />
+          <div className="absolute w-[90%] mx-auto flex items-end justify-between bottom-8 left-9">
+            <div className="flex flex-col items-baseline justify-start gap-4">
+              <h1 className="text-white sm:text-[16px] md:text-[50px] font-[poppins-semibold] ">
+                Online Visa
+              </h1>
+              <p className="text-white sm:text-[12px] md:text-[14px] w-[70%] font-[poppins-regular]">
+                Lorem ipsum dolor sit amet consectetur. Feugiat placerat ac
+                ipsum tortor malesuada nibh id.
+              </p>
+            </div>
+
+            <img src={arrow} alt="arrow" />
+          </div>
+        </div>
+
+        <div onClick={() => navigate('/hotels')} className="relative cursor-pointer sm:w-full lg:w-[45%] ">
+          <img
+            className="sm:w-full lg:w-[89%] object-cover rounded-[32px]"
+            src={visa}
+            alt="visa"
+          />
+          <div className="absolute w-[78%] mx-auto flex items-end justify-between bottom-8 left-9">
+            <div className="flex flex-col items-baseline justify-start gap-4">
+              <h1 className="text-white sm:text-[16px] md:text-[50px] font-[poppins-semibold] ">
+                Hotels
+              </h1>
+              <p className="text-white sm:text-[12px] md:text-[14px] w-[80%] font-[poppins-regular]">
+                Lorem ipsum dolor sit amet consectetur. Feugiat placerat ac
+                ipsum tortor malesuada nibh id.
+              </p>
+            </div>
+
+            <img src={arrow} alt="arrow" className="object-cover md:w-[56px] sm:w-[25px] " />
+          </div>
+        </div>
+      </div>
+      <AreYouReady />
+    </>
   );
 };
 

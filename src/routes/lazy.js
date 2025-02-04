@@ -1,10 +1,13 @@
 import { lazy } from "react";
 
 export const About = lazy(() => import("../pages/About"));
-export const Service = lazy(() => import("../pages/Service"));
-export const Product = lazy(() => import("../pages/Product"));
+export const Turkmenistan = lazy(() => import("../pages/Turkmenistan"));
+export const Blog = lazy(() => import("../pages/Blog"));
+export const Hotels = lazy(() => import("../pages/Hotels"));
+export const Tours = lazy(() => import("../pages/Tours"));
 export const Contact = lazy(() => import("../pages/Contact"));
-export const CategoryInner = lazy(() => import("../pages/CategoryInner"));
-export const NewsList = lazy(() => import("../pages/NewsList"));
-export const NewInner = lazy(() => import("../pages/NewInner"));
-export const ProductInner = lazy(() => import("../pages/ProductInner"));
+export const Visa = lazy(() => import("../pages/Visa"));
+export const Destination = lazy(() => import("../pages/Destination"));
+export const BlogInner = lazy(() => import("../pages/BlogInner"));
+export const HotelInner = lazy(() => import("../pages/HotelInner"));
+export const DestinationInner = lazy(() => import("../pages/DestinationInner"));

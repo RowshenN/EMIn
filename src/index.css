@@ -2,74 +2,79 @@
 @tailwind components;
 @tailwind utilities;
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-p,h1,h2 {
-    margin: 0;
-    padding: 0;
-}
-.scrollHidden::-webkit-scrollbar {
-  display: none;
-}
-body {
-  width: 100%;
-  max-width: 1420px;
-  overflow-x: hidden;
-  background-color: #007337;
+p,h1,h1 {
+  padding: 0;
+  margin: 0;
 }
 
 @font-face {
-    font-family: outfit-light;
-    /* 300 */
-    src: url("./fonts/Outfit-Light.ttf");
-  }
-  @font-face {
-    font-family: outfit-regular;
-    /* 400 */
-    src: url("./fonts/Outfit-Regular.ttf");
-  }
-  @font-face {
-    font-family: outfit-medium; 
-    /* 500 */
-    src: url("./fonts/Outfit-Medium.ttf");
-  }
-  @font-face {
-    font-family: outfit-semibold;
-    /* 600 */
-    src: url("./fonts/Outfit-SemiBold.ttf");
-  }
-  @font-face {
-    font-family: outfit-bold;
-    /* 700 */
-    src: url("./fonts/Outfit-Bold.ttf");
-  }
-  @font-face {
-    font-family: manrope-light;
-    /* 300 */
-    src: url("./fonts/Manrope-Light.ttf");
-  }
-  @font-face {
-    font-family: manrope-regular;
-    /* 400 */
-    src: url("./fonts/Manrope-Regular.ttf");
-  }
-  @font-face {
-    font-family: manrope-medium; 
-    /* 500 */
-    src: url("./fonts/Manrope-Medium.ttf");
-  }
-  @font-face {
-    font-family: manrope-semibold;
-    /* 600 */
-    src: url("./fonts/Manrope-SemiBold.ttf");
-  }
-  @font-face {
-    font-family: manrope-bold;
-    /* 700 */
-    src: url("./fonts/Manrope-Bold.ttf");
-  }
-  
+  font-family: poppins-light;
+  /* 300 */
+  src: url("./fonts/Poppins-Light.ttf");
+}
+@font-face {
+  font-family: poppins-regular;
+  /* 400 */
+  src: url("./fonts/Poppins-Regular.ttf");
+}
+@font-face {
+  font-family: poppins-medium;
+  /* 500 */
+  src: url("./fonts/Poppins-Medium.ttf");
+}
+@font-face {
+  font-family: poppins-semibold;
+  /* 600 */
+  src: url("./fonts/Poppins-SemiBold.ttf");
+}
+@font-face {
+  font-family: poppins-bold;
+  /* 700 */
+  src: url("./fonts/Poppins-Bold.ttf");
+}
+
+.swiper-pagination-fraction,
+.swiper-pagination-custom,
+.swiper-horizontal > .swiper-pagination-bullets,
+.swiper-pagination-bullets.swiper-pagination-horizontal {
+  display: none !important;
+}
+
+
+.jynsy {
+  background-image: url('images/visa-down-vector.svg');
+  background-position: right 23px center;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  background-size: 15px;
+  appearance: none; /* Remove default browser styling */
+  -webkit-appearance: none; /* For Safari */ 
+}
+
+.wagt {
+  background-image: url('images/visa-input-calendar.svg');
+  background-position: left 23px center;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  background-size: 15px;
+  appearance: none; /* Remove default browser styling */
+  -webkit-appearance: none; /* For Safari */ 
+}
+
+.ant-drawer-content {
+  height: 450px !important;
+}
+
+.ant-drawer-body {
+  height: 350px !important;
+}
+
+.ant-drawer-content-wrapper {
+  height: fit-content !important;
+}

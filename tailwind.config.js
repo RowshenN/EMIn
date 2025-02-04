@@ -3,12 +3,10 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
-      colors: {
-        red: "",
-      },
       gridTemplateColumns: {
         "auto-fill-250": "repeat(auto-fill,minmax(250px,1fr))",
         "auto-fit-250": "repeat(auto-fit,minmax(250px,1fr))",
+        "auto-fit-150": "repeat(auto-fit,minmax(300px,1fr))",
       },
       screens: {
         sm: "320px",
@@ -17,7 +15,7 @@ module.exports = {
         md: "768px",
         // => @media (min-width: 768px) { ... }
 
-        lg: "1024px",
+        lg: "1070px",
         // => @media (min-width: 1024px) { ... }
 
         xl: "1280px",

@@ -1,29 +1,29 @@
 import React, { Suspense, useEffect } from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 
-import Navigation from "../components/Naviagation";
 import Footer from "../components/Footer";
-import Svg from "../components/svgs";
 import Home from "../pages/Home";
+import NotFound from "../pages/NotFound";
 import PageLoading from "../components/PageLoading";
 
 import {
   About,
-  Service,
-  Product,
   Contact,
-  CategoryInner,
-  NewsList,
-  NewInner,
-  ProductInner,
+  Blog,
+  Tours,
+  Hotels,
+  Turkmenistan,
+  Visa,
+  Destination,
+  BlogInner,
+  HotelInner,
+  DestinationInner,
 } from "./lazy";
 
 const Router = () => {
   return (
     <BrowserRouter>
       <ScrollTop>
-        <Navigation />
-        <Svg />
         <Routes>
           <Route path="/" exact element={<Home />} />
           <Route
@@ -36,26 +36,108 @@ const Router = () => {
               </Suspense>
             }
           />
+
+          <Route path="*" exact element={<NotFound />} />
+
           <Route
-            path="/service"
+            path="/blog"
             exact
             element={
               <Suspense fallback={<PageLoading />}>
                 {" "}
-                <Service />
+                <Blog />
               </Suspense>
             }
           />
+
           <Route
-            path="/product"
+            path="/destination-inner/:id"
             exact
             element={
               <Suspense fallback={<PageLoading />}>
                 {" "}
-                <Product />
+                <DestinationInner />
               </Suspense>
             }
           />
+
+          <Route
+            path="/blog-inner/:id"
+            exact
+            element={
+              <Suspense fallback={<PageLoading />}>
+                {" "}
+                <BlogInner />
+              </Suspense>
+            }
+          />
+
+          <Route
+            path="/hotel-inner/:id"
+            exact
+            element={
+              <Suspense fallback={<PageLoading />}>
+                {" "}
+                <HotelInner />
+              </Suspense>
+            }
+          />
+
+          <Route
+            path="/turkmenistan"
+            exact
+            element={
+              <Suspense fallback={<PageLoading />}>
+                {" "}
+                <Turkmenistan />
+              </Suspense>
+            }
+          />
+
+          <Route
+            path="/hotels"
+            exact
+            element={
+              <Suspense fallback={<PageLoading />}>
+                {" "}
+                <Hotels />
+              </Suspense>
+            }
+          />
+
+          <Route
+            path="/visa"
+            exact
+            element={
+              <Suspense fallback={<PageLoading />}>
+                {" "}
+                <Visa />
+              </Suspense>
+            }
+          />
+
+          <Route
+            path="/destination"
+            exact
+            element={
+              <Suspense fallback={<PageLoading />}>
+                {" "}
+                <Destination />
+              </Suspense>
+            }
+          />
+
+          <Route
+            path="/tours"
+            exact
+            element={
+              <Suspense fallback={<PageLoading />}>
+                {" "}
+                <Tours />
+              </Suspense>
+            }
+          />
+
           <Route
             path="/contact"
             exact
@@ -63,49 +145,6 @@ const Router = () => {
               <Suspense fallback={<PageLoading />}>
                 {" "}
                 <Contact />
-              </Suspense>
-            }
-          />
-
-          <Route
-            path="/category-inner"
-            exact
-            element={
-              <Suspense fallback={<PageLoading />}>
-                {" "}
-                <CategoryInner />
-              </Suspense>
-            }
-          />
-
-          <Route
-            path="/news-list"
-            exact
-            element={
-              <Suspense fallback={<PageLoading />}>
-                {" "}
-                <NewsList />
-              </Suspense>
-            }
-          />
-
-          <Route
-            path="/new-inner/:id"
-            exact
-            element={
-              <Suspense fallback={<PageLoading />}>
-                {" "}
-                <NewInner />
-              </Suspense>
-            }
-          />
-          <Route
-            path="/product-inner/:id"
-            exact
-            element={
-              <Suspense fallback={<PageLoading />}>
-                {" "}
-                <ProductInner />
               </Suspense>
             }
           />
