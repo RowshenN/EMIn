@@ -16,7 +16,7 @@ const About = () => {
         <div className="sm:w-full md:w-[90%] mx-auto sm:mb-[235px] md:mb-[385px]">
           <div className="w-full relative sm:mb-10 md:mb-[64px] ">
             <img src={surat} alt="surat" className="rounded-[23px] sm:h-[123px] md:h-full w-full object-cover" />
-            <p className="absolute sm:top-[26%] xs:top-[35%] sm:left-[35%] xs:left-[40%] left-[43%] text-white md:text-[35px] sm:text-[26px] lg:text-[50px] font-[poppins-semibold] ">
+            <p className="absolute sm:top-[26%] xs:top-[35%] sm:left-[35%] xs:left-[40%] md:left-[43%] text-white md:text-[35px] sm:text-[26px] lg:text-[50px] font-[poppins-semibold] ">
               About us
             </p>
           </div>

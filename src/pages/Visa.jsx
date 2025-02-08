@@ -14,10 +14,7 @@ import DropFileInput from "../components/dropFile";
 import { Select } from "antd";
 import { message } from "antd";
 import { DatePicker } from "antd";
-import dayjs from "dayjs";
-import customParseFormat from "dayjs/plugin/customParseFormat";
 import { axiosInstance } from "../utils/axiosInstance";
-dayjs.extend(customParseFormat);
 
 const optionsGender = [
   {
@@ -114,7 +111,7 @@ const Visa = () => {
   // Gelyanler
 
   const handleGelyanGender = (value) => {
-    setGelyanInfo({ ...gidyanInfo, gender: value });
+    setGelyanInfo({ ...gelyanInfo, gender: value });
   };
 
   const handleGelyanBirth = (value) => {
@@ -264,7 +261,11 @@ const Visa = () => {
       <Navigation />
       <div className="mt-10 sm:w-full md:w-[90%] mx-auto sm:mb-[235px] md:mb-[370px]">
         <div className="w-full relative sm:mb-10 md:mb-[64px] ">
-          <img src={surat} alt="surat" className="rounded-[23px] sm:h-[123px] md:h-full w-full object-cover" />
+          <img
+            src={surat}
+            alt="surat"
+            className="rounded-[23px] sm:h-[123px] md:h-full w-full object-cover"
+          />
           <p className="absolute top-[35%] sm:left-[40%] xs:left-[45%] text-white md:text-[35px] sm:text-[26px] lg:text-[50px] font-[poppins-semibold] ">
             Visa
           </p>

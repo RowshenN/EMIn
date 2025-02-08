@@ -17,8 +17,8 @@ import TestimonialCards from "./TestimonialCards";
 const Testimonials = () => {
   const [open, setOpen] = useState(false);
   return (
-    <div className="w-full relative overflow-hidden">
-      <div className="w-full flex items-center justify-center mb-[70px]">
+    <div className="w-full relative overflow-hidden md:mb-[130px]">
+      <div className="w-full flex items-center justify-center sm:mb-[30px] md:mb-[70px]">
         <div className="flex w-[40%] mx-auto items-center justify-center gap-2 relative">
           <h1 className="md:text-[50px] sm:text-[30px] lg:text-[61px] font-[poppins-bold] ">Testimonials</h1>
           <img
@@ -40,7 +40,7 @@ const Testimonials = () => {
           breakpoints={{
             320 : {
               width: 320,
-              slidesPerView : 1.2,
+              slidesPerView : 1.4,
             },
             760: {
               width: 760,
@@ -57,7 +57,7 @@ const Testimonials = () => {
             clickable: true,
           }}
           modules={[Pagination]}
-          className="relative h-[425px] "
+          className="relative h-[300px]"
           scrollbar={false}
         >
           <SwiperSlide>

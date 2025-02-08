@@ -8,24 +8,44 @@ import clock from "../../images/clock-svg.svg";
 const ToursCards = ({ item }) => {
   const navigate = useNavigate();
   return (
-    <div onClick={() => navigate(`/destination-inner/${item.id}`)} className="border bg-white cursor-pointer border-solid border-[#DADADA] rounded-[20px] px-3 pt-3 pb-[18px] ">
+    <div
+      // onClick={() => navigate(`/destination-inner/${item.id}`)}
+      onClick={() => navigate(`/destination-inner`)}
+      className="border bg-white cursor-pointer border-solid border-[#DADADA] rounded-[11px] sm:px-[7px] md:px-3 sm:pt-[7px] md:pt-3 pb-[18px] "
+    >
       <div className="w-full">
         <div className="mb-[10px] rounded-[11px] ">
-          <img className="w-full" src={item?.main_image} alt="surat" />
+          <img className="w-full" src={surat} alt="surat" />
+          {/* src={item?.main_image} */}
         </div>
 
         <div className="border-b border-solid pb-5 mb-[10px] px-1 border-[#DADADA]">
-          <p className="font-[poppins-medium] text-[16px] ">{item?.description}</p>
+          <p className="font-[poppins-medium] sm:text-[10px] md:text-[16px] line-clamp-2 ">
+            {/* {item?.description} */} London & Paris: A Winter Tale of Two
+            Cities
+          </p>
         </div>
 
         <div className="w-full flex items-center justify-between">
-          <div className="flex items-center justify-center gap-2">
-            <img src={map} alt="map" />
-            <p className="font-[poppins-medium] text-[14px] ">{item?.location}</p>
+          <div className="flex items-center justify-center sm:gap-1 md:gap-2">
+            <img
+              src={map}
+              alt="map"
+              className="object-cover md:w-[22px] sm:w-[11px] "
+            />
+            <p className="font-[poppins-medium] sm:text-[8px] md:text-[14px] ">
+              {/* {item?.location} */} France
+            </p>
           </div>
-          <div className="flex items-center justify-center gap-2">
-            <img src={clock} alt="clock" />
-            <p className="font-[poppins-medium] text-[14px] ">{`${item?.date_end - item?.date_start} days`}</p>
+          <div className="flex items-center justify-center sm:gap-1 md:gap-2">
+            <img
+              src={clock}
+              alt="clock"
+              className="object-cover md:w-[22px] sm:w-[11px] "
+            />
+            <p className="font-[poppins-medium] sm:text-[8px] md:text-[14px] ">{`${
+              "5" // item?.date_end - item?.date_start
+            } days`}</p>
           </div>
         </div>
       </div>

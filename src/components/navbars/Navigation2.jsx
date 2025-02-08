@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 
 import { useNavigate } from "react-router-dom";
 
@@ -7,8 +7,11 @@ import globe from "../../images/globe.svg";
 import vector from "../../images/Vector.svg";
 import burger from "../../images/burger-button.svg";
 import { Drawer } from "antd";
+import { SebedimContext } from "../../context/Context";
 
 const Navigation2 = () => {
+  const { dil, ChangeDil } = useContext(SebedimContext);
+  const [lang, setLang] = useState(false);
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   return (
@@ -107,9 +110,53 @@ const Navigation2 = () => {
               </p>
             </div>
 
-            <div className="bg-[#F9F9F9] cursor-pointer py-[10px] px-5 gap-2 rounded-[29px] flex items-center justify-center">
+            <div
+              onClick={() => setLang(!lang)}
+              className="bg-[#F9F9F9] relative cursor-pointer py-[10px] px-5 gap-2 rounded-[29px] flex items-center justify-center"
+            >
               <img src={globe} alt="globe" />
-              <p>EN</p>
+              <p>
+                {dil === "tm"
+                  ? "TM"
+                  : dil === "ru"
+                  ? "RU"
+                  : dil === "tr"
+                  ? "TR"
+                  : "EN"}{" "}
+              </p>
+
+              <div
+                onMouseLeave={() => setLang(false)}
+                className={
+                  (lang === true ? "flex " : " hidden ") +
+                  "absolute top-11 flex flex-col py-1 items-center justify-end gap-2 rounded-[20px] w-fit px-8 bg-[#F9F9F9] z-50 "
+                }
+              >
+                <div
+                  onClick={() => ChangeDil("tm")}
+                  className="hover:text-black"
+                >
+                  TM
+                </div>
+                <div
+                  onClick={() => ChangeDil("ru")}
+                  className="hover:text-black"
+                >
+                  RU
+                </div>
+                <div
+                  onClick={() => ChangeDil("en")}
+                  className="hover:text-black"
+                >
+                  EN
+                </div>
+                <div
+                  onClick={() => ChangeDil("tr")}
+                  className="hover:text-black"
+                >
+                  TR
+                </div>
+              </div>
             </div>
           </div>
 

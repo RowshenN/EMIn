@@ -7,11 +7,13 @@ import Navigation from "../components/navbars/Navigation";
 const NotFound = () => {
   return (
     <>
-      <Navigation />
+      <div className="sm:w-[94%] md:w-[95%] mx-auto">
+        <Navigation />
+      </div>
       <div className="flex items-center justify-center h-[100vh] bg-white">
         <div className="">
           <div className="relative w-full flex items-center justify-center">
-            <img src={icon} alt="icon" className="absolute top-0 left-[20%]" />
+            <img src={icon} alt="icon" className="absolute top-0 sm:left-[10%] md:left-[20%]" />
             <img src={plane} alt="plane" className="z-10" />
           </div>
 
