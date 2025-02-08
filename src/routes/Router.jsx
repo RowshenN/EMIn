@@ -51,8 +51,7 @@ const Router = () => {
           />
 
           <Route
-            // path="/destination-inner/:id"
-            path="/destination-inner"
+            path="/destination-inner/:id"
             exact
             element={
               <Suspense fallback={<PageLoading />}>
@@ -63,8 +62,7 @@ const Router = () => {
           />
 
           <Route
-            // path="/blog-inner/:id"
-            path="/blog-inner"
+            path="/blog-inner/:id"
             exact
             element={
               <Suspense fallback={<PageLoading />}>
@@ -75,8 +73,7 @@ const Router = () => {
           />
 
           <Route
-            // path="/hotel-inner/:id"
-            path="/hotel-inner"
+            path="/hotel-inner/:id"
             exact
             element={
               <Suspense fallback={<PageLoading />}>

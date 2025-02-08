@@ -72,15 +72,13 @@ const Blog = () => {
                 >
                   <div className="mb-[18px] w-full">
                     <img
-                      // src={TopFour[1]?.banner}
-                      src={surat1}
+                      src={TopFour[1]?.banner}
                       alt="surat"
                       className="w-full sm:h-[200px] md:h-[497px] rounded-[22px] object-cover"
                     />
                   </div>
                   <p className="sm:text-[18px] md:text-[24px] font-[poppins-semibold]">
-                    {/* {TopFour[1]?.name} */} Exploring the Wonders of the
-                    Northern Lights
+                    {TopFour[1]?.name}
                   </p>
                   <p className="sm:text-[14px] md:text-[16px] font-[poppins-regular] text-[#717171]">
                     18 Oct 2024
@@ -97,19 +95,17 @@ const Blog = () => {
               <div className="sm:w-full md:w-[70%]">
                 <div
                   className="cursor-pointer"
-                  onClick={() => navigate("/blog-inner")}
+                  onClick={() => navigate(`/blog-inner/${TopFour[3].id}`)}
                 >
                   <div className="mb-[18px] w-full rounded-[22px]">
                     <img
                       className="w-full sm:h-[200px] md:h-[275px] xl:h-[314px] rounded-[22px] object-cover"
-                      // src={TopFour[3]?.banner}
-                      src={surat2}
+                      src={TopFour[3]?.banner}
                       alt="alt"
                     />
                   </div>
                   <p className="sm:text-[18px] md:text-[24px] font-[poppins-semibold]">
-                    {/* {TopFour[3]?.name} */} 5 Surprising Facts About
-                    Amsterdam Nights
+                    {TopFour[3]?.name}
                   </p>
                   <p className="sm:text-[14px] md:text-[16px] font-[poppins-regular] text-[#717171]">
                     18 Oct 2024
@@ -120,14 +116,9 @@ const Blog = () => {
           </div>
 
           <div className="w-full grid sm:gap-[25px] md:gap-[30px] sm:grid-cols-1 md:grid-cols-auto-fit-150">
-            {/* {Array.from(otherBlogs).map((item) => {
+            {Array.from(otherBlogs).map((item) => {
               return <BlogCart key={item.id} item={item} />;
-            })} */}
-            <BlogCart />
-            <BlogCart />
-            <BlogCart />
-            <BlogCart />
-            <BlogCart />
+            })}
           </div>
         </div>
       </div>

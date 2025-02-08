@@ -38,15 +38,9 @@ const Hotels = () => {
         </div>
 
         <div className="w-full grid sm:gap-[15px] md:gap-[30px] sm:grid-cols-2 md:grid-cols-auto-fill-250">
-          {/* {hotelmains?.map((item) => {
+          {hotelmains?.map((item) => {
             return <HotleCards key={item.id} item={item} />;
-          })} */}
-          <HotleCards />
-          <HotleCards />
-          <HotleCards />
-          <HotleCards />
-          <HotleCards />
-          <HotleCards />
+          })}
         </div>
       </div>
 

@@ -9,9 +9,21 @@ import sort from "../images/tour-sort.svg";
 import ToursCards from "../components/tours/ToursCards";
 import AreYouReady from "../components/AreYouReady";
 import { axiosInstance } from "../utils/axiosInstance";
+import Pagination from "../components/Pagination";
 
 const Tours = () => {
   const [destinations, setDestinations] = useState([]);
+  const [tests, setTests] = useState([]);
+  const [pages, setPages] = useState([]);
+
+  const [filter, setFilter] = useState({
+    limit: 10,
+    page: 1,
+    search_query: "",
+    deleted: null,
+    active: null,
+    order: 0,
+  });
 
   useEffect(() => {
     getHotels();
@@ -20,9 +32,21 @@ const Tours = () => {
   const getHotels = async () => {
     await axiosInstance
       .get("/destinations")
-      .then((res) => {
-        setDestinations(res.data.data);
-        console.log(res.data);
+      .then((data) => {
+        setDestinations(data.data.data);
+        console.log(data.data);
+        setTests(data.data);
+        let i = 1;
+        let array = [];
+        let end = data?.data?.count / filter?.limit;
+        if (data?.data?.count % filter?.limit > 0) {
+          end = end + 1;
+        }
+        while (i <= end) {
+          array.push(i);
+          i++;
+        }
+        setPages([...array]);
       })
       .catch((err) => {
         console.log(err);
@@ -97,17 +121,19 @@ const Tours = () => {
           </div>
 
           <div className="w-full grid sm:gap-[15px] md:gap-[30px] sm:grid-cols-2 md:grid-cols-auto-fill-250 ">
-            {/* {destinations?.map((item) => {
+            {destinations?.map((item) => {
               return <ToursCards key={item.id} item={item} />;
-            })} */}
-            <ToursCards />
-            <ToursCards />
-            <ToursCards />
-            <ToursCards />
-            <ToursCards />
-            <ToursCards />
-            <ToursCards />
-            <ToursCards />
+            })}
+          </div>
+          <div className="w-full mt-[40px] flex items-center gap-5 justify-center">
+            <Pagination
+              meta={tests?.count}
+              filter={filter}
+              pages={pages}
+              next={() => setFilter({ ...filter, page: filter.page + 1 })}
+              prev={() => setFilter({ ...filter, page: filter.page - 1 })}
+              goTo={(item) => setFilter({ ...filter, page: item })}
+            />
           </div>
         </div>
       </div>

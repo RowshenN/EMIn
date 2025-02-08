@@ -28,7 +28,7 @@ const Blog = () => {
       });
   };
 
-  const NewBlogs = Array.from(blogs).slice(0, 3);
+  const NewBlogs = Array.from(blogs).slice(0, 4);
   return (
     <div className="md:w-[90%] xl:w-[80%] mx-auto sm:mb-[49px] md:mb-[82px]">
       <div className="w-full flex items-center justify-center sm:mb-[33px] md:mb-[80px] ">
@@ -40,26 +40,22 @@ const Blog = () => {
 
       <div className="mb-[45px] sm:w-[94%] mx-auto md:w-full md:flex-row sm:flex-col flex items-start justify-between sm:gap-[17px] md:gap-[30px]">
         <div
-          // onClick={() => navigate(`/blog-inner/${NewBlogs[0].id}`)}
-          onClick={() => navigate(`/blog-inner`)}
+          onClick={() => navigate(`/blog-inner/${NewBlogs[0].id}`)}
           className="sm:w-full md:w-[65%] cursor-pointer relative"
         >
           <img
-            // src={NewBlogs[0]?.banner}
-            src={blog1}
+            src={NewBlogs[0]?.banner}
             className="w-full object-cover rounded-[22px] sm:h-[275px] md:h-[658px]"
             alt="blog"
           />
           <p className="absolute sm:bottom-4 md:bottom-[25px] sm:left-4 md:left-[25px] text-white sm:text-[14px] md:text-[28px] font-[poppins-semibold] w-[60%] ">
-            {/* {NewBlogs[0]?.name} */} 10 places you must see in the world
+            {NewBlogs[0]?.name} 
           </p>
         </div>
 
         <div className="flex md:w-[35%] sm:w-full sm:flex-row md:flex-col items-baseline gap-[30px] justify-center">
-          {/* <HomeBlogCart item={NewBlogs[1]} />
-          <HomeBlogCart item={NewBlogs[2]} /> */}
-          <HomeBlogCart />
-          <HomeBlogCart />
+          <HomeBlogCart item={NewBlogs[1]} />
+          <HomeBlogCart item={NewBlogs[2]} />
         </div>
       </div>
 

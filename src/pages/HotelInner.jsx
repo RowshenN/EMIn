@@ -73,18 +73,16 @@ const HotelInner = () => {
           // style={{ backgroundImage: `url(${hotel?.main_image})` }}
         >
           <img
-            src={surat}
+            src={hotel?.main_image}
             alt="surat"
             className="-z-10 object-cover md:h-full sm:h-[300px] rounded-[23px] w-full "
           />
           <div className="w-[55%] z-10 absolute bottom-[10%] left-[23%] text-center">
             <p className="text-white sm:text-[18px] md:text-[30px] xl:text-[60px] font-[poppins-bold] ">
-              {/* {hotel?.name} */} Karakum Hotel
+              {hotel?.name} 
             </p>
             <p className="text-white sm:text-[12px] md:text-[16px] font-[poppins-regular] ">
-              {/* {hotel?.short_description} */} Lorem ipsum dolor sit amet
-              consectetur. Quam placerat viverra phasellus lorem viverra massa
-              purus platea.
+              {hotel?.short_description} 
             </p>
           </div>
         </div>
@@ -112,77 +110,17 @@ const HotelInner = () => {
           className="relative sm:h-fit md:h-[425px]  "
           scrollbar={false}
         >
-          {/* {hotel?.images?.map((item) => (
+          {hotel?.images?.map((item) => (
             <SwiperSlide key={item}>
-              <div className="w-full rounded-[22px] cursor-pointer">
+              <div className="w-full cursor-pointer">
                 <img
                   src={item}
                   alt="surat"
-                  className="w-full h-[325px] rounded-[15px] object-cover"
-                />
-              </div>
-            </SwiperSlide>
-          ))} */}
-          <div>
-            {/* {destInner?.images?.map((item) => ( */}
-            {/* <SwiperSlide key={item}> */}
-            <SwiperSlide className="!h-fit">
-              <div className="w-full cursor-pointer">
-                <img
-                  // src={item}
-                  src={surat2}
-                  alt="surat"
                   className="w-full sm:h-[180px] md:h-[325px] object-cover rounded-[22px]"
                 />
               </div>
             </SwiperSlide>
-
-            <SwiperSlide>
-              <div className="w-full cursor-pointer">
-                <img
-                  // src={item}
-                  src={surat2}
-                  alt="surat"
-                  className="w-full sm:h-[180px] md:h-[325px] object-cover rounded-[22px]"
-                />
-              </div>
-            </SwiperSlide>
-
-            <SwiperSlide>
-              <div className="w-full cursor-pointer">
-                <img
-                  // src={item}
-                  src={surat2}
-                  alt="surat"
-                  className="w-full sm:h-[180px] md:h-[325px] object-cover rounded-[22px]"
-                />
-              </div>
-            </SwiperSlide>
-
-            <SwiperSlide>
-              <div className="w-full cursor-pointer">
-                <img
-                  // src={item}
-                  src={surat2}
-                  alt="surat"
-                  className="w-full sm:h-[180px] md:h-[325px] object-cover rounded-[22px]"
-                />
-              </div>
-            </SwiperSlide>
-
-            <SwiperSlide>
-              <div className="w-full cursor-pointer">
-                <img
-                  // src={item}
-                  src={surat2}
-                  alt="surat"
-                  className="w-full sm:h-[180px] md:h-[325px] object-cover rounded-[22px]"
-                />
-              </div>
-            </SwiperSlide>
-
-            {/* ))} */}
-          </div>
+          ))}
         </Swiper>
       </div>
 
@@ -192,26 +130,8 @@ const HotelInner = () => {
           <p className="text-[30px] md:block sm:hidden font-[poppins-semibold] mb-5 ">
             Information
           </p>
-          {/* <p className="text-[16px] font-[poppins-regular]">
+          <p className="text-[16px] font-[poppins-regular]">
             {hotel?.description}
-          </p> */}
-          <p className="md:text-black sm:text-[#717171] sm:text-[12px] md:text-[16px] font-[poppins-regular]">
-            Lorem ipsum dolor sit amet consectetur. Urna auctor consectetur
-            nullam cras massa. Vel vitae ante lacus condimentum eget consequat
-            pretium ut. Malesuada felis ut ut pellentesque ultrices in. Interdum
-            lorem dui amet rhoncus morbi dolor vel.
-          </p>
-          <p className="md:text-black sm:text-[#717171] sm:text-[12px] md:text-[16px] font-[poppins-regular]">
-            Lorem ipsum dolor sit amet consectetur. Urna auctor consectetur
-            nullam cras massa. Vel vitae ante lacus condimentum eget consequat
-            pretium ut. Malesuada felis ut ut pellentesque ultrices in. Interdum
-            lorem dui amet rhoncus morbi dolor vel.
-          </p>
-          <p className="md:text-black sm:text-[#717171] sm:text-[12px] md:text-[16px] font-[poppins-regular]">
-            Lorem ipsum dolor sit amet consectetur. Urna auctor consectetur
-            nullam cras massa. Vel vitae ante lacus condimentum eget consequat
-            pretium ut. Malesuada felis ut ut pellentesque ultrices in. Interdum
-            lorem dui amet rhoncus morbi dolor vel.
           </p>
         </div>
 
@@ -219,8 +139,7 @@ const HotelInner = () => {
           <p className="sm:text-[18px] md:text-[30px] font-[poppins-semibold] mb-5">Map</p>
 
           <div>
-            {/* <img src={hotel?.map} alt="map" /> */}
-            <img src={map} alt="map" />
+            <img src={hotel?.map} alt="map" />
           </div>
         </div>
       </div>
@@ -230,16 +149,9 @@ const HotelInner = () => {
         <p className=" md:block sm:hidden text-[30px] font-[poppins-bold] mb-4">Hotels</p>
 
         <div className="w-full grid sm:gap-[15px] md:gap-[30px] sm:grid-cols-2 md:grid-cols-auto-fill-250 ">
-          {/* {hotelmains.map((item) => {
+          {hotelmains.map((item) => {
             return <HotleCards key={item.id} item={item} />;
-          })} */}
-          <HotleCards />
-          <HotleCards />
-          <HotleCards />
-          <HotleCards />
-          <HotleCards />
-          <HotleCards />
-          <HotleCards />
+          })}
         </div>
       </div>
 

@@ -79,22 +79,14 @@ const Hotels = () => {
 
           <div>
             <div className="w-full grid sm:gap-[15px] md:gap-[30px] sm:grid-cols-2 md:grid-cols-auto-fill-250 ">
-              {/* {Array.from(hotels).map((item) => {
+              {Array.from(hotels).map((item) => {
                 return (
                   <HotleCards
                     key={item.id}
                     item={item}
                   />
                 );
-              })} */}
-              <HotleCards />
-              <HotleCards />
-              <HotleCards />
-              <HotleCards />
-              <HotleCards />
-              <HotleCards />
-              <HotleCards />
-              <HotleCards />
+              })}
             </div>
             <div className="w-full mt-[40px] flex items-center gap-5 justify-center">
               <Pagination

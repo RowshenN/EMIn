@@ -49,32 +49,28 @@ const Destinations = () => {
               className="relative w-full cursor-pointer"
             >
               <img
-                // src={destinations[0]?.main_image}
-                src={surat1}
+                src={destinations[0]?.main_image}
                 alt="surat"
                 className="w-full sm:h-[122px] md:h-[210px] xl:h-[285px] rounded-[10px] object-cover"
               />
               <p className="absolute sm:bottom-4 md:bottom-[26px] sm:left-4 md:left-[26px] text-white sm:text-[10px] md:text-[20px] font-[poppins-medium] ">
-                {/* {destinations[0]?.name} */}
-                NAme of image
+                {destinations[0]?.name}
               </p>
             </div>
 
             <div
               onClick={() =>
-                // navigate(`/destination-inner/${destinations[1]?.id}`)
-                navigate("/destination-inner")
+                navigate(`/destination-inner/${destinations[1]?.id}`)
               }
               className="relative w-full sm:h-[122px] md:h-[210px] xl:h-[285px] cursor-pointer"
             >
               <img
-                // src={destinations[1]?.main_image}
-                src={surat2}
+                src={destinations[1]?.main_image}
                 alt="surat"
                 className="w-full h-full rounded-[10px] object-cover"
               />
               <p className="absolute sm:bottom-4 md:bottom-[26px] sm:left-4 md:left-[26px] text-white sm:text-[10px] md:text-[20px] font-[poppins-medium]">
-                {/* {destinations[1]?.name} */} name fo image
+                {destinations[1]?.name} 
               </p>
             </div>
           </div>
@@ -86,13 +82,12 @@ const Destinations = () => {
             className="relative sm:h-[257px] md:h-[435px] xl:h-[600px] w-full cursor-pointer"
           >
             <img
-              // src={destinations[2]?.main_image}
-              src={surat3}
+              src={destinations[2]?.main_image}
               alt="surat"
               className="w-full h-full"
             />
             <p className="absolute sm:bottom-4 md:bottom-[26px] sm:left-4 md:left-[26px] text-white sm:text-[10px] md:text-[20px] font-[poppins-medium]">
-              {/* {destinations[2]?.name} */} name of image
+              {destinations[2]?.name} 
             </p>
           </div>
         </div>
@@ -105,14 +100,12 @@ const Destinations = () => {
             className="relative w-full sm:h-[180px] md:h-[210px] xl:h-[285px] cursor-pointer"
           >
             <img
-              // src={destinations[3]?.main_image}
-              src={surat4}
+              src={destinations[3]?.main_image}
               alt="surat"
               className="w-full h-full rounded-[10px] object-cover"
             />
             <p className="absolute sm:bottom-4 md:bottom-[26px] sm:left-4 md:left-[26px] text-white sm:text-[10px] md:text-[20px] font-[poppins-medium]">
-              {/* {destinations[3]?.name} */}
-              name of image
+              {destinations[3]?.name}
             </p>
           </div>
 
@@ -124,14 +117,12 @@ const Destinations = () => {
               className="relative w-[208px] md:h-[210px] xl:h-[285px] cursor-pointer"
             >
               <img
-                // src={destinations[4]?.main_image}
-                src={surat5}
+                src={destinations[4]?.main_image}
                 className="w-full md:h-[210px] xl:h-[285px] rounded-[10px] object-cover"
                 alt="surat"
               />
               <p className="absolute sm:bottom-4 md:bottom-[26px] sm:left-4 md:left-[26px] text-white sm:text-[10px] md:text-[20px] font-[poppins-medium]">
-                {/* {destinations[4]?.name} */}
-                name fo image
+                {destinations[4]?.name}
               </p>
             </div>
 
@@ -142,13 +133,12 @@ const Destinations = () => {
               className="relative w-[291px] md:h-[210px] xl:h-[285px] cursor-pointer"
             >
               <img
-                // src={destinations[5]?.main_image}
-                src={surat6}
+                src={destinations[5]?.main_image}
                 className="w-full md:h-[210px] xl:h-[285px] rounded-[10px] object-cover"
                 alt="surat"
               />
               <p className="absolute sm:bottom-4 md:bottom-[26px] sm:left-4 md:left-[26px] text-white sm:text-[10px] md:text-[20px] font-[poppins-medium]">
-                {/* {destinations[5]?.name} */} name fo image
+                {destinations[5]?.name} 
               </p>
             </div>
           </div>

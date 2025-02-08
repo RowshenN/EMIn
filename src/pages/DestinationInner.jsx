@@ -41,6 +41,25 @@ const DestinationInner = () => {
       });
   };
 
+  const [blogs, setBlogs] = useState([]);
+  useEffect(() => {
+    getHotels();
+  }, []);
+
+  const getHotels = async () => {
+    await axiosInstance
+      .get("/destinations")
+      .then((res) => {
+        setBlogs(res.data.data);
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  // const NewBlogs = Array.from(blogs).slice(0, 3);
+
   return (
     <>
       <div className="sm:w-[94%] md:w-[95%] mx-auto">
@@ -51,17 +70,17 @@ const DestinationInner = () => {
           className=" relative w-full "
           // style={{ backgroundImage: `url(${destInner?.main_image})` }}
         >
-          <img src={surat2} alt="suart" className="-z-10 rounded-[23px]" />
+          <img
+            src={destInner?.main_image}
+            alt="suart"
+            className="-z-10 rounded-[23px]"
+          />
           <div className="bg-white absolute z-10 top-[4%] left-[2%] rounded-[20px] sm:hidden xl:block md:w-[50%] xl:w-[36%] pt-6 pl-9 pr-[45px] pb-[58px] ">
             <p className="text-[40px] font-[poppins-medium] mb-[23px] ">
-              {/* {destInner?.name} */} name of destinner
+              {destInner?.name}
             </p>
             <p className="text-[#717171] text-[16px] font-[poppins-regular] mb-[13px] ">
-              {/* {destInner?.description} */} Lorem ipsum dolor sit amet
-              consectetur. Urna auctor consectetur nullam cras massa. Vel vitae
-              ante lacus condimentum eget consequat pretium ut. Malesuada felis
-              ut ut pellentesque ultrices in. Interdum lorem dui amet rhoncus
-              morbi dolor vel.
+              {destInner?.description}
             </p>
             {/* <p className="text-[#717171] text-[16px] font-[poppins-regular] mb-10 ">
               Lorem ipsum dolor sit amet consectetur. Urna auctor consectetur
@@ -88,7 +107,9 @@ const DestinationInner = () => {
       </div>
 
       <div className="w-[90%] sm:block xl:hidden mx-auto mb-[32px] ">
-        <p className="md:text-[24px] sm:text-[20px] font-[poppins-medium] mb-[15px] " >United Kingdom - London</p>
+        <p className="md:text-[24px] sm:text-[20px] font-[poppins-medium] mb-[15px] ">
+          United Kingdom - London
+        </p>
         <p className="text-[#717171] sm:text-[12px] md:text-[16px] font-[poppins-regular] mb-[15px] ">
           Lorem ipsum dolor sit amet consectetur. Urna auctor consectetur nullam
           cras massa. Vel vitae ante lacus condimentum eget consequat pretium
@@ -126,64 +147,17 @@ const DestinationInner = () => {
           scrollbar={false}
         >
           <div>
-            {/* {destInner?.images?.map((item) => ( */}
-            {/* <SwiperSlide key={item}> */}
-            <SwiperSlide className="!h-fit">
-              <div className="w-full cursor-pointer">
-                <img
-                  // src={item}
-                  src={surat1}
-                  alt="surat"
-                  className="w-full sm:h-[180px] md:h-[325px] object-cover rounded-[22px]"
-                />
-              </div>
-            </SwiperSlide>
-
-            <SwiperSlide>
-              <div className="w-full cursor-pointer">
-                <img
-                  // src={item}
-                  src={surat1}
-                  alt="surat"
-                  className="w-full sm:h-[180px] md:h-[325px] object-cover rounded-[22px]"
-                />
-              </div>
-            </SwiperSlide>
-
-            <SwiperSlide>
-              <div className="w-full cursor-pointer">
-                <img
-                  // src={item}
-                  src={surat1}
-                  alt="surat"
-                  className="w-full sm:h-[180px] md:h-[325px] object-cover rounded-[22px]"
-                />
-              </div>
-            </SwiperSlide>
-
-            <SwiperSlide>
-              <div className="w-full cursor-pointer">
-                <img
-                  // src={item}
-                  src={surat1}
-                  alt="surat"
-                  className="w-full sm:h-[180px] md:h-[325px] object-cover rounded-[22px]"
-                />
-              </div>
-            </SwiperSlide>
-
-            <SwiperSlide>
-              <div className="w-full cursor-pointer">
-                <img
-                  // src={item}
-                  src={surat1}
-                  alt="surat"
-                  className="w-full sm:h-[180px] md:h-[325px] object-cover rounded-[22px]"
-                />
-              </div>
-            </SwiperSlide>
-
-            {/* ))} */}
+            {destInner?.images?.map((item) => (
+              <SwiperSlide key={item} className="!h-fit">
+                <div className="w-full cursor-pointer">
+                  <img
+                    src={item}
+                    alt="surat"
+                    className="w-full sm:h-[180px] md:h-[325px] object-cover rounded-[22px]"
+                  />
+                </div>
+              </SwiperSlide>
+            ))}
           </div>
         </Swiper>
       </div>
@@ -196,51 +170,32 @@ const DestinationInner = () => {
               Included
             </p>
             <div className="flex items-baseline flex-col justify-start gap-3 mb-[37px] ">
-              {/* {destInner?.included?.map((item) => {
-                return ( */}
-              <p
-                // key={item + "s"}
-                className="sm:text-[12px] md:text-[16px] font-[poppins-regular]"
-              >
-                {/* {item.item} */}- Lorem ipsum dolor sit amet consectetur.
-                Maecenas feugiat nam vel vestibulum iaculis eu ullamcorper a. -
-                Lorem ipsum dolor sit amet consectetur. Maecenas feugiat nam vel
-                vestibulum iaculis eu ullamcorper a.- Lorem ipsum dolor sit amet
-                consectetur. Maecenas feugiat nam vel vestibulum iaculis eu
-                ullamcorper a.- Lorem ipsum dolor sit amet consectetur. Maecenas
-                feugiat nam vel vestibulum iaculis eu ullamcorper a.- Lorem
-                ipsum dolor sit amet consectetur. Maecenas feugiat nam vel
-                vestibulum iaculis eu ullamcorper a.- Lorem ipsum dolor sit amet
-                consectetur. Maecenas feugiat nam vel vestibulum iaculis eu
-                ullamcorper a.
-              </p>
-              {/* );
-              })} */}
+              {destInner?.included?.map((item) => {
+                return (
+                  <p
+                    key={item + "s"}
+                    className="sm:text-[12px] md:text-[16px] font-[poppins-regular]"
+                  >
+                    {item.item}
+                  </p>
+                );
+              })}
             </div>
 
             <p className="sm:text-[18px] md:text-[30px] font-[poppins-semibold] mb-4 ">
               Not included
             </p>
             <div className="flex items-baseline flex-col justify-start gap-3">
-              {/* {destInner?.not_included?.map((item) => {
-                return ( */}
-              <p
-                // key={item + "w"}
-                className="sm:text-[12px] md:text-[16px] font-[poppins-regular]"
-              >
-                {/* {item.item} */} - Lorem ipsum dolor sit amet consectetur.
-                Maecenas feugiat nam vel vestibulum iaculis eu ullamcorper a. -
-                Lorem ipsum dolor sit amet consectetur. Maecenas feugiat nam vel
-                vestibulum iaculis eu ullamcorper a.- Lorem ipsum dolor sit amet
-                consectetur. Maecenas feugiat nam vel vestibulum iaculis eu
-                ullamcorper a.- Lorem ipsum dolor sit amet consectetur. Maecenas
-                feugiat nam vel vestibulum iaculis eu ullamcorper a.- Lorem
-                ipsum dolor sit amet consectetur. Maecenas feugiat nam vel
-                vestibulum iaculis eu ullamcorper a.- Lorem ipsum dolor sit amet
-                consectetur. Maecenas feugiat nam vel vestibulum iaculis eu
-                ullamcorper a.
-              </p>
-              {/* // ); // })} */}
+              {destInner?.not_included?.map((item) => {
+                return (
+                  <p
+                    key={item + "w"}
+                    className="sm:text-[12px] md:text-[16px] font-[poppins-regular]"
+                  >
+                    {item.item}
+                  </p>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -250,8 +205,7 @@ const DestinationInner = () => {
           <div className="w-full">
             <img
               className="sm:w-full md:w-[670px] sm:h-[254px] md:h-[508px] object-cover "
-              // src={destInner?.map}
-              src={desmao}
+              src={destInner?.map}
               alt="map"
             />
           </div>
@@ -260,40 +214,15 @@ const DestinationInner = () => {
 
       {/* hotels */}
       <div className="w-[85%] mx-auto mb-[145px] ">
-        <p className="md:block sm:hidden text-[30px] font-[poppins-bold] mb-4">Tours</p>
+        <p className="md:block sm:hidden text-[30px] font-[poppins-bold] mb-4">
+          Tours
+        </p>
 
-        <div className="w-full grid sm:gap-[15px] md:gap-[30px] sm:grid-cols-2 md:grid-cols-auto-fill-250 ">
-          <ToursCards
-            country={"Turkmenistan"}
-            def={"London & Paris: A Winter Tale of Two Cities"}
-            time={"5 days"}
-          />
-          <ToursCards
-            country={"Turkmenistan"}
-            def={"London & Paris: A Winter Tale of Two Cities"}
-            time={"5 days"}
-          />
-          <ToursCards
-            country={"Turkmenistan"}
-            def={"London & Paris: A Winter Tale of Two Cities"}
-            time={"5 days"}
-          />
-          <ToursCards
-            country={"Turkmenistan"}
-            def={"London & Paris: A Winter Tale of Two Cities"}
-            time={"5 days"}
-          />
-          <ToursCards
-            country={"Turkmenistan"}
-            def={"London & Paris: A Winter Tale of Two Cities"}
-            time={"5 days"}
-          />
-          <ToursCards
-            country={"Turkmenistan"}
-            def={"London & Paris: A Winter Tale of Two Cities"}
-            time={"5 days"}
-          />
-        </div>
+        {/* <div className="w-full grid sm:gap-[15px] md:gap-[30px] sm:grid-cols-2 md:grid-cols-auto-fill-250 ">
+          {NewBlogs?.map((item) => {
+            return <ToursCards key={item.id} item={item} />;
+          })}
+        </div> */}
       </div>
       <AreYouReady />
     </>

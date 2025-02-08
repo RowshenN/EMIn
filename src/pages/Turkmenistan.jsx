@@ -119,7 +119,7 @@ const Turkmenistan = () => {
             </p>
           </div>
 
-          <div className="w-full text-left lg:py-[25px] lg:px-[35px] sm:text-[12px] md:text-[16px] text-white bg-[#000000B5] backdrop-filter ">
+          <div className="w-full text-left lg:py-[25px] lg:px-[35px] sm:text-[12px] md:text-[16px] text-white ">
             <p className="shadow-2xl">
               {dil === "tm"
                 ? "Türkmenistanyň medeniýet ulgamyny ösdürmek, türkmen halkynyň ruhy gymmatlyklaryna esaslanýan döwlet taglymatyny kemala getirmek hormatly Prezidentimiz Serdar Berdimuhamedowyň alyp barýan köpugurly syýasatynyň ileri tutulýan ugurlarynyň biridir. Özboluşly medeni mirasymyz halkymyzyň aýawly saklap, nesilden-nesle geçirip gelýän gaýtalanmajak maddy we ruhy gymmatlyklarynyň bitewi ulgamydyr. Milli medeni mirasymyzy öwrenmek, gorap saklamak, mundan beýläk-de baýlaşdyrmak döwlet Baştutanymyzyň üns merkezinde durýar. Bu ugurdaky işler häzirki wagtda üstünlikli dowam etdirilip, medeniýet we sungat işgärleriniň, köpçülikleýin habar beriş serişdeleriniň işine aýratyn ähmiýet berilýär. Döredijilik ugry Arkadag Serdarly bagtyýar ýaşlar ýylynda guralýan çäreleriň hem aýrylmaz bölegidir. Medeniýet, sungat ussatlarynyň, köpçülikleýin habar beriş serişdeleriniň işgärleriniň alyp barýan işleri Watanymyzyň ýeten sepgitlerini giňden wagyz etmäge, olaryň ähmiýetini açyp görkezmäge, ykdysadyýetiň ähli pudaklarynda amala aşyrylýan özgertmelere we durmuş taýdan ösüşe itergi bermäge gönükdirilendir."
@@ -179,7 +179,7 @@ const Turkmenistan = () => {
         <img
           src={bulut_down}
           alt="cloud-down"
-          className="absolute w-full !h-[170px] sm:top-[-10px] lg:top-0 object-cover left-0 "
+          className="absolute w-full !h-[120px] sm:top-[-10px] lg:top-0 object-cover left-0 "
         />
         <img
           src={meals_main}
@@ -204,7 +204,7 @@ const Turkmenistan = () => {
             </p>
           </div>
 
-          <div className="w-full text-left lg:py-[25px] lg:px-[35px] sm:text-[12px] md:text-[16px] text-white lg:bg-black/50">
+          <div className="w-full text-left lg:py-[25px] lg:px-[35px] sm:text-[12px] md:text-[16px] text-white">
             <p>
               {dil === "tm"
                 ? "Türkmen halkymyzyň milli tagamlary, beýleki halklaryň naz-nygmatlary ýaly, öz gözbaşyny gadymy döwürlerden alyp gaýdýar, dürli-dürliligi we özboluşlulygy bilen tapawutlanýar. Biziň günlerimize ýetip gelen gadymy rowaýatlarda türkmen şalarynyň, harby serkerdeleriň bereketli saçaklaryň başynda öz ýeňişlerini belleýişleri, daşary ýurtly ilçileriň desterhanlardaky azyk önümleriniň köplügine haýran galyşlary, olaryň ähli adamlary sahylyk bilen tagam datmaga çagyryşlary hakynda örän köp aýdylýar. Adatça, üstünlik bilen tamamlanan möhüm işler, halk baýramçylygynyň dessurlary, maşgalanyň şanly wakalary we dabaralary hem saçak başynda giňden bellenilýär. Gahryman Arkadagymyzyň “Bereketli türkmen saçagy” atly kitaby türkmen aşhanasynyň muşdaklarynyň iň söýgüli eserleriniň hatarynda durýar. Mälim bolşy ýaly, türkmeniň datly tagamlary taryhyny irki döwürlerden alyp gaýdýar, olar uzak ýyllaryň dowamynda has-da kämilleşdirilip, adamyň sagdynlygyna, iýmit siňdirijiligine, ýokumlylyga, ýakymlylyga, süýjülige gönükdirilendir. Türkmen halkymyzyň milli tagamlary, beýleki halklaryň naz-nygmatlary ýaly, öz gözbaşyny gadymy döwürlerden alyp gaýdýar, dürli-dürliligi we özboluşlulygy bilen tapawutlanýar.Dograma – munuň özi türkmen halkynyň däp bolan ýörgünli milli naharydyr. Onuň ady hem ,,dogramak” diýen sözden gelip çykypdyr.    Türkmen milli tagamy bolan ,,Tamdyrlama” maşgalanyň iň gowy görýän nahary bolup, ol dost-ýarlar, myhman gelende ýa-da toý-baýramlarda taýýarlanylýar.  Elleri tagamly ene-mamalarymyz geçmişde däneli-kösükli ekinlerden ençeme milli tagamlary taýýarlamak bilen, olary beýik sungat derejesine ýetiripdirler. Bular barada türkmen halkynyň Milli Lideri Gahryman Arkadagymyzyň «Bereketli türkmen saçagy» atly kitabynda giňişleýin gürrüň edilýär. Milli tagamlarymyz halkymyzyň myhmansöýerliginiň özboluşly güwäsidir."
@@ -219,7 +219,7 @@ const Turkmenistan = () => {
         <img
           src={meals_bottom}
           alt="cloud-top"
-          className="absolute object-cover sm:bottom-[-10px] lg:bottom-0 left-0 !h-[170px] w-full"
+          className="absolute object-cover sm:bottom-[-10px] lg:bottom-0 left-0 !h-[100px] w-full"
         />
       </div>
 
