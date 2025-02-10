@@ -1,4 +1,4 @@
-import React,{useContext} from "react";
+import React, { useContext } from "react";
 
 import Navigation from "../components/navbars/Navigation";
 
@@ -9,7 +9,7 @@ import AreYouReady from "../components/AreYouReady";
 import { SebedimContext } from "../context/Context";
 
 const About = () => {
-  const {dil} = useContext(SebedimContext)
+  const { dil } = useContext(SebedimContext);
   return (
     <>
       <Navigation />
@@ -24,12 +24,12 @@ const About = () => {
               />
               <p className="absolute sm:top-[26%] xs:top-[35%] sm:left-[35%] xs:left-[40%] md:left-[43%] text-white md:text-[35px] sm:text-[26px] lg:text-[50px] font-[poppins-semibold] ">
                 {dil === "tk"
-                  ? "Başgalar"
+                  ? "Hakymyzda"
                   : dil === "ru"
-                  ? "Другие"
+                  ? "О нас"
                   : dil === "tr"
-                  ? "Başka"
-                  : "Others"}
+                  ? "Haberler"
+                  : "About us"}
               </p>
             </div>
 

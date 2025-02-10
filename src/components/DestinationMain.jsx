@@ -57,7 +57,7 @@ const Destinations = () => {
           <div className="w-full flex flex-col justify-start items-baseline sm:gap-3 md:gap-[15px] xl:gap-[30px]">
             <div
               onClick={() =>
-                navigate(`/destination-inner/${destinations[0]?.id}`)
+                navigate(`/destination-inner/${destinations[0]?.id}?type=${destinations[0]?.type}`)
               }
               className="relative w-full cursor-pointer"
             >
@@ -73,7 +73,7 @@ const Destinations = () => {
 
             <div
               onClick={() =>
-                navigate(`/destination-inner/${destinations[1]?.id}`)
+                navigate(`/destination-inner/${destinations[1]?.id}?type=${destinations[1]?.type}`)
               }
               className="relative w-full sm:h-[122px] md:h-[210px] xl:h-[285px] cursor-pointer"
             >
@@ -90,7 +90,7 @@ const Destinations = () => {
 
           <div
             onClick={() =>
-              navigate(`/destination-inner/${destinations[2]?.id}`)
+              navigate(`/destination-inner/${destinations[2]?.id}?type=${destinations[2]?.type}`)
             }
             className="relative sm:h-[257px] md:h-[435px] xl:h-[600px] w-full cursor-pointer"
           >
@@ -108,7 +108,7 @@ const Destinations = () => {
         <div className="sm:w-full md:w-[45%] flex flex-col items-baseline sm:gap-3 md:gap-[15px] xl:gap-[30px] justify-start">
           <div
             onClick={() =>
-              navigate(`/destination-inner/${destinations[3]?.id}`)
+              navigate(`/destination-inner/${destinations[3]?.id}?type=${destinations[3]?.type}`)
             }
             className="relative w-full sm:h-[180px] md:h-[210px] xl:h-[285px] cursor-pointer"
           >
@@ -125,7 +125,7 @@ const Destinations = () => {
           <div className="w-full flex items-center sm:gap-3 md:gap-[15px] xl:gap-[30px] justify-start ">
             <div
               onClick={() =>
-                navigate(`/destination-inner/${destinations[4]?.id}`)
+                navigate(`/destination-inner/${destinations[4]?.id}?type=${destinations[4]?.type}`)
               }
               className="relative w-[208px] md:h-[210px] xl:h-[285px] cursor-pointer"
             >
@@ -141,7 +141,7 @@ const Destinations = () => {
 
             <div
               onClick={() =>
-                navigate(`/destination-inner/${destinations[5]?.id}`)
+                navigate(`/destination-inner/${destinations[5]?.id}?type=${destinations[5]?.type}`)
               }
               className="relative w-[291px] md:h-[210px] xl:h-[285px] cursor-pointer"
             >

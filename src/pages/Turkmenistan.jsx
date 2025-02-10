@@ -199,7 +199,7 @@ const Turkmenistan = () => {
         <img
           src={meals_bottom}
           alt="cloud-top"
-          className="absolute z-20 object-cover sm:bottom-[-10px] md:bottom-[-80px] lg:bottom-[-145px] left-0 h-fit w-full"
+          className="absolute z-20 object-cover sm:bottom-[-10px] md:bottom-[-80px] lg:bottom-[-113px] left-0 h-fit w-full"
         />
       </div>
 

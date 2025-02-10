@@ -163,22 +163,22 @@ const Contact = () => {
                 <img
                   src={social}
                   alt="social"
-                  className="object-cover sm:w-[17px] md:w-[30px]"
+                  className="object-cover cursor-pointer sm:w-[17px] md:w-[30px]"
                 />
                 <img
                   src={social2}
                   alt="social"
-                  className="object-cover sm:w-[17px] md:w-[30px]"
+                  className="object-cover cursor-pointer sm:w-[17px] md:w-[30px]"
                 />
                 <img
                   src={social3}
                   alt="social"
-                  className="object-cover sm:w-[17px] md:w-[30px]"
+                  className="object-cover cursor-pointer sm:w-[17px] md:w-[30px]"
                 />
                 <img
                   src={social4}
                   alt="social"
-                  className="object-cover sm:w-[17px] md:w-[30px]"
+                  className="object-cover cursor-pointer sm:w-[17px] md:w-[30px]"
                 />
               </div>
             </div>
