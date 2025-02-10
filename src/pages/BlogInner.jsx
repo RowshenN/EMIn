@@ -52,7 +52,7 @@ const BlogInner = () => {
   useEffect(() => {
     getHotelInner();
     getHotels();
-  }, [dil]);
+  }, [dil,id]);
 
   const lastThreeBlogs = blogs.length - 3;
   const NewBlogs = Array.from(blogs).slice(lastThreeBlogs, blogs.length);
@@ -72,11 +72,11 @@ const BlogInner = () => {
     <>
       <Navigation />
       <div className="sm:w-[94%] md:w-[90%] mx-auto sm:mt-[32px] md:mt-[37px] sm:mb-[140px] md:mb-[190px] ">
-        <div className="w-full rounded-[22px] sm:mb-2 md:mb-[33px]">
+        <div className="w-full  sm:h-[300px] md:h-[523px]  rounded-[22px] sm:mb-2 md:mb-[33px]">
           <img
             src={blog?.banner}
             alt="sell"
-            className="w-full sm:h-[300px] md:h-[523px] rounded-[22px] object-cover"
+            className="w-full h-full rounded-[22px] object-cover"
           />
         </div>
 

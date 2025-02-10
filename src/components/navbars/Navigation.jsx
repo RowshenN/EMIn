@@ -166,7 +166,7 @@ const Navigation = () => {
                 {tours && (
                   <div
                     onMouseLeave={() => setTours(false)}
-                    className="bg-[#F9F9F9] z-50 py-2 px-2 absolute top-8 right-[-37px] flex flex-col items-center gap-2 rounded-[11px] justify-center"
+                    className="bg-[#F9F9F9] z-50 py-2 px-3 absolute top-8 right-[-37px] flex flex-col items-center gap-2 rounded-[11px] justify-center"
                   >
                     <p
                       onClick={() => navigate(`/tours?type=${"turkmenistan"}`)}

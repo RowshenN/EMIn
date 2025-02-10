@@ -115,7 +115,7 @@ const Tours = () => {
 
       <div className="w-full flex items-center justify-center">
         <div
-          onClick={() => navigate("/tours")}
+          onClick={() => navigate(`/tours?type=${type}`)}
           className="flex items-center justify-center gap-[10px]"
         >
           <button className="text-[#009833] sm:text-[12px] md:text-[18px] font-[poppins-medium] ">

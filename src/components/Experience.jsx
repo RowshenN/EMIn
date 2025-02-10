@@ -18,12 +18,12 @@ const Experience = () => {
         <div className="sm:mb-6 md:mb-[55px]">
           <h1 className="sm:text-[25px] md:text-[40px] lg:text-[50px] md:text-left sm:text-center font-[poppins-semibold] ">
             {dil === "tk"
-              ? "Gözlemek"
+              ? "Experience The New Adventure with Emin Hyzmat"
               : dil === "ru"
-              ? "Поиск"
+              ? "Получите новый опыт с Эмином Хызмат!"
               : dil === "tr"
               ? "Emin Hyzmat sayesinde yeni maceralar keşfedin!"
-              : `Experience The New Adventure with ${(<br />)} Emin Hyzmat`}
+              : `Experience The New Adventure with Emin Hyzmat`}
           </h1>
           <img
             className="mt-[-17px] md:block sm:hidden"

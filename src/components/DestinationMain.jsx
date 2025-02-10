@@ -97,7 +97,7 @@ const Destinations = () => {
             <img
               src={destinations[2]?.main_image}
               alt="surat"
-              className="w-full h-full"
+              className="w-full rounded-[10px] object-cover h-full"
             />
             <p className="absolute sm:bottom-4 md:bottom-[26px] sm:left-4 md:left-[26px] text-white sm:text-[10px] md:text-[20px] font-[poppins-medium]">
               {destinations[2]?.name}

@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import HotleCards from "./HotleCards";
 
 import icon from "../../images/hotel-round.svg";
@@ -8,6 +9,7 @@ import { SebedimContext } from "../../context/Context";
 const Hotels = () => {
   const { dil } = useContext(SebedimContext);
   const [hotels, setHotels] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getHotels();
@@ -16,9 +18,9 @@ const Hotels = () => {
   const getHotels = async () => {
     await axiosInstance
       .get("/hotels", {
-        headers:{
+        headers: {
           "Accept-Language": dil,
-        }
+        },
       })
       .then((res) => {
         setHotels(res.data.data);
@@ -44,7 +46,10 @@ const Hotels = () => {
               ? "Oteller"
               : "Hotels"}
           </h1>
-          <button className="text-[18px] md:block sm:hidden text-[#009833] font-[poppins-medium] ">
+          <button
+            onClick={() => navigate("/hotels")}
+            className="text-[18px] md:block sm:hidden text-[#009833] font-[poppins-medium] "
+          >
             {dil === "tk"
               ? "Beýlekiler"
               : dil === "ru"
