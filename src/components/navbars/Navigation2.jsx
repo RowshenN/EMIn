@@ -1,4 +1,4 @@
-import React, { useState,useContext } from "react";
+import React, { useState, useContext } from "react";
 
 import { useNavigate } from "react-router-dom";
 
@@ -12,6 +12,7 @@ import { SebedimContext } from "../../context/Context";
 const Navigation2 = () => {
   const { dil, ChangeDil } = useContext(SebedimContext);
   const [lang, setLang] = useState(false);
+  const [tours, setTours] = useState(false);
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   return (
@@ -27,49 +28,92 @@ const Navigation2 = () => {
             key={"placement"}
           >
             <div className="flex items-center text-[14px] font-[poppins-medium] justify-center gap-4">
-              <div className="flex flex-col py-[10px] px-5 rounded-[29px] w-full items-start justify-start gap-9">
+              <div className="flex flex-col py-[10px] px-5 rounded-[29px] w-full items-start justify-start gap-5">
                 <p
                   onClick={() => navigate("/about")}
                   className="w-full cursor-pointer"
                 >
-                  About us
+                  {dil === "tk"
+                    ? "Hakymyzda"
+                    : dil === "ru"
+                    ? "О нас"
+                    : dil === "tr"
+                    ? "Haberler"
+                    : "About us"}
                 </p>
 
                 <p
                   onClick={() => navigate("/turkmenistan")}
                   className="cursor-pointer w-full"
                 >
-                  Turkmenistan
+                  {dil === "tk"
+                    ? "Türkmenistan"
+                    : dil === "ru"
+                    ? "Туркменистан"
+                    : dil === "tr"
+                    ? "Türkmenistan"
+                    : "Turkmenistan"}
                 </p>
                 <p
                   onClick={() => navigate("/tours")}
                   className="flex cursor-pointer w-full items-center justify-start gap-2"
                 >
-                  Tours <img src={vector} alt="vector" />
+                  {dil === "tk"
+                    ? "Turlar"
+                    : dil === "ru"
+                    ? "Туры"
+                    : dil === "tr"
+                    ? "Turlar"
+                    : "Tours"}{" "}
+                  <img src={vector} alt="vector" />
                 </p>
                 <p
                   onClick={() => navigate("/hotels")}
                   className="cursor-pointer w-full"
                 >
-                  Hotels
+                  {dil === "tk"
+                    ? "Oteller"
+                    : dil === "ru"
+                    ? "Отели"
+                    : dil === "tr"
+                    ? "Oteller"
+                    : "Hotels"}
                 </p>
                 <p
                   onClick={() => navigate("/visa")}
                   className="cursor-pointer w-full"
                 >
-                  Visa
+                  {dil === "tk"
+                    ? "Visa"
+                    : dil === "ru"
+                    ? "Виза"
+                    : dil === "tr"
+                    ? "Visa"
+                    : "Visa"}
                 </p>
                 <p
                   onClick={() => navigate("/blog")}
                   className="cursor-pointer w-full"
                 >
-                  Blog
+                  {dil === "tk"
+                    ? "Blog"
+                    : dil === "ru"
+                    ? "Блог"
+                    : dil === "tr"
+                    ? "Blog"
+                    : "Blog"}
                 </p>
                 <p
                   onClick={() => navigate("/contact")}
-                  className="cursor-pointer"
+                  className="cursor-pointer w-full"
                 >
-                  Contact
+                  {dil === "tk"
+                    ? "Habarlaşmak üçin"
+                    : dil === "ru"
+                    ? "Обращайтесь к нам"
+                    : dil === "tr"
+                    ? "Bizimle iletişime geçin"
+                    : "Contact us"}
                 </p>
               </div>
             </div>
@@ -84,29 +128,93 @@ const Navigation2 = () => {
           <div className="flex items-center text-[14px] font-[poppins-medium] justify-center gap-4">
             <div className="sm:hidden lg:flex bg-[#F9F9F9] py-[10px] px-5 rounded-[29px] w-full items-center justify-center gap-9">
               <p onClick={() => navigate("/about")} className="cursor-pointer">
-                About us
+                {dil === "tk"
+                  ? "Hakymyzda"
+                  : dil === "ru"
+                  ? "О нас"
+                  : dil === "tr"
+                  ? "Haberler"
+                  : "About us"}
               </p>
 
               <p
                 onClick={() => navigate("/turkmenistan")}
                 className="cursor-pointer"
               >
-                Turkmenistan
+                {dil === "tk"
+                  ? "Türkmenistan"
+                  : dil === "ru"
+                  ? "Туркменистан"
+                  : dil === "tr"
+                  ? "Türkmenistan"
+                  : "Turkmenistan"}
               </p>
               <p
-                onClick={() => navigate("/tours")}
-                className="flex cursor-pointer items-center justify-center gap-2"
+                onMouseOver={() => setTours(true)}
+                className="flex relative cursor-pointer items-center justify-center gap-2"
               >
-                Tours <img src={vector} alt="vector" />
+                {dil === "tk"
+                  ? "Turlar"
+                  : dil === "ru"
+                  ? "Туры"
+                  : dil === "tr"
+                  ? "Turlar"
+                  : "Tours"}{" "}
+                <img src={vector} alt="vector" />
+                {tours && (
+                  <div
+                    onMouseLeave={() => setTours(false)}
+                    className="bg-[#F9F9F9] py-2 px-2 absolute top-8 right-[-37px] flex flex-col items-center gap-2 rounded-[11px] justify-center"
+                  >
+                    <p
+                      onClick={() => navigate(`/tours?type=${"turkmenistan"}`)}
+                    >
+                      {dil === "tk"
+                        ? "Türkmenistan"
+                        : dil === "ru"
+                        ? "Туркменистан"
+                        : dil === "tr"
+                        ? "Türkmenistan"
+                        : "Turkmenistan"}
+                    </p>
+                    <p onClick={() => navigate(`/tours?type=${"others"}`)}>
+                      {dil === "tk"
+                        ? "Başgalar"
+                        : dil === "ru"
+                        ? "Другие"
+                        : dil === "tr"
+                        ? "Başka"
+                        : "Others"}
+                    </p>
+                  </div>
+                )}
               </p>
               <p onClick={() => navigate("/hotels")} className="cursor-pointer">
-                Hotels
+                {dil === "tk"
+                  ? "Oteller"
+                  : dil === "ru"
+                  ? "Отели"
+                  : dil === "tr"
+                  ? "Oteller"
+                  : "Hotels"}
               </p>
               <p onClick={() => navigate("/visa")} className="cursor-pointer">
-                Visa
+                {dil === "tk"
+                  ? "Visa"
+                  : dil === "ru"
+                  ? "Виза"
+                  : dil === "tr"
+                  ? "Visa"
+                  : "Visa"}
               </p>
               <p onClick={() => navigate("/blog")} className="cursor-pointer">
-                Blog
+                {dil === "tk"
+                  ? "Blog"
+                  : dil === "ru"
+                  ? "Блог"
+                  : dil === "tr"
+                  ? "Blog"
+                  : "Blog"}
               </p>
             </div>
 
@@ -116,7 +224,7 @@ const Navigation2 = () => {
             >
               <img src={globe} alt="globe" />
               <p>
-                {dil === "tm"
+                {dil === "tk"
                   ? "TM"
                   : dil === "ru"
                   ? "RU"
@@ -133,7 +241,7 @@ const Navigation2 = () => {
                 }
               >
                 <div
-                  onClick={() => ChangeDil("tm")}
+                  onClick={() => ChangeDil("tk")}
                   className="hover:text-black"
                 >
                   TM

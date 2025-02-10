@@ -3,18 +3,19 @@ import React, { useState, useEffect, createContext } from "react";
 export const SebedimContext = createContext();
 
 const SebedimContextProvider = (props) => {
-  let [dil, setDil] = useState();
+  let [dil, setDil] = useState("");
   useEffect(() => {
     let dilData = localStorage.getItem("TDYEDil");
     if (dilData) {
       setDil(JSON.parse(dilData));
     } else {
-      setDil("tm");
-      localStorage.setItem("TDYEDil", JSON.stringify("tm"));
+      setDil("tk");
+      localStorage.setItem("TDYEDil", JSON.stringify("tk"));
     }
   }, []);
 
   const ChangeDil = (event) => {
+    console.log(dil);
     setDil(event);
     localStorage.setItem("TDYEDil", JSON.stringify(event));
   };

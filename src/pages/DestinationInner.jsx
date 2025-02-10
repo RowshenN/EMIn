@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 
 import Navigation from "../components/navbars/Navigation";
 import AreYouReady from "../components/AreYouReady";
@@ -19,19 +19,29 @@ import "swiper/css/pagination";
 // import required modules
 import { Pagination } from "swiper/modules";
 import ToursCards from "../components/tours/ToursCards";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import { axiosInstance } from "../utils/axiosInstance";
+import { SebedimContext } from "../context/Context";
 
 const DestinationInner = () => {
+  const { dil } = useContext(SebedimContext);
+  const [searchParams] = useSearchParams();
+  const type = searchParams.get("type");
   const [destInner, setDestInner] = useState([]);
+  const [blogs, setBlogs] = useState([]);
   const { id } = useParams();
   useEffect(() => {
     getHotelInner();
-  }, []);
+    getHotels();
+  }, [id, dil]);
 
   const getHotelInner = async () => {
     await axiosInstance
-      .get(`/destinations/${id}/details`)
+      .get(`/destinations/${id}/details`, {
+        headers: {
+          "Accept-Language": dil,
+        },
+      })
       .then((res) => {
         setDestInner(res.data.data);
         console.log(res.data.data);
@@ -41,39 +51,57 @@ const DestinationInner = () => {
       });
   };
 
-  const [blogs, setBlogs] = useState([]);
-  useEffect(() => {
-    getHotels();
-  }, []);
-
   const getHotels = async () => {
     await axiosInstance
-      .get("/destinations")
-      .then((res) => {
-        setBlogs(res.data.data);
-        console.log(res.data);
+      .get(`/destinations?type=${type}`, {
+        headers: {
+          "Accept-Language": dil,
+        },
+      })
+      .then((data) => {
+        setBlogs(data.data.data);
+        console.log(data.data);
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
-  // const NewBlogs = Array.from(blogs).slice(0, 3);
+  function daysBetween(startDateString, endDateString) {
+    const startDate = new Date(startDateString);
+    const endDate = new Date(endDateString);
+
+    // Calculate the difference in milliseconds
+    const diffInMs = Math.abs(endDate - startDate);
+
+    // Convert milliseconds to days
+    const diffInDays = Math.ceil(diffInMs / (1000 * 60 * 60 * 24));
+
+    return diffInDays;
+  }
+
+  const startDate = destInner?.date_start;
+  const endDate = destInner?.date_end;
+  const days = daysBetween(startDate, endDate);
+
+  const includedItems =
+    destInner && destInner.included ? Object.values(destInner.included) : [];
+  const notIncludedItems =
+    destInner && destInner.not_included
+      ? Object.values(destInner.not_included)
+      : [];
+
+  const NewBlogs = blogs?.slice(0, 4);
 
   return (
     <>
-      <div className="sm:w-[94%] md:w-[95%] mx-auto">
-        <Navigation />
-      </div>
+      <Navigation />
       <div className="w-[90%] mx-auto mt-[37px] mb-[25px]">
-        <div
-          className=" relative w-full "
-          // style={{ backgroundImage: `url(${destInner?.main_image})` }}
-        >
+        <div className=" sm:h-[300px] md:h-[625px] relative w-full ">
           <img
             src={destInner?.main_image}
             alt="suart"
-            className="-z-10 rounded-[23px]"
+            className="-z-10 w-full h-full object-cover rounded-[23px]"
           />
           <div className="bg-white absolute z-10 top-[4%] left-[2%] rounded-[20px] sm:hidden xl:block md:w-[50%] xl:w-[36%] pt-6 pl-9 pr-[45px] pb-[58px] ">
             <p className="text-[40px] font-[poppins-medium] mb-[23px] ">
@@ -99,7 +127,7 @@ const DestinationInner = () => {
             <div className="flex items-center justify-start gap-4">
               <img src={clock} alt="clock" />
               <p className=" text-[14px] font-[poppins-regular] ">
-                {destInner?.date_start} - {destInner?.date_end}{" "}
+                {days} {days > 0 ? "days" : "day"}
               </p>
             </div>
           </div>
@@ -108,19 +136,10 @@ const DestinationInner = () => {
 
       <div className="w-[90%] sm:block xl:hidden mx-auto mb-[32px] ">
         <p className="md:text-[24px] sm:text-[20px] font-[poppins-medium] mb-[15px] ">
-          United Kingdom - London
+          {destInner?.name}
         </p>
         <p className="text-[#717171] sm:text-[12px] md:text-[16px] font-[poppins-regular] mb-[15px] ">
-          Lorem ipsum dolor sit amet consectetur. Urna auctor consectetur nullam
-          cras massa. Vel vitae ante lacus condimentum eget consequat pretium
-          ut. Malesuada felis ut ut pellentesque ultrices in. Interdum lorem dui
-          amet rhoncus morbi dolor vel.
-        </p>
-        <p className="text-[#717171] sm:text-[12px] md:text-[16px] font-[poppins-regular]">
-          Lorem ipsum dolor sit amet consectetur. Urna auctor consectetur nullam
-          cras massa. Vel vitae ante lacus condimentum eget consequat pretium
-          ut. Malesuada felis ut ut pellentesque ultrices in. Interdum lorem dui
-          amet rhoncus morbi dolor vel.
+          {destInner?.description}
         </p>
       </div>
 
@@ -170,38 +189,32 @@ const DestinationInner = () => {
               Included
             </p>
             <div className="flex items-baseline flex-col justify-start gap-3 mb-[37px] ">
-              {destInner?.included?.map((item) => {
-                return (
-                  <p
-                    key={item + "s"}
-                    className="sm:text-[12px] md:text-[16px] font-[poppins-regular]"
-                  >
-                    {item.item}
-                  </p>
-                );
-              })}
+              {includedItems.map((item, index) => (
+                <li key={index}>{item.item}</li>
+              ))}
             </div>
 
             <p className="sm:text-[18px] md:text-[30px] font-[poppins-semibold] mb-4 ">
               Not included
             </p>
             <div className="flex items-baseline flex-col justify-start gap-3">
-              {destInner?.not_included?.map((item) => {
-                return (
-                  <p
-                    key={item + "w"}
-                    className="sm:text-[12px] md:text-[16px] font-[poppins-regular]"
-                  >
-                    {item.item}
-                  </p>
-                );
-              })}
+              {notIncludedItems.map((item, index) => (
+                <li key={index}>{item.item}</li>
+              ))}
             </div>
           </div>
         </div>
 
         <div className="sm:w-full md:w-[50%]">
-          <p className="text-[30px] font-[poppins-semibold] mb-5">Map</p>
+          <p className="text-[30px] font-[poppins-semibold] mb-5">
+            {dil === "tk"
+              ? "Karta"
+              : dil === "ru"
+              ? "Карта"
+              : dil === "tr"
+              ? "Harita"
+              : "Map"}
+          </p>
           <div className="w-full">
             <img
               className="sm:w-full md:w-[670px] sm:h-[254px] md:h-[508px] object-cover "
@@ -215,14 +228,20 @@ const DestinationInner = () => {
       {/* hotels */}
       <div className="w-[85%] mx-auto mb-[145px] ">
         <p className="md:block sm:hidden text-[30px] font-[poppins-bold] mb-4">
-          Tours
+          {dil === "tk"
+            ? "Turlar"
+            : dil === "ru"
+            ? "Туры"
+            : dil === "tr"
+            ? "Turlar"
+            : "Tours"}
         </p>
 
-        {/* <div className="w-full grid sm:gap-[15px] md:gap-[30px] sm:grid-cols-2 md:grid-cols-auto-fill-250 ">
+        <div className="w-full grid sm:gap-[15px] md:gap-[30px] sm:grid-cols-2 md:grid-cols-auto-fill-250 ">
           {NewBlogs?.map((item) => {
-            return <ToursCards key={item.id} item={item} />;
+            return <ToursCards key={item.id} item={item} type_param={type} />;
           })}
-        </div> */}
+        </div>
       </div>
       <AreYouReady />
     </>

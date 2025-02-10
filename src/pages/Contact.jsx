@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import Navigation2 from "../components/navbars/Navigation2";
 
@@ -14,8 +14,10 @@ import line from "../images/contact-line.svg";
 import send_line from "../images/contact-send-line.svg";
 import { axiosInstance } from "../utils/axiosInstance";
 import { message } from "antd";
+import { SebedimContext } from "../context/Context";
 
 const Contact = () => {
+  const { dil } = useContext(SebedimContext);
   const [emailInput, setEmailInput] = useState([]);
 
   const [form, setForm] = useState({
@@ -85,7 +87,13 @@ const Contact = () => {
         <div className="sm:w-full md:w-[90%] flex md:flex-row sm:flex-col items-start sm:gap-[70px] md:gap-[100px] justify-between sm:mt-[100px] md:mt-[151px] ">
           <div>
             <p className="sm:text-[25px] md:text-[50px] font-[poppins-semibold] ">
-              Contact us
+              {dil === "tk"
+                ? "Habarlaşmak üçin"
+                : dil === "ru"
+                ? "Обращайтесь к нам"
+                : dil === "tr"
+                ? "Bizimle iletişime geçin"
+                : "Contact us"}
             </p>
             <p className="text-[#878787] sm:text-[14px] md:text-[16px] font-[poppins-medium] sm:mt-4 md:mt-[22px] mb-[55px] ">
               Lorem ipsum dolor sit amet consectetur. Metus accumsan malesuada
@@ -97,7 +105,13 @@ const Contact = () => {
               <div className="flex items-center mb-[10px] justify-start gap-2">
                 <img src={map} alt="map" />
                 <p className="text-[#009833] text-[16px] font-[poppins-medium]">
-                  Office
+                  {dil === "tk"
+                    ? "Ofis"
+                    : dil === "ru"
+                    ? "Офис"
+                    : dil === "tr"
+                    ? "Ofis"
+                    : "Office"}
                 </p>
               </div>
               <p className="sm:text-[16px] md:text-[20px] pl-[29px] font-[poppins-regular]">
@@ -109,7 +123,13 @@ const Contact = () => {
               <div className="flex items-center mb-[10px] justify-start gap-2">
                 <img src={phone} alt="map" />
                 <p className="text-[#009833] text-[16px] font-[poppins-medium]">
-                  Phone
+                  {dil === "tk"
+                    ? "Telefon"
+                    : dil === "ru"
+                    ? "Телефон"
+                    : dil === "tr"
+                    ? "Telefon"
+                    : "Phone"}
                 </p>
               </div>
               <p className="sm:text-[16px] md:text-[20px] pl-[29px] font-[poppins-regular]">
@@ -131,7 +151,13 @@ const Contact = () => {
 
             <div>
               <p className="text-[16px] font-[poppins-semibold] mb-[15px] ">
-                Follow us
+                {dil === "tk"
+                  ? "Bize agza boluň"
+                  : dil === "ru"
+                  ? "Подписывайтесь на нас"
+                  : dil === "tr"
+                  ? "Bizi takip edin"
+                  : "Follow us"}
               </p>
               <div className="flex items-center justify-start gap-[31px] ">
                 <img
@@ -161,7 +187,13 @@ const Contact = () => {
           <div className="bg-white w-full shadow-2xl rounded-[23px] z-10 sm:px-[15px] sm:py-[40px] md:py-[55px] md:px-[50px] ">
             <div className="sm:w-full md:w-[430px] lg:w-[498px]">
               <h1 className="sm:text-[18px] md:text-[28px] font-[poppins-semibold] sm:mb-[30px] md:mb-[45px] ">
-                Send a message
+                {dil === "tk"
+                  ? "Habar iber"
+                  : dil === "ru"
+                  ? "Отправить сообщение"
+                  : dil === "tr"
+                  ? "Mesaj gönder"
+                  : "Send a message"}
               </h1>
 
               <form className="w-full flex flex-col items-baseline justify-start sm:gap-[10px] md:gap-[33px]">
@@ -171,7 +203,13 @@ const Contact = () => {
                       className="sm:text-[14px] md:sm:text-[14px] md:text-[16px] font-[poppins-medium]"
                       htmlFor="name"
                     >
-                      Name
+                      {dil === "tk"
+                        ? "Ady"
+                        : dil === "ru"
+                        ? "Имя"
+                        : dil === "tr"
+                        ? "İsim"
+                        : "Name"}
                     </label>
                     <input
                       value={form.name}
@@ -188,7 +226,13 @@ const Contact = () => {
                       className="sm:text-[14px] md:text-[16px] font-[poppins-medium]"
                       htmlFor="surname"
                     >
-                      Surname
+                      {dil === "tk"
+                        ? "Familiýasy"
+                        : dil === "ru"
+                        ? "Фамилия"
+                        : dil === "tr"
+                        ? "Soyadı"
+                        : "Surname"}
                     </label>
                     <input
                       value={form.surname}
@@ -206,7 +250,13 @@ const Contact = () => {
                     className="sm:text-[14px] md:text-[16px] font-[poppins-medium]"
                     htmlFor="email"
                   >
-                    Email
+                    {dil === "tk"
+                      ? "E-poçta"
+                      : dil === "ru"
+                      ? "Электронная почта"
+                      : dil === "tr"
+                      ? "E-posta"
+                      : "Email"}
                   </label>
                   <input
                     value={form.email}
@@ -223,7 +273,13 @@ const Contact = () => {
                     className="sm:text-[14px] md:text-[16px] font-[poppins-medium]"
                     htmlFor="subject"
                   >
-                    Subject
+                    {dil === "tk"
+                      ? "Tema"
+                      : dil === "ru"
+                      ? "Тема"
+                      : dil === "tr"
+                      ? "Söz"
+                      : "Subject"}
                   </label>
                   <input
                     value={form.subject}
@@ -240,7 +296,13 @@ const Contact = () => {
                     className="sm:text-[14px] md:text-[16px] font-[poppins-medium]"
                     htmlFor="message"
                   >
-                    Message
+                    {dil === "tk"
+                      ? "Habar"
+                      : dil === "ru"
+                      ? "Сообщение"
+                      : dil === "tr"
+                      ? "Mesaj"
+                      : "Message"}
                   </label>
                   <textarea
                     value={form.message}
@@ -258,7 +320,13 @@ const Contact = () => {
                   className="flex flex-col cursor-pointer items-baseline justify-start gap-2"
                 >
                   <p className="text-[16px] font-[poppins-medium] ">
-                    Send Message
+                    {dil === "tk"
+                      ? "Habar iber"
+                      : dil === "ru"
+                      ? "Отправить сообщение"
+                      : dil === "tr"
+                      ? "Mesaj göndermek"
+                      : "Send message"}
                   </p>
                   <img src={send_line} alt="line" />
                 </div>
@@ -284,7 +352,15 @@ const Contact = () => {
           <input
             className="bg-[#FAFAFA] outline-none text-[16px] font-[poppins-regular] border-[#DADADA] border-[1px] rounded-[6px] w-full py-[13px] sm:px-[15px] md:px-[22px]  "
             type="email"
-            placeholder="Email address"
+            placeholder={
+              dil === "tk"
+                ? "E-poçta"
+                : dil === "ru"
+                ? "Электронная почта"
+                : dil === "tr"
+                ? "E-posta"
+                : "Email"
+            }
             value={emailInput}
             onChange={(e) => setEmailInput(e.target.value)}
           />

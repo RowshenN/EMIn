@@ -38,6 +38,7 @@ const Router = () => {
           />
 
           <Route path="*" exact element={<NotFound />} />
+          <Route path="/loading" exact element={<PageLoading />} />
 
           <Route
             path="/blog"

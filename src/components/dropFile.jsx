@@ -7,24 +7,40 @@ import papka from "../images/visa-addfolder.svg";
 
 const DropFileInput = (props) => {
   const wrapperRef = useRef(null);
-  const [fileList, setFileList] = useState(props.files ? props.files : []);
+  const [fileList, setFileList] = useState(props.files || []); // Use || for default value
+
   const onDragEnter = () => wrapperRef.current.classList.add("dragover");
   const onDragLeave = () => wrapperRef.current.classList.remove("dragover");
   const onDrop = () => wrapperRef.current.classList.remove("dragover");
 
   const onFileDrop = (e) => {
-    const newFile = e.target.files[0];
-    console.log("newFile", newFile);
-    if (newFile) {
-      const updatedList = [...fileList, newFile];
-      setFileList(updatedList);
-      props.onFileChange(updatedList);
-    }
+    const newFiles = Array.from(e.target.files); // Handle multiple files
+    newFiles.forEach((newFile) => {
+      if (newFile) {
+        // Check file size and type before adding
+        if (newFile.size <= 10 * 1024 * 1024) {
+          // Example: 10MB limit
+          if (
+            newFile.type.startsWith("image/") ||
+            newFile.type.startsWith("application/pdf") ||
+            newFile.type.startsWith("application/octet-stream")
+          ) {
+            // Example: Allow images and PDFs
+            const updatedList = [...fileList, newFile];
+            setFileList(updatedList);
+            props.onFileChange(updatedList);
+          } else {
+            alert("Invalid file type. Please upload images or PDFs."); // Or use a more sophisticated notification
+          }
+        } else {
+          alert("File size exceeds the limit (10MB)."); // Or a more user-friendly message
+        }
+      }
+    });
   };
 
   const fileRemove = (file) => {
-    const updatedList = [...fileList];
-    updatedList.splice(fileList.indexOf(file), 1);
+    const updatedList = fileList.filter((f) => f !== file); // More efficient removal
     setFileList(updatedList);
     props.onFileChange(updatedList);
   };

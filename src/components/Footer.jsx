@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 import logo from "../images/footer-logo.svg";
@@ -6,8 +6,10 @@ import footer1 from "../images/footer1.svg";
 import footer2 from "../images/footer2.svg";
 import footer3 from "../images/footer3.svg";
 import footer4 from "../images/footer4.svg";
+import { SebedimContext } from "../context/Context";
 
 const Footer = () => {
+  const { dil } = useContext(SebedimContext);
   const navigate = useNavigate();
   return (
     <div className="w-[90%] mx-auto sm:px-5 md:px-[78px] sm:py-[27px] md:pt-[42px] md:pb-[33px] bg-[#F4F4F4] rounded-[20px] mb-[67px] ">
@@ -30,25 +32,49 @@ const Footer = () => {
               onClick={() => navigate("/about")}
               className="text-[14px] cursor-pointer font-[poppins-medium] "
             >
-              About us
+              {dil === "tk"
+                ? "Hakymyzda"
+                : dil === "ru"
+                ? "О нас"
+                : dil === "tr"
+                ? "Haberler"
+                : "About us"}
             </p>
             <p
               onClick={() => navigate("/blog")}
               className="text-[#717171] text-[14px] cursor-pointer font-[poppins-regular] "
             >
-              Blog
+              {dil === "tk"
+                ? "Blog"
+                : dil === "ru"
+                ? "Блог"
+                : dil === "tr"
+                ? "Blog"
+                : "Blog"}
             </p>
             <p
               onClick={() => navigate("/turkmenistan")}
               className="text-[#717171] text-[14px] cursor-pointer font-[poppins-regular]"
             >
-              Turkmenistan
+              {dil === "tk"
+                ? "Türkmenistan"
+                : dil === "ru"
+                ? "Туркменистан"
+                : dil === "tr"
+                ? "Türkmenistan"
+                : "Turkmenistan"}
             </p>
             <p
               onClick={() => navigate("/contact")}
               className="text-[#717171] text-[14px] cursor-pointer font-[poppins-regular]"
             >
-              Contact us
+              {dil === "tk"
+                ? "Habarlaşmak üçin"
+                : dil === "ru"
+                ? "Обращайтесь к нам"
+                : dil === "tr"
+                ? "Bizimle iletişime geçin"
+                : "Contact us"}
             </p>
           </div>
 
@@ -63,26 +89,58 @@ const Footer = () => {
               onClick={() => navigate("/tours")}
               className="text-[#717171] text-[14px] cursor-pointer font-[poppins-regular]"
             >
-              Tours
+              {dil === "tk"
+                ? "Turlar"
+                : dil === "ru"
+                ? "Туры"
+                : dil === "tr"
+                ? "Turlar"
+                : "Tours"}
             </p>
             <p
               onClick={() => navigate("/hotels")}
               className="text-[#717171] text-[14px] cursor-pointer font-[poppins-regular]"
             >
-              Hotels
+              {dil === "tk"
+                ? "Oteller"
+                : dil === "ru"
+                ? "Отели"
+                : dil === "tr"
+                ? "Oteller"
+                : "Hotels"}
             </p>
             <p
               onClick={() => navigate("/visa")}
               className="text-[#717171] text-[14px] cursor-pointer font-[poppins-regular]"
             >
-              Visa
+              {dil === "tk"
+                ? "Visa"
+                : dil === "ru"
+                ? "Виза"
+                : dil === "tr"
+                ? "Visa"
+                : "Visa"}
             </p>
           </div>
 
           <div className="flex flex-col justify-start items-baseline gap-[10px]">
-            <p className="text-[14px] font-[poppins-medium]">Terms of use</p>
+            <p className="text-[14px] font-[poppins-medium]">
+              {dil === "tk"
+                ? "Ulanyş şertleri"
+                : dil === "ru"
+                ? "Условия использования"
+                : dil === "tr"
+                ? "Kullanım koşulları"
+                : "Terms of use"}
+            </p>
             <p className="text-[#717171] text-[14px] font-[poppins-regular]">
-              Privacy policy
+              {dil === "tk"
+                ? "Gizlinlik syýasaty"
+                : dil === "ru"
+                ? "Политика конфиденциальности "
+                : dil === "tr"
+                ? "Gizlilik politikası"
+                : "Privacy policy"}
             </p>
           </div>
         </div>

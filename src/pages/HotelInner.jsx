@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 
 // import surat from "../images/hotel-inner.png";
 // import surat2 from "../images/hotel-inner-img.png";
@@ -22,31 +22,34 @@ import { axiosInstance } from "../utils/axiosInstance";
 import surat from "../images/hotel-inner.png";
 import surat2 from "../images/hotel-inner-img.png";
 import map from "../images/hotel-map.png";
+import { SebedimContext } from "../context/Context";
 
 const HotelInner = () => {
   const [hotel, setHotel] = useState([]);
+  const [hotels, setHotels] = useState([]);
   const { id } = useParams();
+  const { dil } = useContext(SebedimContext);
   useEffect(() => {
     getHotelInner();
-  }, []);
+    getHotels();
+  }, [dil,id]);
 
   const getHotelInner = async () => {
-    await axiosInstance
-      .get(`/hotels/${id}/details`)
-      .then((res) => {
-        setHotel(res.data.data);
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
+    try {
+      const response = await axiosInstance.get(`/hotels/${id}/details`, {
+        headers: {
+          "Accept-Language": dil,
+        },
       });
+      if (response.status !== 200) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      setHotel(response.data.data);
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
   };
-
-  const [hotels, setHotels] = useState([]);
-
-  useEffect(() => {
-    getHotels();
-  }, []);
 
   const getHotels = async () => {
     await axiosInstance
@@ -63,9 +66,7 @@ const HotelInner = () => {
   const hotelmains = hotels.slice(0, 8);
   return (
     <>
-      <div className="sm:w-[94%] md:w-[95%] mx-auto">
-        <Navigation />
-      </div>
+      <Navigation />
 
       <div className="w-[90%] mx-auto mt-[37px] mb-[25px]">
         <div
@@ -75,14 +76,14 @@ const HotelInner = () => {
           <img
             src={hotel?.main_image}
             alt="surat"
-            className="-z-10 object-cover md:h-full sm:h-[300px] rounded-[23px] w-full "
+            className="-z-10 object-cover md:h-[523px] sm:h-[300px] rounded-[23px] w-full "
           />
           <div className="w-[55%] z-10 absolute bottom-[10%] left-[23%] text-center">
             <p className="text-white sm:text-[18px] md:text-[30px] xl:text-[60px] font-[poppins-bold] ">
-              {hotel?.name} 
+              {hotel?.name}
             </p>
             <p className="text-white sm:text-[12px] md:text-[16px] font-[poppins-regular] ">
-              {hotel?.short_description} 
+              {hotel?.short_description}
             </p>
           </div>
         </div>
@@ -136,7 +137,9 @@ const HotelInner = () => {
         </div>
 
         <div className="sm:w-full md:w-[50%]">
-          <p className="sm:text-[18px] md:text-[30px] font-[poppins-semibold] mb-5">Map</p>
+          <p className="sm:text-[18px] md:text-[30px] font-[poppins-semibold] mb-5">
+            Map
+          </p>
 
           <div>
             <img src={hotel?.map} alt="map" />
@@ -146,7 +149,9 @@ const HotelInner = () => {
 
       {/* hotels */}
       <div className="w-[85%] mx-auto mb-[145px] ">
-        <p className=" md:block sm:hidden text-[30px] font-[poppins-bold] mb-4">Hotels</p>
+        <p className=" md:block sm:hidden text-[30px] font-[poppins-bold] mb-4">
+          Hotels
+        </p>
 
         <div className="w-full grid sm:gap-[15px] md:gap-[30px] sm:grid-cols-2 md:grid-cols-auto-fill-250 ">
           {hotelmains.map((item) => {

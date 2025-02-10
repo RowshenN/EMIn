@@ -1,126 +1,66 @@
-import React from "react";
+import React from 'react';
 
-const Pagination = (props) => {
+import right from "../images/right-arrow.png"
+import left from "../images/left-arrow.png"
+
+function Pagination({ meta, onPageChange }) {
+  if (!meta) {
+    return null;
+  }
+
+  const { current_page, last_page, links } = meta;
+
+  const handlePageClick = (page) => {
+    if (page !== current_page && page <= last_page && page >= 1) {
+      onPageChange(page);
+    }
+  };
+
   return (
-    <div className="flex w-fit items-center cursor-pointer gap-6">
-      <div>
-        {props?.filter?.page != 1 ? (
-          <svg
-            onClick={() => props?.prev()}
-            className="rotate-180"
-            width="6"
-            height="10"
-            viewBox="0 0 6 10"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M1 1L4.29289 4.29289C4.68342 4.68342 4.68342 5.31658 4.29289 5.70711L1 9"
-              stroke="black"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-            />
-          </svg>
-        ) : (
-          <svg
-            width="6"
-            height="10"
-            viewBox="0 0 6 10"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M5 9L1.70711 5.70711C1.31658 5.31658 1.31658 4.68342 1.70711 4.29289L5 1"
-              stroke="#B8BFCC"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-            />
-          </svg>
-        )}
-      </div>
-      <div className="w-fit flex gap-6">
-        {props?.pages?.length <= 10
-          ? props?.pages?.map((item, i) => {
-              return (
-                <div
-                  key={"page" + i + 1}
-                  onClick={() => props?.goTo(item)}
-                  className={`text-[14px] font-[400]  ${
-                    props?.filter?.page == item && "text-blue"
-                  }`}
-                >
-                  {item}
-                </div>
-              );
-            })
-          : props?.pages?.map((item, i) => {
-              return i + 1 <= 2 || props?.pages?.length - 2 <= i ? (
-                <div
-                  key={"page" + i + 1}
-                  onClick={() => props?.goTo(item)}
-                  className={`text-[14px] font-[400]  ${
-                    props?.filter?.page == item && "text-blue"
-                  }`}
-                >
-                  {item}
-                </div>
-              ) : (
-                props?.filter?.page == item && (
-                  <div className="flex gap-4 items-center justify-between">
-                    <div key={"page." + i}>...</div>
-                    <div
-                      key={"page" + i + 1}
-                      onClick={() => props?.goTo(item)}
-                      className={`text-[14px] font-[400]  ${
-                        props?.filter?.page == item && "text-blue"
-                      }`}
-                    >
-                      {props?.filter?.page}
-                    </div>
+    <nav aria-label="Page navigation" className="flex justify-center w-full mt-4">
+      <ul className="inline-flex items-center justify-center gap-2"> {/* Removed -space-x-px */}
+        {links.map((link, index) => {
+          let className = "px-3 w-full py-1 flex items-center justify-center";
 
-                    <div key={"page.." + i}>...</div>
-                  </div>
-                )
-              );
-            })}
-      </div>
-      <div>
-        {props?.filter?.page < props?.meta / props?.filter?.limit ? (
-          <svg
-            onClick={() => props?.next()}
-            width="6"
-            height="10"
-            viewBox="0 0 6 10"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M1 1L4.29289 4.29289C4.68342 4.68342 4.68342 5.31658 4.29289 5.70711L1 9"
-              stroke="black"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-            />
-          </svg>
-        ) : (
-          <svg
-            className="rotate-180"
-            width="6"
-            height="10"
-            viewBox="0 0 6 10"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M5 9L1.70711 5.70711C1.31658 5.31658 1.31658 4.68342 1.70711 4.29289L5 1"
-              stroke="#B8BFCC"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-            />
-          </svg>
-        )}
-      </div>
-    </div>
+          if (link.active) {
+            className += " bg-[#009833] rounded-full px-1 text-white ";
+          } else if (link.url === null || link.label === "...") {
+            className += " ";
+          }
+
+          let labelContent = link.label; // Default label content
+
+          if (link.label.includes("Previous")) { // Check for "« Previous"
+            labelContent = (
+              <>
+                <img src={left} alt="arrow" className='h-[30px] w-[30px] object-cover cursor-pointer' />
+                {/* <span>Previous</span> Added text label */}
+              </>
+            );
+          } else if (link.label.includes("Next")) { // Check for "Next »"
+            labelContent = (
+              <>
+                {/* <span>Next</span> */}
+                <img src={right} alt="arrow" className='h-[30px] w-[30px] object-cover cursor-pointer' />
+              </>
+            );
+          }
+
+          return (
+            <li key={index}>
+              <button
+                className={className}
+                onClick={() => handlePageClick(link.label)}
+                disabled={link.url === null || link.label === "..."}
+              >
+                {labelContent}
+              </button>
+            </li>
+          );
+        })}
+      </ul>
+    </nav>
   );
-};
+}
 
-export default React.memo(Pagination);
+export default Pagination;

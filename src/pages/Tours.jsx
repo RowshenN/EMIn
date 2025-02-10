@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 
 import Navigation from "../components/navbars/Navigation";
 import surat from "../images/tourMain.png";
@@ -10,68 +10,75 @@ import ToursCards from "../components/tours/ToursCards";
 import AreYouReady from "../components/AreYouReady";
 import { axiosInstance } from "../utils/axiosInstance";
 import Pagination from "../components/Pagination";
+import { SebedimContext } from "../context/Context";
+import { useSearchParams } from "react-router-dom";
 
 const Tours = () => {
+  const { dil } = useContext(SebedimContext);
   const [destinations, setDestinations] = useState([]);
-  const [tests, setTests] = useState([]);
-  const [pages, setPages] = useState([]);
-
-  const [filter, setFilter] = useState({
-    limit: 10,
-    page: 1,
-    search_query: "",
-    deleted: null,
-    active: null,
-    order: 0,
-  });
+  const [meta, setMeta] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [searchParams] = useSearchParams();
+  const type_param = searchParams.get("type");
 
   useEffect(() => {
-    getHotels();
-  }, []);
+    getHotels(currentPage);
+  }, [type_param, dil, currentPage]);
 
-  const getHotels = async () => {
+  const getHotels = async (page = 1) => {
+    setLoading(true);
+    setError(null);
     await axiosInstance
-      .get("/destinations")
+      .get(`/destinations?type=${type_param}&page=${page}`, {
+        headers: {
+          "Accept-Language": dil,
+        },
+      })
       .then((data) => {
         setDestinations(data.data.data);
+        setMeta(data.data.meta);
         console.log(data.data);
-        setTests(data.data);
-        let i = 1;
-        let array = [];
-        let end = data?.data?.count / filter?.limit;
-        if (data?.data?.count % filter?.limit > 0) {
-          end = end + 1;
-        }
-        while (i <= end) {
-          array.push(i);
-          i++;
-        }
-        setPages([...array]);
       })
       .catch((err) => {
         console.log(err);
       });
   };
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
   return (
     <>
-      <div className="sm:w-[94%] md:w-[95%] mx-auto">
-        <Navigation />
-      </div>
+      <Navigation />
+      <div className="sm:w-[94%] md:w-[95%] mx-auto"></div>
       <div className="w-[90%] mx-auto mt-6 sm:mb-[70px] md:mb-[170px]">
-        <div className="w-full relative sm:mb-6 md:mb-[64px] ">
+        <div className="w-full -z-10 relative sm:mb-6 md:mb-[64px] ">
           <img
             src={surat}
             alt="surat"
             className="rounded-[23px] sm:h-[123px] md:h-full w-full object-cover"
           />
           <p className="absolute sm:top-[26%] xs:top-[35%] sm:left-[35%] xs:left-[40%] md:left-[43%] text-white md:text-[35px] sm:text-[26px] lg:text-[50px] font-[poppins-semibold] ">
-            Tours
+            {dil === "tk"
+              ? "Turlar"
+              : dil === "ru"
+              ? "Туры"
+              : dil === "tr"
+              ? "Turlar"
+              : "Tours"}
           </p>
         </div>
 
         <div className="w-full">
           <h1 className="sm:text-[18px] md:text-[32px] font-[poppins-semibold]">
-            Find your dream tour
+            {dil === "tk"
+              ? "Arzuwlaryňyzyň gezelençini öwreniň!"
+              : dil === "ru"
+              ? "Откройте для себя тур своей мечты!"
+              : dil === "tr"
+              ? "Hayallerinizdeki turu keşfedin!"
+              : "Find your dream tour"}
           </h1>
 
           <div className="mt-10 w-full flex sm:items-start md:items-center justify-between mb-10 ">
@@ -83,7 +90,13 @@ const Tours = () => {
                   className="object-cover md:w-[25px] sm:w-[16px] "
                 />
                 <p className="sm:text-[10px] md:text-[14px] font-[poppins-medium] ">
-                  Choose country
+                  {dil === "tk"
+                    ? "Ýurt saýlaň"
+                    : dil === "ru"
+                    ? "Выберите страну "
+                    : dil === "tr"
+                    ? "Ülke seçin"
+                    : "Choose country"}
                 </p>
               </div>
               <div className="flex items-center justify-center sm:gap-[5px] md:gap-[10px] bg-[#FAFAFA] cursor-pointer rounded-[9px] border border-[#D9D9D9] py-[10px] sm:px-[10px] md:px-5">
@@ -110,7 +123,13 @@ const Tours = () => {
                 className="object-cover md:w-[25px] sm:w-[16px] "
               />
               <p className="sm:text-[10px] md:text-[14px] font-[poppins-medium]">
-                Sort by Price
+              {dil === "tk"
+              ? "Bahasy boýunça "
+              : dil === "ru"
+              ? "Сортировать по цене"
+              : dil === "tr"
+              ? "Fiyata göre sırala"
+              : "Sort by Price"}
               </p>
               <img
                 src={down}
@@ -122,18 +141,13 @@ const Tours = () => {
 
           <div className="w-full grid sm:gap-[15px] md:gap-[30px] sm:grid-cols-2 md:grid-cols-auto-fill-250 ">
             {destinations?.map((item) => {
-              return <ToursCards key={item.id} item={item} />;
+              return (
+                <ToursCards key={item.id} item={item} type_param={type_param} />
+              );
             })}
           </div>
           <div className="w-full mt-[40px] flex items-center gap-5 justify-center">
-            <Pagination
-              meta={tests?.count}
-              filter={filter}
-              pages={pages}
-              next={() => setFilter({ ...filter, page: filter.page + 1 })}
-              prev={() => setFilter({ ...filter, page: filter.page - 1 })}
-              goTo={(item) => setFilter({ ...filter, page: item })}
-            />
+            <Pagination meta={meta} onPageChange={handlePageChange} />
           </div>
         </div>
       </div>

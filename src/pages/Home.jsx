@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Navigation from "../components/navbars/Navigation";
@@ -21,21 +21,28 @@ import Testimonials from "../components/testimonials/Testimonials";
 import BlogMain from "../components/BlogMain";
 import FAQ from "../components/faq/FAQ";
 import AreYouReady from "../components/AreYouReady";
+import { SebedimContext } from "../context/Context";
 
 const Home = () => {
   const navigate = useNavigate();
+  const { dil } = useContext(SebedimContext);
   return (
     <>
+      <Navigation />
       <div className="sm:w-[94%] md:w-[90%] mx-auto">
-        <Navigation />
-
         <div
           style={{ backgroundImage: `url(${surat})` }}
-          className="w-full bg-image sm:h-[30vh] md:h-[60vh] lg:h-[90vh] mt-6 -z-10 bg-cover bg-black/20 bg-center bg-no-repeat rounded-[23px]"
+          className="w-full bg-image sm:h-[200px] md:h-[400px] lg:h-[800px] mt-6 -z-10 bg-cover bg-black/20 bg-center bg-no-repeat rounded-[23px]"
         >
           <div className="sm:w-[90%] md:w-[70%] lg:w-[50%] mx-auto flex items-center justify-center text-center sm:pt-[40px] md:pt-[70px] lg:pt-[100px]">
-            <h1 className=" text-white font-[poppins-semibold] sm:text-[25px] md:text-[60px] lg:text-[80px] ">
-              Explore The Majestic Asia Landscape Now
+            <h1 className=" text-white font-[poppins-semibold] sm:text-[23px] md:text-[60px] lg:text-[80px] ">
+              {dil === "tk"
+                ? "Aziýanyň ajaýyp landşaftyny öwreniň"
+                : dil === "ru"
+                ? "Откройте для себя величественную красоту Азии прямо сейчас!"
+                : dil === "tr"
+                ? "Asya'nın görkemli manzaralarını şimdi keşfedin! "
+                : "Explore The Majestic Asia Landscape Now"}
             </h1>
           </div>
         </div>
@@ -55,13 +62,25 @@ const Home = () => {
               <div className="flex items-center justify-center gap-1 p-1">
                 <input type="radio" />
                 <p className="font-[poppins-medium] sm:text-[13px] md:text-[16px]">
-                  Round Trip
+                  {dil === "tk"
+                    ? "Gidiş geliş"
+                    : dil === "ru"
+                    ? "Туда и обратно"
+                    : dil === "tr"
+                    ? "Gidiş dönüş"
+                    : "Round Trip"}
                 </p>
               </div>
               <div className="flex items-center justify-center gap-1 p-1">
                 <input type="radio" />
                 <p className="font-[poppins-medium] sm:text-[13px] md:text-[16px]">
-                  One way
+                  {dil === "tk"
+                    ? "Bir taraplaýyn"
+                    : dil === "ru"
+                    ? "В одну сторону"
+                    : dil === "tr"
+                    ? "Tek yön"
+                    : "One way"}
                 </p>
               </div>
             </div>
@@ -70,31 +89,53 @@ const Home = () => {
               {/* from to divs */}
               <div className="flex sm:flex-col lg:flex-row sm:w-full lg:w-[40%] items-center justify-start gap-2 relative">
                 <div className="flex items-center justify-start gap-2 border border-[#D6D6D6] border-solid rounded-lg sm:py-4 md:py-6 sm:px-3 md:px-4 cursor-pointer sm:w-full lg:w-[50%] ">
-                  <img src={to} className="md:w-[20px] sm:w-[18px] object-cover " alt="from" />
+                  <img
+                    src={to}
+                    className="md:w-[20px] sm:w-[18px] object-cover "
+                    alt="from"
+                  />
                   <p className="font-[poppins-regular] sm:text-[13px] md:text-[16px] ">
                     From
                   </p>
                 </div>
 
                 <div className="flex items-center justify-start gap-2 border border-[#D6D6D6] border-solid rounded-lg sm:py-4 md:py-6 sm:px-3 md:px-5 cursor-pointer sm:w-full lg:w-[50%] ">
-                  <img src={to} className="md:w-[24px] sm:w-[18px] object-cover " alt="from" />
+                  <img
+                    src={to}
+                    className="md:w-[24px] sm:w-[18px] object-cover "
+                    alt="from"
+                  />
                   <p className="font-[poppins-regular] sm:text-[13px] md:text-[16px] ">
                     To
                   </p>
                 </div>
 
                 <div className="absolute w-fit sm:top-[35%] lg:top-[25%] cursor-pointer sm:right-0 lg:left-[46%] bg-white border border-solid border-[#D6D6D6] rounded-lg p-2 ">
-                  <img src={refresh} className="md:w-[24px] sm:w-[18px] object-cover " alt="from" />
+                  <img
+                    src={refresh}
+                    className="md:w-[24px] sm:w-[18px] object-cover "
+                    alt="from"
+                  />
                 </div>
               </div>
 
               {/* calendar divs */}
               <div className="flex items-center py-[6px] justify-center border border-[#D6D6D6] border-solid rounded-lg cursor-pointer sm:w-full lg:w-[30%] ">
                 <div className="flex w-2/4 items-center sm:px-3 md:px-4 sm:justify-start lg:justify-center gap-2 border-r border-solid border-[#D6D6D6] ">
-                  <img src={calendar} alt="cal" className="md:w-[24px] sm:w-[18px] object-cover " />
+                  <img
+                    src={calendar}
+                    alt="cal"
+                    className="md:w-[24px] sm:w-[18px] object-cover "
+                  />
                   <div>
                     <p className="text-[#878787] font-[poppins-regular] text-[12px] ">
-                      Departure
+                      {dil === "tk"
+                        ? "Uçuş"
+                        : dil === "ru"
+                        ? "Вылет"
+                        : dil === "tr"
+                        ? "Kalkış"
+                        : "Departure"}
                     </p>
                     <div className="flex md:flex-col sm:flexrow sm:items-center md:items-start sm:justify-center md:justify-start md:gap-0 sm:gap-2">
                       <p className="font-[poppins-regular] sm:text-[13px] md:text-[16px]">
@@ -108,13 +149,29 @@ const Home = () => {
                 </div>
 
                 <div className="flex items-center sm:px-3 md:px-4 sm:justify-start lg:justify-center gap-2 w-2/4">
-                  <img src={calendar} className="md:w-[24px] sm:w-[18px] object-cover " alt="cal" />
+                  <img
+                    src={calendar}
+                    className="md:w-[24px] sm:w-[18px] object-cover "
+                    alt="cal"
+                  />
                   <div>
                     <p className="text-[#878787] font-[poppins-regular] text-[12px]">
-                      Return
+                      {dil === "tk"
+                        ? "Gaýdyş"
+                        : dil === "ru"
+                        ? "Обратно"
+                        : dil === "tr"
+                        ? "Dönüş"
+                        : "Return"}
                     </p>
                     <p className="font-[poppins-regular] sm:text-[13px] md:text-[16px]">
-                      Add
+                      {dil === "tk"
+                        ? "Goşmak"
+                        : dil === "ru"
+                        ? "Добавлять"
+                        : dil === "tr"
+                        ? "Eklemek"
+                        : "Add"}
                     </p>
                   </div>
                 </div>
@@ -123,17 +180,33 @@ const Home = () => {
               {/* Passenger div */}
               <div className="flex items-center py-[6px] sm:px-3 md:px-4 sm:justify-start lg:justify-center border border-[#D6D6D6] border-solid rounded-lg cursor-pointer sm:w-full lg:w-[15%] ">
                 <div className="flex items-center justify-center gap-2">
-                  <img src={passenger} className="md:w-[24px] sm:w-[18px] object-cover " alt="pas" />
+                  <img
+                    src={passenger}
+                    className="md:w-[24px] sm:w-[18px] object-cover "
+                    alt="pas"
+                  />
                   <div className="flex items-center flex-col justify-start">
                     <p className="text-[#878787] w-full text-left font-[poppins-regular] text-[12px]">
-                      Passengers
+                      {dil === "tk"
+                        ? "Ýolagçylar"
+                        : dil === "ru"
+                        ? "Пассажиры"
+                        : dil === "tr"
+                        ? "Yolcular"
+                        : "Passangers"}
                     </p>
                     <div className="flex md:flex-col sm:flexrow sm:items-center md:items-start sm:justify-center md:justify-start md:gap-0 sm:gap-2">
                       <p className="font-[poppins-regular] whitespace-nowrap sm:text-[13px] md:text-[16px]">
                         1 Passenger
                       </p>
                       <p className="text-[#878787] font-[poppins-regular] text-[12px]">
-                        Business
+                        {dil === "tk"
+                          ? "Biznes"
+                          : dil === "ru"
+                          ? "Бизнес"
+                          : dil === "tr"
+                          ? "Biznes"
+                          : "Business"}
                       </p>
                     </div>
                   </div>
@@ -141,7 +214,15 @@ const Home = () => {
               </div>
 
               <div className="bg-[#009833] cursor-pointer sm:py-4 md:py-6 rounded-lg sm:w-full lg:w-[12%] justify-center flex items-center text-white text-[16px] font-[poppins-regular] ">
-                <button>Search</button>
+                <button>
+                  {dil === "tk"
+                    ? "Gözlemek"
+                    : dil === "ru"
+                    ? "Поиск"
+                    : dil === "tr"
+                    ? "Aramak"
+                    : "Search"}
+                </button>
               </div>
             </div>
           </div>
@@ -159,7 +240,10 @@ const Home = () => {
 
       {/* Online visa */}
       <div className="w-[90%] mb-[103px] mx-auto flex lg:flex-row sm:flex-col items-start justify-center gap-[45px]">
-        <div onClick={() => navigate('/visa')} className="relative cursor-pointer sm:w-full lg:w-[55%] ">
+        <div
+          onClick={() => navigate("/visa")}
+          className="relative cursor-pointer sm:w-full lg:w-[55%] "
+        >
           <img
             className="w-full object-cover rounded-[32px]"
             src={visa2}
@@ -168,7 +252,13 @@ const Home = () => {
           <div className="absolute w-[90%] mx-auto flex items-end justify-between bottom-8 left-9">
             <div className="flex flex-col items-baseline justify-start gap-4">
               <h1 className="text-white sm:text-[16px] md:text-[50px] font-[poppins-semibold] ">
-                Online Visa
+                {dil === "tk"
+                  ? "Online visa"
+                  : dil === "ru"
+                  ? "Онлайн-виза"
+                  : dil === "tr"
+                  ? "Online visa"
+                  : "Online visa"}
               </h1>
               <p className="text-white sm:text-[12px] md:text-[14px] w-[70%] font-[poppins-regular]">
                 Lorem ipsum dolor sit amet consectetur. Feugiat placerat ac
@@ -180,7 +270,10 @@ const Home = () => {
           </div>
         </div>
 
-        <div onClick={() => navigate('/hotels')} className="relative cursor-pointer sm:w-full lg:w-[45%] ">
+        <div
+          onClick={() => navigate("/hotels")}
+          className="relative cursor-pointer sm:w-full lg:w-[45%] "
+        >
           <img
             className="sm:w-full lg:w-[89%] object-cover rounded-[32px]"
             src={visa}
@@ -189,7 +282,13 @@ const Home = () => {
           <div className="absolute w-[78%] mx-auto flex items-end justify-between bottom-8 left-9">
             <div className="flex flex-col items-baseline justify-start gap-4">
               <h1 className="text-white sm:text-[16px] md:text-[50px] font-[poppins-semibold] ">
-                Hotels
+                {dil === "tk"
+                  ? "Oteller"
+                  : dil === "ru"
+                  ? "Отели"
+                  : dil === "tr"
+                  ? "Oteller"
+                  : "Hotels"}
               </h1>
               <p className="text-white sm:text-[12px] md:text-[14px] w-[80%] font-[poppins-regular]">
                 Lorem ipsum dolor sit amet consectetur. Feugiat placerat ac
@@ -197,7 +296,11 @@ const Home = () => {
               </p>
             </div>
 
-            <img src={arrow} alt="arrow" className="object-cover md:w-[56px] sm:w-[25px] " />
+            <img
+              src={arrow}
+              alt="arrow"
+              className="object-cover md:w-[56px] sm:w-[25px] "
+            />
           </div>
         </div>
       </div>

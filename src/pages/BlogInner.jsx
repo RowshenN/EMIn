@@ -1,59 +1,76 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 
-import surat from "../images/blog-inner.png";
-import surat2 from "../images/blog-inner-2.png";
+// import surat from "../images/blog-inner.png";
+// import surat2 from "../images/blog-inner-2.png";
 import Navigation from "../components/navbars/Navigation";
 import AreYouReady from "../components/AreYouReady";
 import HomeBlogCart from "../components/HomeBlogCart";
 import { useParams } from "react-router-dom";
 import { axiosInstance } from "../utils/axiosInstance";
+import { SebedimContext } from "../context/Context";
 
 const BlogInner = () => {
+  const { dil } = useContext(SebedimContext);
   const [blog, setBlog] = useState([]);
+  const [blogs, setBlogs] = useState([]);
   const { id } = useParams();
-  useEffect(() => {
-    getHotelInner();
-  }, []);
 
   const getHotelInner = async () => {
-    await axiosInstance
-      .get(`/blog/${id}/details`)
-      .then((res) => {
-        setBlog(res.data.data);
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
+    try {
+      const response = await axiosInstance.get(`/blog/${id}/details`, {
+        headers: {
+          "Accept-Language": dil,
+        },
       });
+      if (response.status !== 200) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      setBlog(response.data.data);
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
   };
-
-  const [blogs, setBlogs] = useState([]);
-  useEffect(() => {
-    getHotels();
-  }, []);
 
   const getHotels = async () => {
-    await axiosInstance
-      .get("/blogs")
-      .then((res) => {
-        setBlogs(res.data.data);
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
+    try {
+      const response = await axiosInstance.get(`/blogs`, {
+        headers: {
+          "Accept-Language": dil,
+        },
       });
+      if (response.status !== 200) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      setBlogs(response.data.data);
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
   };
+
+  useEffect(() => {
+    getHotelInner();
+    getHotels();
+  }, [dil]);
 
   const lastThreeBlogs = blogs.length - 3;
   const NewBlogs = Array.from(blogs).slice(lastThreeBlogs, blogs.length);
 
-  console.log(blogs.length);
+  const sentences = blog?.description?.split(". ");
+  const cleanedSentences = sentences?.map((s) => s.trim());
+  const fisryt_desc = cleanedSentences?.slice(0, 5);
+  const last_desc = cleanedSentences?.slice(5, cleanedSentences.length);
 
+  const dateString = blog?.created_at;
+  const date = new Date(dateString);
+
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0"); // Pad with '0'
+  const day = String(date.getDate()).padStart(2, "0"); // Pad with '0'
   return (
     <>
-      <div className="sm:w-[94%] md:w-[95%] mx-auto">
-        <Navigation />
-      </div>
+      <Navigation />
       <div className="sm:w-[94%] md:w-[90%] mx-auto sm:mt-[32px] md:mt-[37px] sm:mb-[140px] md:mb-[190px] ">
         <div className="w-full rounded-[22px] sm:mb-2 md:mb-[33px]">
           <img
@@ -67,65 +84,46 @@ const BlogInner = () => {
           <div className="mb-[26px]">
             <div className="w-full md:flex-row sm:flex-col sm:justify-start flex sm:items-baseline md:items-center md:justify-between mb-[18px]">
               <p className="sm:text-[18px] md:text-[30px] md:mb-0 sm:mb-2 font-[poppins-semibold] ">
-                {blog?.name} 
+                {blog?.name}
               </p>
               <p className="text-[#717171] sm:text-[16px] md:text-[18px] font-[poppins-regular]  ">
-                18 Oct 2024
+                {`${year}-${month}-${day}`}
               </p>
             </div>
 
             <p className="sm:text-[12px] md:text-[18px] font-[poppins-regular] sm:mb-4 md:mb-[26px]">
-              {blog?.description} 
+              {blog?.images?.length > 0 ? fisryt_desc : blog?.description}
             </p>
-
-            {/* <p className="sm:text-[12px] md:text-[18px] font-[poppins-regular]">
-              Lorem ipsum dolor sit amet consectetur. Urna auctor consectetur
-              nullam cras massa. Vel vitae ante lacus condimentum eget consequat
-              pretium ut. Malesuada felis ut ut pellentesque ultrices in.
-              Interdum lorem dui amet rhoncus morbi dolor vel.
-            </p> */}
           </div>
 
-          <div className="w-full md:flex-row sm:flex-col flex items-start justify-center sm:gap-[23px] md:gap-[40px] sm:mb-[43px] md:mb-[145px] ">
-            <div className="sm:w-full md:w-[50%] sm:h-full md:h-[429px]">
-              <img
-                src={surat2}
-                alt="surat"
-                className="w-full h-full object-cover rounded-[22px]"
-              />
-            </div>
+          {blog?.images?.length > 0 && (
+            <div className="w-full md:flex-row sm:flex-col flex items-start justify-center sm:gap-[23px] md:gap-[40px] sm:mb-[43px] md:mb-[145px] ">
+              <div className="sm:w-full md:w-[50%] sm:h-full md:h-[429px]">
+                <img
+                  src={blog?.images?.[0]}
+                  alt="surat"
+                  className="w-full h-full object-cover rounded-[22px]"
+                />
+              </div>
 
-            <div className="sm:w-full md:w-[50%]">
-              <p className="sm:text-[12px] md:text-[18px] font-[poppins-regular] sm:mb-4 md:mb-[26px] ">
-                Lorem ipsum dolor sit amet consectetur. Urna auctor consectetur
-                nullam cras massa. Vel vitae ante lacus condimentum eget
-                consequat pretium ut. Malesuada felis ut ut pellentesque
-                ultrices in. Interdum lorem dui amet rhoncus morbi dolor vel.
-              </p>
-
-              <p className="sm:text-[12px] md:text-[18px] font-[poppins-regular]">
-                Lorem ipsum dolor sit amet consectetur. Sit fermentum nulla sit
-                nunc curabitur pretium faucibus nibh turpis. Etiam ullamcorper
-                eget mollis velit rhoncus amet. Posuere molestie dictum neque
-                ultricies tincidunt vel convallis at. Amet egestas molestie
-                adipiscing senectus quam egestas ultricies. In fringilla luctus
-                fames molestie mauris sollicitudin adipiscing arcu turpis.
-                Feugiat consequat ipsum eu nunc sed quis. Volutpat odio auctor
-                integer vitae curabitur duis. Odio fringilla posuere aliquam
-                nunc elit nisl fermentum rhoncus. Eleifend sed pellentesque
-                auctor mauris vel. Magna donec consequat quis mi curabitur quam.
-                Arcu neque suspendisse aenean volutpat adipiscing venenatis
-                etiam nisl. Eleifend nunc eu a sagittis vitae. Amet enim
-                lobortis ridiculus lacus. Nullam lorem mattis convallis laoreet
-                volutpat mauris praesent.{" "}
-              </p>
+              <div className="sm:w-full md:w-[50%]">
+                <p className="sm:text-[12px] md:text-[18px] font-[poppins-regular] sm:mb-4 md:mb-[26px] ">
+                  {last_desc}
+                </p>
+              </div>
             </div>
-          </div>
+          )}
 
           {/* News */}
           <div className="w-full">
             <p className="sm:text-[20px] md:text-[30px] font-[poppins-semibold] mb-[29px] ">
-              News
+              {dil === "tk"
+                ? "Habarlar"
+                : dil === "ru"
+                ? "Новости"
+                : dil === "tr"
+                ? "Haberler"
+                : "News"}
             </p>
 
             <div className="w-full grid sm:gap-[15px] md:gap-[30px] sm:grid-cols-1 md:grid-cols-auto-fit-150">

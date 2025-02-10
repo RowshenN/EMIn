@@ -1,19 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import HotleCards from "./HotleCards";
 
 import icon from "../../images/hotel-round.svg";
 import { axiosInstance } from "../../utils/axiosInstance";
+import { SebedimContext } from "../../context/Context";
 
 const Hotels = () => {
+  const { dil } = useContext(SebedimContext);
   const [hotels, setHotels] = useState([]);
 
   useEffect(() => {
     getHotels();
-  }, []);
+  }, [dil]);
 
   const getHotels = async () => {
     await axiosInstance
-      .get("/hotels")
+      .get("/hotels", {
+        headers:{
+          "Accept-Language": dil,
+        }
+      })
       .then((res) => {
         setHotels(res.data.data);
         console.log(res.data);
@@ -30,10 +36,22 @@ const Hotels = () => {
       <div className="w-[80%] mx-auto z-10 ">
         <div className="w-full flex items-center sm:justify-center md:justify-between sm:mb-[30px] md:mb-[70px]">
           <h1 className="sm:text-[30px] lg:text-[50px] font-[poppins-semibold] ">
-            Hotels
+            {dil === "tk"
+              ? "Oteller"
+              : dil === "ru"
+              ? "Отели"
+              : dil === "tr"
+              ? "Oteller"
+              : "Hotels"}
           </h1>
           <button className="text-[18px] md:block sm:hidden text-[#009833] font-[poppins-medium] ">
-            More
+            {dil === "tk"
+              ? "Beýlekiler"
+              : dil === "ru"
+              ? "Другие"
+              : dil === "tr"
+              ? "Diğerleri"
+              : "More"}
           </button>
         </div>
 

@@ -3,12 +3,13 @@ import "./App.css";
 import Router from "./routes/Router";
 import SebedimContextProvider from "./context/Context";
 
-
 function App() {
   return (
-    <SebedimContextProvider>
-      <Router />
-    </SebedimContextProvider>
+    <div className="max-w-[1550px] mx-auto">
+      <SebedimContextProvider>
+        <Router />
+      </SebedimContextProvider>
+    </div>
   );
 }
 
