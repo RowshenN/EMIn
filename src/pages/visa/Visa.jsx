@@ -25,13 +25,13 @@ const Visa = () => {
       <Navigation />
       <div className="lg:w-full sm:w-[94%] mx-auto ">
         <div className="mt-10 sm:w-full md:w-[90%] mx-auto sm:mb-[235px] md:mb-[370px]">
-          <div className="w-full relative sm:mb-10 md:mb-[64px] ">
+          <div className="w-full flex items-center justify-center relative sm:mb-10 md:mb-[64px] ">
             <img
               src={surat}
               alt="surat"
               className="rounded-[23px] sm:h-[123px] md:h-full w-full object-cover"
             />
-            <p className="absolute top-[35%] sm:left-[40%] xs:left-[45%] text-white md:text-[35px] sm:text-[26px] lg:text-[50px] font-[poppins-semibold] ">
+            <p className="absolute text-white md:text-[35px] sm:text-[26px] lg:text-[50px] font-[poppins-semibold] ">
               {dil === "tk"
                 ? "Visa"
                 : dil === "ru"

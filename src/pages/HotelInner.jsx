@@ -19,10 +19,11 @@ import { Pagination } from "swiper/modules";
 import { useParams } from "react-router-dom";
 import { axiosInstance } from "../utils/axiosInstance";
 
-import surat from "../images/hotel-inner.png";
-import surat2 from "../images/hotel-inner-img.png";
-import map from "../images/hotel-map.png";
+// import surat from "../images/hotel-inner.png";
+// import surat2 from "../images/hotel-inner-img.png";
+// import map from "../images/hotel-map.png";
 import { SebedimContext } from "../context/Context";
+import HotelTestimonial from "../components/HotelTestimonial/HotelTestimonial";
 
 const HotelInner = () => {
   const [hotel, setHotel] = useState([]);
@@ -32,7 +33,7 @@ const HotelInner = () => {
   useEffect(() => {
     getHotelInner();
     getHotels();
-  }, [dil,id]);
+  }, [dil, id]);
 
   const getHotelInner = async () => {
     try {
@@ -64,6 +65,9 @@ const HotelInner = () => {
   };
 
   const hotelmains = hotels.slice(0, 8);
+  const sentences = hotel?.short_description?.split(". ");
+  const cleanedSentences = sentences?.map((s) => s.trim());
+  const fisryt_desc = cleanedSentences?.slice(0, 1);
   return (
     <>
       <Navigation />
@@ -83,7 +87,8 @@ const HotelInner = () => {
               {hotel?.name}
             </p>
             <p className="text-white sm:text-[12px] md:text-[16px] font-[poppins-regular] ">
-              {hotel?.short_description}
+              {/* {hotel?.short_description} */}
+              {fisryt_desc}
             </p>
           </div>
         </div>
@@ -126,10 +131,16 @@ const HotelInner = () => {
       </div>
 
       {/* Info */}
-      <div className="w-[85%] sm:mb-[70px] md:mb-[120px] mx-auto md:flex-row sm:flex-col flex items-start justify-center sm:gap-[42px] md:gap-[111px]  ">
+      <div className="w-[85%] sm:mb-[70px] md:mb-[120px] mx-auto md:flex-row sm:flex-col flex items-start justify-center sm:gap-[42px] md:gap-[80px] lg:gap-[111px]  ">
         <div className="sm:w-full md:w-[50%] ">
           <p className="text-[30px] md:block sm:hidden font-[poppins-semibold] mb-5 ">
-            Information
+            {dil === "tk"
+              ? "Maglumatlar"
+              : dil === "ru"
+              ? "Информация"
+              : dil === "tr"
+              ? "Bilgi"
+              : "Information"}
           </p>
           <p className="text-[16px] font-[poppins-regular]">
             {hotel?.description}
@@ -138,19 +149,44 @@ const HotelInner = () => {
 
         <div className="sm:w-full md:w-[50%]">
           <p className="sm:text-[18px] md:text-[30px] font-[poppins-semibold] mb-5">
-            Map
+            {dil === "tk"
+              ? "Karta"
+              : dil === "ru"
+              ? "Карта"
+              : dil === "tr"
+              ? "Harita"
+              : "Map"}
           </p>
 
+          {/* <div className="w-full">
+            <iframe
+              className="w-full object-cover sm:h-[260px] rounded-[10px] md:h-[418px]"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3147.036845389377!2d58.33081367570038!3d37.929569671946815!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f700184161f1425%3A0x7d0166571add2197!2sYyldyz%20Hotel!5e0!3m2!1sen!2s!4v1739186619510!5m2!1sen!2s"
+              width="600"
+              height="450"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div> */}
           <div>
             <img src={hotel?.map} alt="map" />
-          </div>
+          </div> 
         </div>
       </div>
+
+      <HotelTestimonial id={id} hotel_tests={hotel?.testimonials} />
 
       {/* hotels */}
       <div className="w-[85%] mx-auto mb-[145px] ">
         <p className=" md:block sm:hidden text-[30px] font-[poppins-bold] mb-4">
-          Hotels
+          {dil === "tk"
+            ? "Oteller"
+            : dil === "ru"
+            ? "Отели"
+            : dil === "tr"
+            ? "Oteller"
+            : "Hotels"}
         </p>
 
         <div className="w-full grid sm:gap-[15px] md:gap-[30px] sm:grid-cols-2 md:grid-cols-auto-fill-250 ">

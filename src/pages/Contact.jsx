@@ -1,7 +1,5 @@
 import React, { useState, useContext } from "react";
 
-import Navigation2 from "../components/navbars/Navigation2";
-
 import surat from "../images/contact-img.png";
 import letter from "../images/contact-letter-icon.svg";
 import map from "../images/contact-map-point.svg";
@@ -15,6 +13,7 @@ import send_line from "../images/contact-send-line.svg";
 import { axiosInstance } from "../utils/axiosInstance";
 import { message } from "antd";
 import { SebedimContext } from "../context/Context";
+import Navigation from "../components/navbars/Navigation";
 
 const Contact = () => {
   const { dil } = useContext(SebedimContext);
@@ -81,11 +80,12 @@ const Contact = () => {
   };
 
   return (
+    <>
+    <Navigation />
     <div className="w-full sm:mb-[100px] md:mb-[140px] ">
-      <Navigation2 />
-      <div className="sm:w-[94%] md:w-[87%] relative flex items-start gap-[150px] justify-between mx-auto sm:mt-[50px] md:mt-[100px] ">
-        <div className="sm:w-full md:w-[90%] flex md:flex-row sm:flex-col items-start sm:gap-[70px] md:gap-[100px] justify-between sm:mt-[100px] md:mt-[151px] ">
-          <div>
+      <div className="sm:w-[94%] md:w-[90%] relative flex items-start gap-[150px] justify-between mx-auto sm:mt-[50px] md:mt-[100px] ">
+        <div className="w-full flex lg:flex-row sm:flex-col items-start sm:gap-[70px] md:gap-[100px] justify-between sm:mt-[20px] lg:mt-[151px] ">
+          <div className="sm:w-full lg:w-[40%]">
             <p className="sm:text-[25px] md:text-[50px] font-[poppins-semibold] ">
               {dil === "tk"
                 ? "Habarlaşmak üçin"
@@ -184,8 +184,8 @@ const Contact = () => {
             </div>
           </div>
 
-          <div className="bg-white w-full shadow-2xl rounded-[23px] z-10 sm:px-[15px] sm:py-[40px] md:py-[55px] md:px-[50px] ">
-            <div className="sm:w-full md:w-[430px] lg:w-[498px]">
+          <div className="bg-white sm:w-full lg:w-[60%] shadow-2xl rounded-[23px] z-10 sm:px-[15px] sm:py-[40px] md:py-[55px] md:px-[50px] ">
+            <div className="w-full">
               <h1 className="sm:text-[18px] md:text-[28px] font-[poppins-semibold] sm:mb-[30px] md:mb-[45px] ">
                 {dil === "tk"
                   ? "Habar iber"
@@ -335,7 +335,7 @@ const Contact = () => {
           </div>
         </div>
 
-        <div className="w-[40%] sm:hidden md:block absolute top-0 right-0 -z-20 rounded-[23px] h-[70%]">
+        <div className="w-[40%] sm:hidden lg:block absolute top-0 right-0 -z-20 rounded-[23px] h-[70%]">
           <img
             src={surat}
             alt="surat"
@@ -371,6 +371,7 @@ const Contact = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

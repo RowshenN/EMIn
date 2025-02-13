@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 // import surat from "../../images/tour-img.png";
 import map from "../../images/map.svg";
 import clock from "../../images/clock-svg.svg";
+import { SebedimContext } from "../../context/Context";
 
-const ToursCards = ({ item,type_param }) => {
+const ToursCards = ({ item, type_param }) => {
+  const { dil } = useContext(SebedimContext);
   function daysBetween(startDateString, endDateString) {
     const startDate = new Date(startDateString);
     const endDate = new Date(endDateString);
@@ -26,7 +28,9 @@ const ToursCards = ({ item,type_param }) => {
   const navigate = useNavigate();
   return (
     <div
-      onClick={() => navigate(`/destination-inner/${item.id}?type=${type_param}`)}
+      onClick={() =>
+        navigate(`/destination-inner/${item.id}?type=${type_param}`)
+      }
       className="border bg-white cursor-pointer border-solid border-[#DADADA] rounded-[11px] sm:px-[7px] md:px-3 sm:pt-[7px] md:pt-3 pb-[18px] "
     >
       <div className="w-full">
@@ -62,7 +66,22 @@ const ToursCards = ({ item,type_param }) => {
               className="object-cover md:w-[22px] sm:w-[11px] "
             />
             <p className="font-[poppins-medium] sm:text-[8px] md:text-[14px] ">
-              {days} {days > 0 ? "days" : "day"}{" "}
+              {days}{" "}
+              {days > 0
+                ? dil === "tk"
+                  ? "gün"
+                  : dil === "ru"
+                  ? "дни"
+                  : dil === "tr"
+                  ? "gün"
+                  : "days"
+                : dil === "tk"
+                ? "gün"
+                : dil === "ru"
+                ? "день"
+                : dil === "tr"
+                ? "gün"
+                : "day"}{" "}
             </p>
           </div>
         </div>

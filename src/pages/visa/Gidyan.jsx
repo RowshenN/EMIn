@@ -4,7 +4,7 @@ import { Select, message, DatePicker } from "antd";
 import { axiosInstance } from "../../utils/axiosInstance";
 import { countries } from "../../components/Countries";
 import visa_line from "../../images/visa-send-line.svg";
-import moment from "moment"; // Import moment
+// import moment from "moment";
 import { SebedimContext } from "../../context/Context";
 
 const optionsGender = [

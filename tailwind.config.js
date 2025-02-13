@@ -9,7 +9,8 @@ module.exports = {
         "auto-fit-150": "repeat(auto-fit,minmax(350px,1fr))",
       },
       colors : {
-        "my-bg" : "rgba(0, 0, 0, 0.71)"
+        "my-bg" : "rgba(0, 0, 0, 0.71)",
+        'custom-teal-gradient': 'linear-gradient(180deg, #FFFFFF 0%, #D8F0FF 85.8%)',
       },
       screens: {
         sm: "320px",
@@ -27,6 +28,9 @@ module.exports = {
         // => @media (min-width: 1536px) { ... }
         "2xl": "1536px",
         // => @media (min-width: 1536px) { ... }
+      },
+      backgroundImage: {
+        'gradient-20-80': 'linear-gradient(to left, white 10%, #34C2AA 350%)',
       },
     },
   },

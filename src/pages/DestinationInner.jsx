@@ -22,6 +22,7 @@ import ToursCards from "../components/tours/ToursCards";
 import { useParams, useSearchParams } from "react-router-dom";
 import { axiosInstance } from "../utils/axiosInstance";
 import { SebedimContext } from "../context/Context";
+import TourTestimonial from "../components/TourTestimonial";
 
 const DestinationInner = () => {
   const { dil } = useContext(SebedimContext);
@@ -224,6 +225,8 @@ const DestinationInner = () => {
           </div>
         </div>
       </div>
+
+      <TourTestimonial id={id} tour_tests={destInner?.testimonials} />
 
       {/* hotels */}
       <div className="w-[85%] mx-auto mb-[145px] ">

@@ -33,10 +33,13 @@ const Experience = () => {
         </div>
 
         <p className="text-[#878787] md:text-left sm:text-center sm:text-[12px] md:text-[16px] font-[poppins-medium] mb-[33px] ">
-          Lorem ipsum dolor sit amet consectetur. Dolor vitae ut sit ut mauris
-          sociis tortor vel dignissim. Ullamcorper auctor non arcu proin
-          urna.Lorem ipsum dolor sit amet consectetur. Dolor vitae ut sit ut
-          mauris sociis tortor vel dignissim. non arcu proin urna.
+          {dil === "tk"
+            ? "Emin Hyzmat Travel Agency bilen kynçylyksyz we ýatdan çykmajak syýahat tejribesi gazanyň!"
+            : dil === "ru"
+            ? "Доверьтесь Emin Hyzmat Travel Agency, и мы сделаем ваше путешествие легким и незабываемым! "
+            : dil === "tr"
+            ? "Emin Hyzmat Travel Agency olarak, sizlere stressiz ve unutulmaz bir seyahat deneyimi sunuyoruz!"
+            : "At Emin Hyzmat Travel Agency, we are committed to making every journey stress-free and memorable. Let us take care of the details so you can focus on enjoying the adventure!"}
         </p>
 
         <div className="flex sm:items-start md:items-center justify-start sm:gap-4 md:gap-6 mb-[35px]">
@@ -52,13 +55,18 @@ const Experience = () => {
                 : "Safe Travelling"}
             </p>
             <p className="text-[#878787] sm:text-[12px] md:text-[16px] font-[poppins-medium]">
-              Lorem ipsum dolor sit amet consectetur. Dolor vitae ut sit ut
-              mauris sociis tortor vel dignissim.
+              {dil === "tk"
+                ? "24/7 Goldaw – Dünýäniň islendik ýerinde biz size kömek etmäge taýýar."
+                : dil === "ru"
+                ? "Круглосуточная поддержка – Мы всегда рядом, где бы вы ни находились. "
+                : dil === "tr"
+                ? "7/24 Destek – Nerede olursanız olun, her zaman yanınızdayız."
+                : "24/7 Support – We are always here to assist you, wherever you are."}
             </p>
           </div>
         </div>
 
-        <div className="flex sm:items-start md:items-center justify-start gap-6">
+        <div className="flex sm:items-start md:items-center justify-start sm:gap-4 md:gap-6">
           <img src={price} alt="safe" />
           <div>
             <p className="sm:text-[18px] md:text-[22px] font-[poppins-semibold]">
@@ -71,8 +79,13 @@ const Experience = () => {
                 : "Affordable Price"}
             </p>
             <p className="text-[#878787] sm:text-[12px] md:text-[16px] font-[poppins-medium]">
-              Lorem ipsum dolor sit amet consectetur. Dolor vitae ut sit ut
-              mauris sociis tortor vel dignissim.
+              {dil === "tk"
+                ? "Myhmanhana Bron Edilmegi – Dünýäniň islendik nokadynda rahat we amatly myhmanhanalar."
+                : dil === "ru"
+                ? "Бронирование отелей – Комфортное размещение в проверенных отелях. "
+                : dil === "tr"
+                ? "Otel Rezervasyonları – Dünyanın dört bir yanında konforlu konaklama seçenekleri."
+                : "Hotel Reservations – Comfortable stays at top-rated hotels worldwide."}
             </p>
           </div>
         </div>

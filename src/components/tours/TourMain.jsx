@@ -100,7 +100,7 @@ const Tours = () => {
           </div>
         </div>
 
-        <div className="w-[80%] mx-auto grid sm:gap-[15px] md:gap-[30px] sm:grid-cols-2 md:grid-cols-auto-fill-250">
+        <div className="sm:w-[94%] md:w-[80%] mx-auto grid sm:gap-[15px] md:gap-[30px] sm:grid-cols-2 md:grid-cols-auto-fill-250">
           {tourMains?.map((item) => {
             return <ToursCards key={item.id} item={item} type_param={type} />;
           })}

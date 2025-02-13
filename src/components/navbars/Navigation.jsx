@@ -39,7 +39,7 @@ const Navigation = () => {
                     : dil === "ru"
                     ? "О нас"
                     : dil === "tr"
-                    ? "Haberler"
+                    ? "Hakkımızda"
                     : "About us"}
                 </p>
 
@@ -56,17 +56,49 @@ const Navigation = () => {
                     : "Turkmenistan"}
                 </p>
                 <p
-                  onClick={() => navigate("/tours")}
-                  className="flex cursor-pointer w-full items-center justify-start gap-2"
+                  onMouseLeave={() => setTours(false)}
+                  onMouseOver={() => setTours(true)}
+                  className="flex relative cursor-pointer w-fit flex-col items-start justify-start gap-2"
                 >
-                  {dil === "tk"
-                    ? "Turlar"
-                    : dil === "ru"
-                    ? "Туры"
-                    : dil === "tr"
-                    ? "Turlar"
-                    : "Tours"}{" "}
-                  <img src={vector} alt="vector" />
+                  <div className="flex items-center  transition-all duration-200 justify-center gap-2">
+                    {dil === "tk"
+                      ? "Turlar"
+                      : dil === "ru"
+                      ? "Туры"
+                      : dil === "tr"
+                      ? "Turlar"
+                      : "Tours"}{" "}
+                    <img src={vector} alt="vector" />
+                  </div>
+                  {tours && (
+                    <div
+                      onMouseLeave={() => setTours(false)}
+                      className="bg-white z-50 py-2 transition-all duration-200 px-3 flex flex-col items-start gap-2 rounded-[11px] justify-start"
+                    >
+                      <p
+                        onClick={() =>
+                          navigate(`/tours?type=${"turkmenistan"}`)
+                        }
+                      >
+                        {dil === "tk"
+                          ? "Türkmenistan"
+                          : dil === "ru"
+                          ? "Туркменистан"
+                          : dil === "tr"
+                          ? "Türkmenistan"
+                          : "Turkmenistan"}
+                      </p>
+                      <p onClick={() => navigate(`/tours?type=${"others"}`)}>
+                        {dil === "tk"
+                          ? "Başgalar"
+                          : dil === "ru"
+                          ? "Другие"
+                          : dil === "tr"
+                          ? "Başka"
+                          : "Others"}
+                      </p>
+                    </div>
+                  )}
                 </p>
                 <p
                   onClick={() => navigate("/hotels")}
@@ -135,7 +167,7 @@ const Navigation = () => {
                   : dil === "ru"
                   ? "О нас"
                   : dil === "tr"
-                  ? "Haberler"
+                  ? "Hakkımızda"
                   : "About us"}
               </p>
 

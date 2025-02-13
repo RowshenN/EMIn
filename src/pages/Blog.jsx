@@ -53,15 +53,14 @@ const Blog = () => {
   return (
     <>
       <Navigation />
-      <div className="sm:w-[94%] md:w-[95%] mx-auto"></div>
       <div className="w-[90%] mx-auto mt-6 sm:mb-[160px] md:mb-[170px]">
-        <div className="w-full relative sm:mb-10 md:mb-[64px] ">
+        <div className="w-full flex items-center justify-center relative sm:mb-10 md:mb-[64px] ">
           <img
             src={surat}
             alt="surat"
             className="rounded-[23px] sm:h-[123px] md:h-full w-full object-cover"
           />
-          <p className="absolute sm:top-[28%] xs:top-[35%] sm:left-[37%] xs:left-[40%] md:left-[43%] text-white md:text-[35px] sm:text-[26px] lg:text-[50px] font-[poppins-semibold] ">
+          <p className="absolute text-white md:text-[35px] sm:text-[26px] lg:text-[50px] font-[poppins-semibold] ">
             {dil === "tk"
               ? "Blog"
               : dil === "ru"

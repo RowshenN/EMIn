@@ -53,7 +53,7 @@ const Destinations = () => {
       </p>
 
       <div className="w-full flex md:flex-row sm:flex-col items-start justify-center sm:gap-3 md:gap-[15px] 1xl:gap-[30px] mt-[55px]">
-        <div className="flex w-full sm:gap-3 md:gap-[15px] xl:gap-[30px] items-start justify-center">
+        <div className="flex sm:w-full md:w-[55%] sm:gap-3 md:gap-[15px] xl:gap-[30px] items-start justify-center">
           <div className="w-full flex flex-col justify-start items-baseline sm:gap-3 md:gap-[15px] xl:gap-[30px]">
             <div
               onClick={() =>
@@ -127,11 +127,11 @@ const Destinations = () => {
               onClick={() =>
                 navigate(`/destination-inner/${destinations[4]?.id}?type=${destinations[4]?.type}`)
               }
-              className="relative w-[208px] md:h-[210px] xl:h-[285px] cursor-pointer"
+              className="relative w-[70%] sm:h-[180px] md:h-[210px] xl:h-[285px] cursor-pointer"
             >
               <img
                 src={destinations[4]?.main_image}
-                className="w-full md:h-[210px] xl:h-[285px] rounded-[10px] object-cover"
+                className="w-full h-full rounded-[10px] object-cover"
                 alt="surat"
               />
               <p className="absolute sm:bottom-4 md:bottom-[26px] sm:left-4 md:left-[26px] text-white sm:text-[10px] md:text-[20px] font-[poppins-medium]">
@@ -143,11 +143,11 @@ const Destinations = () => {
               onClick={() =>
                 navigate(`/destination-inner/${destinations[5]?.id}?type=${destinations[5]?.type}`)
               }
-              className="relative w-[291px] md:h-[210px] xl:h-[285px] cursor-pointer"
+              className="relative w-full sm:h-[180px] md:h-[210px] xl:h-[285px] cursor-pointer"
             >
               <img
                 src={destinations[5]?.main_image}
-                className="w-full md:h-[210px] xl:h-[285px] rounded-[10px] object-cover"
+                className="w-full h-full rounded-[10px] object-cover"
                 alt="surat"
               />
               <p className="absolute sm:bottom-4 md:bottom-[26px] sm:left-4 md:left-[26px] text-white sm:text-[10px] md:text-[20px] font-[poppins-medium]">

@@ -8,7 +8,7 @@ const AreYouReady = () => {
   const { dil } = useContext(SebedimContext);
   const navigate = useNavigate();
   return (
-    <div className="w-full mb-[154px] flex items-center justify-center relative">
+    <div className="w-full sm:mb-[99px] md:mb-[154px] flex items-center justify-center relative">
       <div className="z-10 flex flex-col items-center justify-center gap-[14px]">
         <h1 className="sm:text-[20px] md:text-[35px] font-[poppins-semibold] ">
           {dil === "tk"

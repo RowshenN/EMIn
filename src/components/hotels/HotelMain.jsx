@@ -35,7 +35,7 @@ const Hotels = () => {
 
   return (
     <div className="w-full relative sm:mb-[90px] md:mb-[148px]">
-      <div className="w-[80%] mx-auto z-10 ">
+      <div className="sm:w-[94%] md:w-[80%] mx-auto z-10 ">
         <div className="w-full flex items-center sm:justify-center md:justify-between sm:mb-[30px] md:mb-[70px]">
           <h1 className="sm:text-[30px] lg:text-[50px] font-[poppins-semibold] ">
             {dil === "tk"

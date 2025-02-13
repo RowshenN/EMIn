@@ -4,7 +4,6 @@ import { Select, message, DatePicker } from "antd";
 import { axiosInstance } from "../../utils/axiosInstance";
 import { countries } from "../../components/Countries";
 import visa_line from "../../images/visa-send-line.svg";
-import moment from "moment"; // Import moment for date formatting
 import { SebedimContext } from "../../context/Context";
 
 const optionsGender = [
@@ -26,9 +25,6 @@ const labelRender = (props) => {
 const Gelyan = () => {
   const { dil } = useContext(SebedimContext);
   const { Option } = Select;
-  const [photo, setPhoto] = useState([]);
-  const [passport, setPassport] = useState([]);
-
   const [gelyanInfo, setGelyanInfo] = useState({
     name: "",
     surname: "",
@@ -42,6 +38,9 @@ const Gelyan = () => {
     travel_date: null,
     notes: "",
   });
+
+  const [passport, setPassport] = useState([]); // Use for DropFileInput
+  const [photo, setPhoto] = useState([]); // Use for DropFileInput
 
   const onFileChangePassport = (files) => {
     setPassport(files);
@@ -62,44 +61,35 @@ const Gelyan = () => {
       gelyanInfo.nationality &&
       gelyanInfo.incoming_country &&
       gelyanInfo.travel_date &&
-      gelyanInfo.notes &&
-      photo.length > 0 &&
-      passport.length > 0
+      passport.length > 0 &&
+      photo.length > 0
     ) {
-      const formData = new FormData();
+      const formData = new FormData(); // Use FormData
 
-      photo.forEach((file) => formData.append("photo", file));
       passport.forEach((file) => formData.append("passport", file));
+      photo.forEach((file) => formData.append("photo", file));
 
-      formData.append("name", gelyanInfo.name);
-      formData.append("surname", gelyanInfo.surname);
-      formData.append("gender", gelyanInfo.gender);
-      formData.append(
-        "birth_date",
-        gelyanInfo.birth_date
-          ? gelyanInfo.birth_date.format("YYYY-MM-DD")
-          : null
-      ); // Handle null date
-      formData.append("email", gelyanInfo.email);
-      formData.append("phone", gelyanInfo.phone);
-      formData.append("nationality", gelyanInfo.nationality);
-      formData.append("incoming_country", gelyanInfo.incoming_country);
-      formData.append(
-        "travel_date",
-        gelyanInfo.travel_date
-          ? gelyanInfo.travel_date.format("YYYY-MM-DD")
-          : null
-      ); // Handle null date
-      formData.append("notes", gelyanInfo.notes);
-      for (let [key, value] of formData.entries()) {
-        console.log(key, value); // This will show the key-value pairs
+      for (const key in gelyanInfo) {
+        if (key === "birth_date" || key === "travel_date") {
+          formData.append(
+            key,
+            gelyanInfo[key] ? gelyanInfo[key].format("YYYY-MM-DD") : null
+          );
+        } else {
+          formData.append(key, gelyanInfo[key]);
+        }
       }
 
       try {
-        const res = await axiosInstance.post("/visas/incoming", formData);
-        console.log(formData);
+        const res = await axiosInstance.post("/visas/incoming", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data", // Important!
+          },
+        });
+        console.log(res);
         message.success("Your message has been sent successfully!");
         setGelyanInfo({
+          // Reset form
           name: "",
           surname: "",
           patronymic_name: "",
@@ -112,18 +102,27 @@ const Gelyan = () => {
           travel_date: null,
           notes: "",
         });
-        setPhoto([]);
         setPassport([]);
+        setPhoto([]);
       } catch (error) {
-        console.error("Error:", error.response);
-        message.error(
-          "There was an error sending your message. Please try again."
-        );
+        console.error("Error:", error);
+        if (error.response) {
+          console.error("Response data:", error.response.data);
+          console.error("Response status:", error.response.status);
+          console.error("Response headers:", error.response.headers);
+          if (error.response.status === 413) {
+            message.error(
+              "File size too large. Please check the file size limits."
+            );
+          } else {
+            message.error("Error sending message. Please try again.");
+          }
+        } else {
+          message.error("An error occurred. Please try again.");
+        }
       }
     } else {
-      message.warning(
-        "Please fill in all required fields and upload the documents!"
-      );
+      message.warning("Please fill all fields and upload documents!");
     }
   };
 
@@ -366,13 +365,15 @@ const Gelyan = () => {
                 required
                 type="number"
                 className="bg-[#FCFCFC] text-[16px] font-[poppins-regular] w-full sm:px-4 md:px-7 py-3 outline-none rounded-[9px] border border-[#D9D9D9] "
-                placeholder={dil === "tk"
-                ? "Telefon belgisi"
-                : dil === "ru"
-                ? "Номер телефона"
-                : dil === "tr"
-                ? "Telefon numarası"
-                : "Phone number"}
+                placeholder={
+                  dil === "tk"
+                    ? "Telefon belgisi"
+                    : dil === "ru"
+                    ? "Номер телефона"
+                    : dil === "tr"
+                    ? "Telefon numarası"
+                    : "Phone number"
+                }
                 id="tel"
               />
             </div>
@@ -502,10 +503,7 @@ const Gelyan = () => {
                     ? "Fotoğraf"
                     : "Photo"}
                 </p>
-                <DropFileInput
-                  files={photo}
-                  onFileChange={(files) => onFileChangePhoto(files)}
-                />
+                <DropFileInput files={photo} onFileChange={onFileChangePhoto} />
               </div>
             </div>
 
@@ -525,13 +523,15 @@ const Gelyan = () => {
                 onChange={(e) =>
                   setGelyanInfo({ ...gelyanInfo, notes: e.target.value })
                 }
-                placeholder={dil === "tk"
-                ? "Bellik"
-                : dil === "ru"
-                ? "Примечания"
-                : dil === "tr"
-                ? "Notlar"
-                : "Notes"}
+                placeholder={
+                  dil === "tk"
+                    ? "Bellik"
+                    : dil === "ru"
+                    ? "Примечания"
+                    : dil === "tr"
+                    ? "Notlar"
+                    : "Notes"
+                }
                 id="bellik"
                 className="bg-[#FCFCFC] min-h-[129px] w-full text-[16px] font-[poppins-regular] sm:px-4 md:px-7 py-3 outline-none rounded-[9px] border border-[#D9D9D9] "
               ></textarea>
@@ -539,7 +539,7 @@ const Gelyan = () => {
 
             <div className="sm:w-full md:w-[65%]">
               <div
-                onClick={() => postMessageIncoming()}
+                onClick={postMessageIncoming}
                 className="cursor-pointer mb-[34px] flex items-baseline flex-col justify-start gap-2 "
               >
                 <p className="text-[16px] font-[poppins-medium]">

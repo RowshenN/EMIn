@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import logo from "../images/footer-logo.svg";
@@ -7,8 +7,10 @@ import footer2 from "../images/footer2.svg";
 import footer3 from "../images/footer3.svg";
 import footer4 from "../images/footer4.svg";
 import { SebedimContext } from "../context/Context";
+import vector from "../images/Vector.svg";
 
 const Footer = () => {
+  const [tours, setTours] = useState(false);
   const { dil } = useContext(SebedimContext);
   const navigate = useNavigate();
   return (
@@ -86,16 +88,45 @@ const Footer = () => {
               FAQ
             </p>
             <p
-              onClick={() => navigate("/tours")}
-              className="text-[#717171] text-[14px] cursor-pointer font-[poppins-regular]"
+              onMouseOver={() => setTours(true)}
+              onMouseLeave={() => setTours(false)}
+              className="flex relative text-[#717171] text-[14px] cursor-pointer font-[poppins-regular] w-fit flex-col items-start justify-start gap-2"
             >
-              {dil === "tk"
-                ? "Turlar"
-                : dil === "ru"
-                ? "Туры"
-                : dil === "tr"
-                ? "Turlar"
-                : "Tours"}
+              <div className="flex items-center  justify-center gap-2">
+                {dil === "tk"
+                  ? "Turlar"
+                  : dil === "ru"
+                  ? "Туры"
+                  : dil === "tr"
+                  ? "Turlar"
+                  : "Tours"}{" "}
+                <img src={vector} alt="vector" />
+              </div>
+              {tours && (
+                <div
+                  onMouseLeave={() => setTours(false)}
+                  className="z-50 py-2 px-3 flex absolute bg-[#F9F9F9] bottom-5 left-0 flex-col gap-1 items-start rounded-[11px] justify-start"
+                >
+                  <p onClick={() => navigate(`/tours?type=${"turkmenistan"}`)}>
+                    {dil === "tk"
+                      ? "Türkmenistan"
+                      : dil === "ru"
+                      ? "Туркменистан"
+                      : dil === "tr"
+                      ? "Türkmenistan"
+                      : "Turkmenistan"}
+                  </p>
+                  <p onClick={() => navigate(`/tours?type=${"others"}`)}>
+                    {dil === "tk"
+                      ? "Başgalar"
+                      : dil === "ru"
+                      ? "Другие"
+                      : dil === "tr"
+                      ? "Başka"
+                      : "Others"}
+                  </p>
+                </div>
+              )}
             </p>
             <p
               onClick={() => navigate("/hotels")}

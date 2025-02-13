@@ -32,7 +32,7 @@ const Home = () => {
       <div className="sm:w-[94%] md:w-[90%] mx-auto">
         <div
           style={{ backgroundImage: `url(${surat})` }}
-          className="w-full bg-image sm:h-[200px] md:h-[400px] lg:h-[800px] mt-6 -z-10 bg-cover bg-black/20 bg-center bg-no-repeat rounded-[23px]"
+          className="w-full bg-image sm:h-[250px] md:h-[400px] lg:h-[800px] mt-6 -z-10 bg-cover bg-black/20 bg-center bg-no-repeat rounded-[23px]"
         >
           <div className="sm:w-[90%] md:w-[70%] lg:w-[50%] mx-auto flex items-center justify-center text-center sm:pt-[40px] md:pt-[70px] lg:pt-[100px]">
             <h1 className=" text-white font-[poppins-semibold] sm:text-[23px] md:text-[60px] lg:text-[80px] ">
@@ -250,7 +250,7 @@ const Home = () => {
             alt="visa"
           />
           <div className="absolute w-[90%] mx-auto flex items-end justify-between bottom-8 left-9">
-            <div className="flex flex-col items-baseline justify-start gap-4">
+            <div className="flex flex-col items-baseline justify-start sm:gap-2 md:gap-4">
               <h1 className="text-white sm:text-[16px] md:text-[50px] font-[poppins-semibold] ">
                 {dil === "tk"
                   ? "Online visa"
@@ -266,7 +266,11 @@ const Home = () => {
               </p>
             </div>
 
-            <img src={arrow} alt="arrow" />
+            <img
+              className="object-cover md:w-[56px] md:mr-0 sm:mr-4 sm:w-[25px] "
+              src={arrow}
+              alt="arrow"
+            />
           </div>
         </div>
 
@@ -279,8 +283,8 @@ const Home = () => {
             src={visa}
             alt="visa"
           />
-          <div className="absolute w-[78%] mx-auto flex items-end justify-between bottom-8 left-9">
-            <div className="flex flex-col items-baseline justify-start gap-4">
+          <div className="absolute sm:w-[90%] lg:w-[78%] mx-auto flex items-end justify-between bottom-8 left-9">
+            <div className="flex flex-col items-baseline justify-start sm:gap-2 md:gap-4">
               <h1 className="text-white sm:text-[16px] md:text-[50px] font-[poppins-semibold] ">
                 {dil === "tk"
                   ? "Oteller"
@@ -299,7 +303,7 @@ const Home = () => {
             <img
               src={arrow}
               alt="arrow"
-              className="object-cover md:w-[56px] sm:w-[25px] "
+              className="object-cover md:w-[56px] md:mr-0 sm:mr-4 sm:w-[25px] "
             />
           </div>
         </div>

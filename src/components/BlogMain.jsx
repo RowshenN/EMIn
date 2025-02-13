@@ -38,17 +38,23 @@ const Blog = () => {
   return (
     <div className="md:w-[90%] xl:w-[80%] mx-auto sm:mb-[49px] md:mb-[82px]">
       <div className="w-full flex items-center justify-center sm:mb-[33px] md:mb-[80px] ">
-        <div className="relative w-[32%] flex items-center justify-center">
-          <h1 className="md:text-[50px] sm:text-[26px] lg:text-[61px] font-[poppins-bold] z-10">
-            {dil === "tk"
-              ? "Blog"
-              : dil === "ru"
-              ? "Блог"
-              : dil === "tr"
-              ? "Blog"
-              : "Blog"}
-          </h1>
-          <img src={icon} className="absolute top-0 -z-10 left-0" alt="icons" />
+        <div className="w-full mb-[40px] relative flex items-center justify-center">
+          <div className="flex items-center justify-center flex-col">
+            <h1 className="md:text-[50px] text-center sm:text-[26px] lg:text-[61px] font-[poppins-bold] z-10">
+              {dil === "tk"
+                ? "Blog"
+                : dil === "ru"
+                ? "Блог"
+                : dil === "tr"
+                ? "Blog"
+                : "Blog"}
+            </h1>
+            <img
+              src={icon}
+              className="sm:mt-[-40px] md:w-full sm:w-[70%] md:mt-[-80px] object-contain ml-[-10px] -z-10"
+              alt="icons"
+            />
+          </div>
         </div>
       </div>
 

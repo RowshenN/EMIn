@@ -5,6 +5,7 @@ import AreYouReady from "../components/AreYouReady";
 import { SebedimContext } from "../context/Context";
 
 import surat from "../images/turkmenistan.png";
+import mob_suart from "../images/mobile-turkmenistan.png";
 import bulut_top from "../images/Bulut yokarky.png";
 import bulut_down from "../images/asaky bulut.png";
 import history_line from "../images/history-line.svg";
@@ -22,22 +23,30 @@ const Turkmenistan = () => {
   const { dil } = useContext(SebedimContext);
   return (
     <>
-      <div className="w-full">
+      <div className="w-full mx-auto relative ">
         <Navigation2 />
-
-        <div className="w-full -z-20 relative">
-          <div>
+        <div className="w-full h-full relative -z-20">
+          <div className="w-full flex items-start justify-center h-[760px] relative ">
             <img
               src={surat}
               alt="surat"
-              className="w-full h-[100vh] object-cover"
+              className="w-full md:flex sm:hidden h-full object-cover"
+            />
+            
+            <img
+              src={mob_suart}
+              className="w-full absolute -z-20 md:hidden h-full sm:flex object-cover"
+              alt="surat"
+            />
+
+            <p className="md:hidden sm:block mt-[180px] text-[33px] text-[#D8F0FF] leading-[88px] font-[poppins-bold] ">Turkmenistan</p>
+
+            <img
+              className="w-full absolute sm:bottom-[-2px] md:bottom-[-10px] sm:h-[190px] md:h-[210px] object-cover"
+              src={bulut_top}
+              alt="cloud"
             />
           </div>
-          <img
-            className="w-full absolute bottom-[-10px] h-[210px] object-cover"
-            src={bulut_top}
-            alt="cloud"
-          />
         </div>
 
         {/* history */}
@@ -104,7 +113,7 @@ const Turkmenistan = () => {
             </p>
           </div>
 
-          <div className="w-full text-left lg:py-[25px] lg:px-[35px] sm:text-[12px] md:text-[16px] text-white ">
+          <div className="w-full lg:text-left sm:text-center  lg:py-[25px] lg:px-[35px] sm:text-[12px] md:text-[16px] text-white ">
             <p className="shadow-2xl">
               {dil === "tk"
                 ? "Türkmenistanyň medeniýet ulgamyny ösdürmek, türkmen halkynyň ruhy gymmatlyklaryna esaslanýan döwlet taglymatyny kemala getirmek hormatly Prezidentimiz Serdar Berdimuhamedowyň alyp barýan köpugurly syýasatynyň ileri tutulýan ugurlarynyň biridir. Özboluşly medeni mirasymyz halkymyzyň aýawly saklap, nesilden-nesle geçirip gelýän gaýtalanmajak maddy we ruhy gymmatlyklarynyň bitewi ulgamydyr. Milli medeni mirasymyzy öwrenmek, gorap saklamak, mundan beýläk-de baýlaşdyrmak döwlet Baştutanymyzyň üns merkezinde durýar. Bu ugurdaky işler häzirki wagtda üstünlikli dowam etdirilip, medeniýet we sungat işgärleriniň, köpçülikleýin habar beriş serişdeleriniň işine aýratyn ähmiýet berilýär. Döredijilik ugry Arkadag Serdarly bagtyýar ýaşlar ýylynda guralýan çäreleriň hem aýrylmaz bölegidir. Medeniýet, sungat ussatlarynyň, köpçülikleýin habar beriş serişdeleriniň işgärleriniň alyp barýan işleri Watanymyzyň ýeten sepgitlerini giňden wagyz etmäge, olaryň ähmiýetini açyp görkezmäge, ykdysadyýetiň ähli pudaklarynda amala aşyrylýan özgertmelere we durmuş taýdan ösüşe itergi bermäge gönükdirilendir."
@@ -184,7 +193,7 @@ const Turkmenistan = () => {
             </p>
           </div>
 
-          <div className="w-full sm:mt-0 md:mt-[-25px] -z-10 text-left lg:py-[20px] lg:px-[35px] sm:text-[12px] md:text-[16px] text-white">
+          <div className="w-full sm:mt-0 md:mt-[-25px] -z-10 lg:text-left sm:text-center  lg:py-[20px] lg:px-[35px] sm:text-[12px] md:text-[16px] text-white">
             <p>
               {dil === "tk"
                 ? "Türkmen halkymyzyň milli tagamlary, beýleki halklaryň naz-nygmatlary ýaly, öz gözbaşyny gadymy döwürlerden alyp gaýdýar, dürli-dürliligi we özboluşlulygy bilen tapawutlanýar. Biziň günlerimize ýetip gelen gadymy rowaýatlarda türkmen şalarynyň, harby serkerdeleriň bereketli saçaklaryň başynda öz ýeňişlerini belleýişleri, daşary ýurtly ilçileriň desterhanlardaky azyk önümleriniň köplügine haýran galyşlary, olaryň ähli adamlary sahylyk bilen tagam datmaga çagyryşlary hakynda örän köp aýdylýar. Adatça, üstünlik bilen tamamlanan möhüm işler, halk baýramçylygynyň dessurlary, maşgalanyň şanly wakalary we dabaralary hem saçak başynda giňden bellenilýär. Gahryman Arkadagymyzyň “Bereketli türkmen saçagy” atly kitaby türkmen aşhanasynyň muşdaklarynyň iň söýgüli eserleriniň hatarynda durýar. Mälim bolşy ýaly, türkmeniň datly tagamlary taryhyny irki döwürlerden alyp gaýdýar, olar uzak ýyllaryň dowamynda has-da kämilleşdirilip, adamyň sagdynlygyna, iýmit siňdirijiligine, ýokumlylyga, ýakymlylyga, süýjülige gönükdirilendir. Türkmen halkymyzyň milli tagamlary, beýleki halklaryň naz-nygmatlary ýaly, öz gözbaşyny gadymy döwürlerden alyp gaýdýar, dürli-dürliligi we özboluşlulygy bilen tapawutlanýar.Dograma – munuň özi türkmen halkynyň däp bolan ýörgünli milli naharydyr. Onuň ady hem ,,dogramak” diýen sözden gelip çykypdyr.    Türkmen milli tagamy bolan ,,Tamdyrlama” maşgalanyň iň gowy görýän nahary bolup, ol dost-ýarlar, myhman gelende ýa-da toý-baýramlarda taýýarlanylýar.  Elleri tagamly ene-mamalarymyz geçmişde däneli-kösükli ekinlerden ençeme milli tagamlary taýýarlamak bilen, olary beýik sungat derejesine ýetiripdirler. Bular barada türkmen halkynyň Milli Lideri Gahryman Arkadagymyzyň «Bereketli türkmen saçagy» atly kitabynda giňişleýin gürrüň edilýär. Milli tagamlarymyz halkymyzyň myhmansöýerliginiň özboluşly güwäsidir."
