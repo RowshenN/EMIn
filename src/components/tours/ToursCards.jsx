@@ -36,7 +36,7 @@ const ToursCards = ({ item, type_param }) => {
       <div className="w-full">
         <div className="mb-[10px]">
           <img
-            className="w-full rounded-[11px] h-[222px] object-cover"
+            className="w-full rounded-[11px] sm:h-[150px] md:h-[222px] object-cover"
             src={item?.main_image}
             alt="surat"
           />

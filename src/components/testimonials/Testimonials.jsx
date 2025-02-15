@@ -177,7 +177,7 @@ const Testimonials = () => {
       <img
         src={bigsurat}
         alt="surat"
-        className="absolute w-fit -z-10 left-0 top-8"
+        className="absolute sm:w-[70%] md:w-fit -z-10 left-0 top-8"
       />
 
       {open && (

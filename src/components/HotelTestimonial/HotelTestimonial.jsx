@@ -43,10 +43,12 @@ const HotelTestimonial = ({ id, hotel_tests }) => {
     return (
       <StarIcon
         key={i}
+        width={20}
+        height={20}
         onClick={() => handleStarClick(i)}
         onMouseEnter={() => handleStarHover(i)}
         onMouseLeave={handleStarLeave}
-        className="star-icon cursor-pointer"
+        className="star-icon !w-[20px !h-[20px] object-cover cursor-pointer"
       />
     );
   });
@@ -210,7 +212,7 @@ const HotelTestimonial = ({ id, hotel_tests }) => {
           }}
           className="fixed  bg-black/20 z-50 flex items-center justify-center top-0 left-0 bottom-0 right-0"
         >
-          <div className="rounded-[20px] w-fit z-30 bg-white py-5 px-[27px] ">
+          <div className="rounded-[20px] w-[320px] z-30 bg-white py-5 sm:px-5 xs:px-[27px] ">
             <div className="w-full flex gap-6 items-center justify-between mb-4">
               <p className="text-[16px] font-[poppins-semibold] ">
                 Testimonial

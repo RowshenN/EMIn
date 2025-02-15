@@ -1,14 +1,13 @@
-import React from 'react';
-
-import right from "../images/right-arrow.png"
-import left from "../images/left-arrow.png"
+import React from "react";
+import right from "../images/right-arrow.png";
+import left from "../images/left-arrow.png";
 
 function Pagination({ meta, onPageChange }) {
   if (!meta) {
     return null;
   }
 
-  const { current_page, last_page, links } = meta;
+  const { current_page, last_page } = meta;
 
   const handlePageClick = (page) => {
     if (page !== current_page && page <= last_page && page >= 1) {
@@ -16,48 +15,70 @@ function Pagination({ meta, onPageChange }) {
     }
   };
 
+  const handlePreviousClick = () => {
+    if (current_page > 1) {
+      handlePageClick(current_page - 1);
+    }
+  };
+
+  const handleNextClick = () => {
+    if (current_page < last_page) {
+      handlePageClick(current_page + 1);
+    }
+  };
+
   return (
-    <nav aria-label="Page navigation" className="flex justify-center w-full mt-4">
-      <ul className="inline-flex items-center justify-center gap-2"> {/* Removed -space-x-px */}
-        {links.map((link, index) => {
-          let className = "px-3 w-full py-1 flex items-center justify-center";
+    <nav
+      aria-label="Page navigation"
+      className="flex justify-center w-full mt-4"
+    >
+      <ul className="inline-flex items-center justify-center gap-2">
+        <li className={`page-item ${current_page === 1 ? "disabled" : ""}`}>
+          <button
+            className="px-3 py-1 flex items-center justify-center"
+            onClick={handlePreviousClick}
+            disabled={current_page === 1}
+          >
+            <img
+              src={left}
+              alt="arrow"
+              className="h-[30px] w-[30px] object-cover cursor-pointer"
+            />
+          </button>
+        </li>
 
-          if (link.active) {
-            className += " bg-[#009833] rounded-full px-1 text-white ";
-          } else if (link.url === null || link.label === "...") {
-            className += " ";
-          }
+        {Array.from({ length: last_page }, (_, i) => i + 1).map((page) => (
+          <li
+            key={page}
+            className={`page-item ${
+              current_page === page
+                ? "active bg-[#009833] rounded-full px-2 text-white"
+                : "px-3 py-1 flex items-center justify-center"
+            }`}
+          >
+            <button className="page-link" onClick={() => handlePageClick(page)}>
+              {page}
+            </button>
+          </li>
+        ))}
 
-          let labelContent = link.label; // Default label content
-
-          if (link.label.includes("Previous")) { // Check for "« Previous"
-            labelContent = (
-              <>
-                <img src={left} alt="arrow" className='h-[30px] w-[30px] object-cover cursor-pointer' />
-                {/* <span>Previous</span> Added text label */}
-              </>
-            );
-          } else if (link.label.includes("Next")) { // Check for "Next »"
-            labelContent = (
-              <>
-                {/* <span>Next</span> */}
-                <img src={right} alt="arrow" className='h-[30px] w-[30px] object-cover cursor-pointer' />
-              </>
-            );
-          }
-
-          return (
-            <li key={index}>
-              <button
-                className={className}
-                onClick={() => handlePageClick(link.label)}
-                disabled={link.url === null || link.label === "..."}
-              >
-                {labelContent}
-              </button>
-            </li>
-          );
-        })}
+        <li
+          className={`page-item ${
+            current_page === last_page ? "disabled" : ""
+          }`}
+        >
+          <button
+            className="px-3 py-1 flex items-center justify-center"
+            onClick={handleNextClick}
+            disabled={current_page === last_page}
+          >
+            <img
+              src={right}
+              alt="arrow"
+              className="h-[30px] w-[30px] object-cover cursor-pointer"
+            />
+          </button>
+        </li>
       </ul>
     </nav>
   );

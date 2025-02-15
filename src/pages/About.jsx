@@ -24,7 +24,7 @@ const About = () => {
               />
               <p className="absolute text-white md:text-[35px] sm:text-[26px] lg:text-[50px] font-[poppins-semibold] ">
                 {dil === "tk"
-                  ? "Hakymyzda"
+                  ? "Biz barada"
                   : dil === "ru"
                   ? "О нас"
                   : dil === "tr"

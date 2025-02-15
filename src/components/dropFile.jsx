@@ -12,73 +12,30 @@ const DropFileInput = (props) => {
   const onDragLeave = () => wrapperRef.current.classList.remove("dragover");
   const onDrop = () => wrapperRef.current.classList.remove("dragover");
 
-  const onFileDrop = async (e) => {
-    e.preventDefault(); // Prevent default drag behavior
+  const onFileDrop = (e) => {
+    e.preventDefault();
     const newFiles = Array.from(e.target.files);
-    for (const newFile of newFiles) {
-      if (newFile) {
-        if (newFile.size <= 10 * 1024 * 1024) {
-          if (
-            newFile.type.startsWith("image/") ||
-            newFile.type.startsWith("application/pdf") ||
-            newFile.type.startsWith("application/octet-stream")
-          ) {
-            try {
-              await uploadFileInChunks(newFile);
-              const updatedList = [...fileList, newFile];
-              setFileList(updatedList);
-              props.onFileChange(updatedList);
-            } catch (error) {
-              console.error("File upload failed:", error);
-              alert(`File upload failed: ${error.message}`);
-            }
-          } else {
-            alert("Invalid file type. Please upload images or PDFs.");
-          }
-        } else {
-          alert("File size exceeds the limit (10MB).");
-        }
+
+    const validFiles = newFiles.filter((newFile) => {
+      if (newFile.size > 10 * 1024 * 1024) {
+        alert("File size exceeds the limit (10MB).");
+        return false;
       }
-    }
-  };
-
-  const uploadFileInChunks = async (file, chunkSize = "1MB") => {
-    const totalChunks = Math.ceil(file.size / chunkSize);
-    let start = 0;
-
-    for (let i = 0; i < totalChunks; i++) {
-      const end = Math.min(start + chunkSize, file.size);
-      const chunk = file.slice(start, end);
-
-      try {
-        const response = await uploadChunk(chunk, i, totalChunks, file.name);
-        if (!response.ok) {
-          const errorText = await response.text();
-          throw new Error(`Upload failed for chunk ${i + 1}: ${response.status} - ${errorText}`);
-        }
-        console.log(`Uploaded chunk ${i + 1} of ${totalChunks} for ${file.name}`);
-      } catch (error) {
-        console.error("Chunk upload error:", error);
-        throw error;
+      
+      if (
+        !newFile.type.startsWith("image/") &&
+        !newFile.type.startsWith("application/pdf") &&
+        !newFile.type.startsWith("application/octet-stream")
+      ) {
+        alert("Invalid file type. Please upload images or PDFs.");
+        return false;
       }
-
-      start = end;
-    }
-
-    console.log(`Upload complete for ${file.name}!`);
-  };
-
-  const uploadChunk = async (chunk, chunkIndex, totalChunks, fileName) => {
-    const formData = new FormData();
-    formData.append('chunk', chunk, `${fileName}.part${chunkIndex}`);
-    formData.append('chunkIndex', chunkIndex);
-    formData.append('totalChunks', totalChunks);
-    formData.append('fileName', fileName);
-
-    return fetch('/upload', {
-      method: 'POST',
-      body: formData,
+      return true;
     });
+
+    const updatedList = [...fileList, ...validFiles]; // Add new files to the list
+    setFileList(updatedList);
+    props.onFileChange(updatedList);
   };
 
   const fileRemove = (file) => {
@@ -116,16 +73,22 @@ const DropFileInput = (props) => {
               <div className="relative flex mb-2.5 bg-gray/10 p-4 rounded-xl w-full justify-between">
                 <div className="flex">
                   <img
-                    src={ImageConfig[item.type.split("/")[1]] || ImageConfig["default"]}
+                    src={
+                      ImageConfig[item.type.split("/")[1]] ||
+                      ImageConfig["default"]
+                    }
                     alt="img"
                     width={40}
                     height={40}
                   />
                   <div className="ml-6">
-                    <p className="text-[16px] font-[poppins-regular] ">{item.name}</p>
+                    <p className="text-[16px] font-[poppins-regular] ">
+                      {item.name}
+                    </p>
                     <span className="flex">
                       <p className="text-[16px] font-[poppins-regular] ">
-                        {Math.round(item.size / 1024)} KB {/* Display size in KB */}
+                        {Math.round(item.size / 1024)} KB{" "}
+                        {/* Display size in KB */}
                       </p>
                     </span>
                   </div>

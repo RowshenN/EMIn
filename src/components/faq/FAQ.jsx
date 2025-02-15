@@ -27,10 +27,11 @@ const FAQ = () => {
         console.log(err);
       });
   };
+  
   return (
     <div className="w-full sm:mb-10 md:mb-[183px] relative">
       <div className="w-[80%] z-10 mx-auto flex flex-col items-center justify-center">
-        <div className="w-full mb-[86px] flex items-center justify-center">
+        <div className="w-full sm:mb-[40px] md:mb-[86px] flex items-center justify-center">
           <p className="sm:text-[30px] lg:text-[50px] font-[poppins-semibold] ">FAQ's</p>
         </div>
 

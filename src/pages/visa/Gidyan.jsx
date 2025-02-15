@@ -4,12 +4,12 @@ import { Select, message, DatePicker } from "antd";
 import { axiosInstance } from "../../utils/axiosInstance";
 import { countries } from "../../components/Countries";
 import visa_line from "../../images/visa-send-line.svg";
-// import moment from "moment";
+import moment from "moment";
 import { SebedimContext } from "../../context/Context";
 
 const optionsGender = [
-  { label: "Male", value: "Male" },
-  { label: "Female", value: "Female" },
+  { label: "Male", value: "male" },
+  { label: "Female", value: "female" },
 ];
 
 const labelRender = (props) => {
@@ -26,49 +26,94 @@ const labelRender = (props) => {
 const Gidyan = () => {
   const { dil } = useContext(SebedimContext);
   const { Option } = Select;
-  const [photo, setPhoto] = useState([]); // Store File objects
-  const [local_passport, setLocal_passport] = useState([]);
-  const [international_passport, setInternational_passport] = useState([]);
-  const [birth_certificate, setBirth_certificate] = useState([]);
-  const [marriage_certificate, setMarriage_certificate] = useState([]);
+  const [photo, setPhoto] = useState([]);
+  const [localPassport, setLocalPassport] = useState([]);
+  const [internationalPassport, setInternationalPassport] = useState([]);
+  const [birthCertificate, setBirthCertificate] = useState([]);
+  const [marriageCertificate, setMarriageCertificate] = useState([]);
 
   const [gidyanInfo, setGidyanInfo] = useState({
     name: "",
     surname: "",
     patronymic_name: "",
     gender: "",
-    birth_date: null, // Store as moment object or null
+    birth_date: null,
     email: "",
     phone: "",
     nationality: "",
     outgoing_country: "",
-    travel_date: null, // Store as moment object or null
+    travel_date: null,
     notes: "",
   });
 
-  const onFileChangePhoto = (files) => {
-    setPhoto(files);
-    console.log(photo);
+  const resizeAndConvertImage = (
+    file,
+    maxWidth,
+    maxHeight,
+    targetType = "image/jpeg",
+    quality = 0.7
+  ) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement("canvas");
+          let width = img.width;
+          let height = img.height;
+
+          if (width > maxWidth) {
+            height *= maxWidth / width;
+            width = maxWidth;
+          }
+          if (height > maxHeight) {
+            width *= maxHeight / height;
+            height = maxHeight;
+          }
+
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext("2d");
+          ctx.drawImage(img, 0, 0, width, height);
+
+          canvas.toBlob(
+            (blob) => {
+              const resizedFile = new File([blob], file.name, {
+                type: targetType,
+              });
+              resolve(resizedFile);
+            },
+            targetType,
+            quality
+          );
+        };
+        img.onerror = reject;
+        img.src = event.target.result;
+      };
+      reader.readAsDataURL(file);
+    });
   };
 
-  const onFileLocal_passport = (files) => {
-    setLocal_passport(files);
-    console.log(local_passport);
+  const handleImageUpload = async (files, setFilesState, fieldName) => {
+    const resizedFiles = [];
+    for (const file of files) {
+      try {
+        const resizedFile = await resizeAndConvertImage(file, 800, 600);
+        resizedFiles.push(resizedFile);
+      } catch (error) {
+        console.error(`Error resizing ${fieldName} image:`, error);
+        message.error(
+          `Error resizing ${fieldName} image. Using original file.`
+        );
+        resizedFiles.push(file);
+      }
+    }
+    setFilesState(resizedFiles);
   };
 
-  const onFileInternational_passport = (files) => {
-    setInternational_passport(files);
-    console.log(international_passport);
-  };
-
-  const onFileChangebirthdate = (files) => {
-    setBirth_certificate(files);
-    console.log(birth_certificate);
-  };
-
-  const onFileChangemarriage = (files) => {
-    setMarriage_certificate(files);
-    console.log(marriage_certificate);
+  const formatDateForBackend = (date) => {
+    if (!date) return null;
+    return moment(date).format("DD.MM.YYYY"); // Correct date formatting
   };
 
   const postMessageOutgoing = async () => {
@@ -83,51 +128,60 @@ const Gidyan = () => {
       gidyanInfo.outgoing_country &&
       gidyanInfo.travel_date &&
       photo.length > 0 &&
-      local_passport.length > 0 &&
-      international_passport.length > 0 &&
-      birth_certificate.length > 0 &&
-      marriage_certificate.length > 0
+      localPassport.length > 0 &&
+      internationalPassport.length > 0
     ) {
-      const formData = new FormData();
-
-      photo.forEach((file) => formData.append("photo", file));
-      local_passport.forEach((file) => formData.append("local_passport", file));
-      international_passport.forEach((file) =>
-        formData.append("international_passport", file)
-      );
-      birth_certificate.forEach((file) =>
-        formData.append("birth_certificate", file)
-      );
-      marriage_certificate.forEach((file) =>
-        formData.append("marriage_certificate", file)
-      );
-
-      formData.append("name", gidyanInfo.name);
-      formData.append("surname", gidyanInfo.surname);
-      formData.append("gender", gidyanInfo.gender);
-      formData.append(
-        "birth_date",
-        gidyanInfo.birth_date
-          ? gidyanInfo.birth_date.format("YYYY-MM-DD")
-          : null
-      );
-      formData.append("email", gidyanInfo.email);
-      formData.append("phone", gidyanInfo.phone);
-      formData.append("nationality", gidyanInfo.nationality);
-      formData.append("outgoing_country", gidyanInfo.outgoing_country);
-      formData.append(
-        "travel_date",
-        gidyanInfo.travel_date
-          ? gidyanInfo.travel_date.format("YYYY-MM-DD")
-          : null
-      );
-      formData.append("notes", gidyanInfo.notes);
-
       try {
+        // 1. Resize images
+        await Promise.all([
+          handleImageUpload(photo, setPhoto, "photo"),
+          handleImageUpload(localPassport, setLocalPassport, "localPassport"),
+          handleImageUpload(
+            internationalPassport,
+            setInternationalPassport,
+            "internationalPassport"
+          ),
+          handleImageUpload(
+            birthCertificate,
+            setBirthCertificate,
+            "birthCertificate"
+          ),
+          handleImageUpload(
+            marriageCertificate,
+            setMarriageCertificate,
+            "marriageCertificate"
+          ),
+        ]);
+
+        // 2. Create FormData and append data
+        const formData = new FormData();
+
+        for (const key in gidyanInfo) {
+          if (key === "birth_date" || key === "travel_date") {
+            const formattedDate = formatDateForBackend(gidyanInfo[key]);
+            formData.append(key, formattedDate);
+          } else {
+            formData.append(key, gidyanInfo[key]);
+          }
+        }
+
+        photo.forEach((file) => formData.append("photo", file));
+        localPassport.forEach((file) =>
+          formData.append("local_passport", file)
+        );
+        internationalPassport.forEach((file) =>
+          formData.append("international_passport", file)
+        );
+        birthCertificate.forEach((file) =>
+          formData.append("birth_certificate", file)
+        );
+        marriageCertificate.forEach((file) =>
+          formData.append("marriage_certificate", file)
+        );
+
         const res = await axiosInstance.post("/visas/outgoing", formData);
         message.success("Outgoing visa created successfully!");
         setGidyanInfo({
-          // Clear form data
           name: "",
           surname: "",
           patronymic_name: "",
@@ -141,13 +195,20 @@ const Gidyan = () => {
           notes: "",
         });
         setPhoto([]);
-        setLocal_passport([]);
-        setInternational_passport([]);
-        setBirth_certificate([]);
-        setMarriage_certificate([]);
+        setLocalPassport([]);
+        setInternationalPassport([]);
+        setBirthCertificate([]);
+        setMarriageCertificate([]);
       } catch (err) {
-        console.error(err);
-        message.error("Error creating outgoing visa. Please try again.");
+        console.error("Full Error:", err);
+        if (err.response && err.response.data && err.response.data.errors) {
+          const errorMessages = err.response.data.errors;
+          for (const key in errorMessages) {
+            message.error(errorMessages[key][0]);
+          }
+        } else {
+          message.error("Error creating outgoing visa. Please try again.");
+        }
       }
     } else {
       message.warning(
@@ -158,14 +219,22 @@ const Gidyan = () => {
 
   const handleGidyanGender = (value) =>
     setGidyanInfo({ ...gidyanInfo, gender: value });
-  const handleGidyanBirth = (value) =>
+  const handleGidyanbirth_date = (value) =>
     setGidyanInfo({ ...gidyanInfo, birth_date: value });
-  const handleGidyanNation = (value) =>
+  const handleGidyanNationality = (value) =>
     setGidyanInfo({ ...gidyanInfo, nationality: value });
-  const handleGidyanCountry = (value) =>
+  const handleGidyanoutgoing_country = (value) =>
     setGidyanInfo({ ...gidyanInfo, outgoing_country: value });
-  const handleGidyanDate = (value) =>
+  const handleGidyantravel_date = (value) =>
     setGidyanInfo({ ...gidyanInfo, travel_date: value });
+
+  const onFileChangePhoto = (files) => setPhoto(files);
+  const onFileLocalPassport = (files) => setLocalPassport(files);
+  const onFileInternationalPassport = (files) =>
+    setInternationalPassport(files);
+  const onFileChangeBirthCertificate = (files) => setBirthCertificate(files);
+  const onFileChangeMarriageCertificate = (files) =>
+    setMarriageCertificate(files);
 
   return (
     <form>
@@ -305,7 +374,6 @@ const Gidyan = () => {
               value={gidyanInfo.gender}
               onChange={handleGidyanGender}
               labelRender={labelRender}
-              defaultValue="1"
               className="ant-selector"
               options={optionsGender}
             />
@@ -326,7 +394,8 @@ const Gidyan = () => {
             </label>
             <DatePicker
               value={gidyanInfo.birth_date}
-              onChange={handleGidyanBirth}
+              onChange={handleGidyanbirth_date}
+              format="DD.MM.YYYY"
               placeholder="Saýla"
               className="bg-[#FCFCFC] text-[16px] font-[poppins-regular] w-full py-[13px]"
             />
@@ -414,10 +483,9 @@ const Gidyan = () => {
               </label>
               <Select
                 labelRender={labelRender}
-                defaultValue="1"
                 className="ant-selector"
                 value={gidyanInfo.nationality}
-                onChange={handleGidyanNation}
+                onChange={handleGidyanNationality}
               >
                 {countries.map((option) => (
                   <Option key={option.value} value={option.value}>
@@ -454,10 +522,9 @@ const Gidyan = () => {
                 </label>
                 <Select
                   labelRender={labelRender}
-                  defaultValue="1"
                   className="ant-selector"
                   value={gidyanInfo.outgoing_country}
-                  onChange={handleGidyanCountry}
+                  onChange={handleGidyanoutgoing_country}
                 >
                   {countries.map((option) => (
                     <Option key={option.value} value={option.value}>
@@ -478,7 +545,8 @@ const Gidyan = () => {
                   placeholder="Saýla"
                   className="bg-[#FCFCFC] text-[16px] font-[poppins-regular] w-full py-[13px]"
                   value={gidyanInfo.travel_date}
-                  onChange={handleGidyanDate}
+                  onChange={handleGidyantravel_date}
+                  format="DD.MM.YYYY"
                 />
               </div>
             </div>
@@ -507,8 +575,8 @@ const Gidyan = () => {
                   : "Local Passport"}
               </p>
               <DropFileInput
-                files={local_passport}
-                onFileChange={onFileLocal_passport}
+                files={localPassport}
+                onFileChange={onFileLocalPassport}
               />
             </div>
 
@@ -517,16 +585,16 @@ const Gidyan = () => {
                 Zagran passport
               </p>
               <DropFileInput
-                files={international_passport}
-                onFileChange={onFileInternational_passport}
+                files={internationalPassport}
+                onFileChange={onFileInternationalPassport}
               />
             </div>
 
             <div className="flex flex-col justify-start gap-[6px] w-full items-baseline">
               <p className="text-[16px] font-[poppins-regular]">Metrka</p>
               <DropFileInput
-                files={birth_certificate}
-                onFileChange={(files) => onFileChangebirthdate(files)}
+                files={birthCertificate}
+                onFileChange={onFileChangeBirthCertificate}
               />
             </div>
           </div>
@@ -537,8 +605,8 @@ const Gidyan = () => {
                 Eger maşgalaly bolsa nika şahadatnamasy
               </p>
               <DropFileInput
-                files={marriage_certificate}
-                onFileChange={onFileChangemarriage}
+                files={marriageCertificate}
+                onFileChange={onFileChangeMarriageCertificate}
               />
             </div>
 

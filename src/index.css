@@ -67,14 +67,7 @@ p,h1,h1 {
   -webkit-appearance: none; /* For Safari */ 
 }
 
-.ant-drawer-content {
-  height: 450px !important;
-}
-
-.ant-drawer-body {
-  height: 350px !important;
-}
-
-.ant-drawer-content-wrapper {
-  height: fit-content !important;
+:where(.css-dev-only-do-not-override-1okl62o).ant-drawer  {
+  height: 100vh !important;
+  width: 100vw !important;
 }

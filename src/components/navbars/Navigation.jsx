@@ -19,6 +19,10 @@ const Navigation = () => {
   return (
     <div className="lg:w-[90%] sm:w-[94%] mx-auto mt-[20px]">
       <div className="w-full flex items-center justify-between">
+        <div onClick={() => navigate("/")} className="w-[75px] cursor-pointer">
+          <img src={logo} className="w-full object-contain" alt="logo" />
+        </div>
+
         {/* Drawer div */}
         <div className="hidden">
           <Drawer
@@ -35,7 +39,7 @@ const Navigation = () => {
                   className="w-full cursor-pointer"
                 >
                   {dil === "tk"
-                    ? "Hakymyzda"
+                    ? "Biz barada"
                     : dil === "ru"
                     ? "О нас"
                     : dil === "tr"
@@ -153,17 +157,12 @@ const Navigation = () => {
           </Drawer>
         </div>
 
-        <div onClick={() => navigate("/")} className="w-[75px] cursor-pointer">
-          <img src={logo} className="w-full object-contain" alt="logo" />
-        </div>
-
         <div className="flex items-center justify-center gap-5">
-          {/* nav itmes */}
           <div className="flex items-center text-[14px] font-[poppins-medium] justify-center gap-4">
             <div className="sm:hidden lg:flex bg-[#F9F9F9] py-[10px] px-5 rounded-[29px] w-full items-center justify-center gap-9">
               <p onClick={() => navigate("/about")} className="cursor-pointer">
                 {dil === "tk"
-                  ? "Hakymyzda"
+                  ? "Biz barada"
                   : dil === "ru"
                   ? "О нас"
                   : dil === "tr"

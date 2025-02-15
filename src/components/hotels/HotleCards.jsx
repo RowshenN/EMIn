@@ -9,7 +9,7 @@ const HotleCards = ({ item }) => {
   return (
     <div
       onClick={() => navigate(`/hotel-inner/${item.id}`)}
-      className="w-full sm:h-[228px] md:h-[400px] cursor-pointer relative"
+      className="w-full sm:h-[200px] md:h-[400px] cursor-pointer relative"
     >
       <div className="w-full h-full">
         <img

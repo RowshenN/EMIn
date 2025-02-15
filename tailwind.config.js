@@ -11,6 +11,8 @@ module.exports = {
       colors : {
         "my-bg" : "rgba(0, 0, 0, 0.71)",
         'custom-teal-gradient': 'linear-gradient(180deg, #FFFFFF 0%, #D8F0FF 85.8%)',
+        'custom-teal-gradient-hotel': ' linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.55) 38.06%)',
+        'gradient-top': 'linear-gradient(to bottom, black 55%, rgba(0,0,0,0.55) 350%)',
       },
       screens: {
         sm: "320px",

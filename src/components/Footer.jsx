@@ -13,6 +13,12 @@ const Footer = () => {
   const [tours, setTours] = useState(false);
   const { dil } = useContext(SebedimContext);
   const navigate = useNavigate();
+  const currentDate = new Date();
+  const day = currentDate.getDate().toString().padStart(2, "0");
+  const month = (currentDate.getMonth() + 1).toString().padStart(2, "0"); // Month is 0-indexed
+  const year = currentDate.getFullYear();
+
+  const formattedDate = `${day}.${month}.${year}`;
   return (
     <div className="w-[90%] mx-auto sm:px-5 md:px-[78px] sm:py-[27px] md:pt-[42px] md:pb-[33px] bg-[#F4F4F4] rounded-[20px] mb-[67px] ">
       <div className="flex md:flex-row sm:flex-col sm:items-baseline md:gap-0 sm:gap-10 md:items-center sm:justify-start md:justify-between w-full sm:pb-[60px] md:pb-[98px] border-b border-solid border-[#DADADA] ">
@@ -23,8 +29,14 @@ const Footer = () => {
             src={logo}
             alt="logo"
           />
-          <p className="sm:w-[90%] md:w-[28%] text-[#7A7A7A] sm:text-[12px] md:text-[14px] font-[poppins-regular] ">
-            Lorem ipsum dolor sit amet consectetur pellentesque.{" "}
+          <p className="sm:w-[90%] md:w-[50%] text-[#7A7A7A] sm:text-[12px] md:text-[14px] font-[poppins-regular] ">
+            {dil === "tk"
+              ? "Emin Hyzmat syýahat agentligi bilen syýahat etmek has aňsat! Wiza kömegi, gezelençler we ygtybarly hyzmatlar bilen rahat syýahat üpjün edýäris."
+              : dil === "ru"
+              ? "Туристическое агентство Emin Hyzmat делает путешествия проще! Визовая поддержка, туры и надежный сервис – все, что нужно для комфортной поездки."
+              : dil === "tr"
+              ? "Emin Hyzmat seyahat acentesi ile seyahat etmek artık daha kolay! Vize desteği, turlar ve güvenilir hizmetlerle sorunsuz bir yolculuk sunuyoruz."
+              : "Emin Hyzmat Travel Agency is here to make your travels easier. Whether you need visa support or exciting tour packages, we provide reliable and hassle-free services."}
           </p>
         </div>
 
@@ -35,7 +47,7 @@ const Footer = () => {
               className="text-[14px] cursor-pointer font-[poppins-medium] "
             >
               {dil === "tk"
-                ? "Hakymyzda"
+                ? "Biz barada"
                 : dil === "ru"
                 ? "О нас"
                 : dil === "tr"
@@ -179,7 +191,14 @@ const Footer = () => {
 
       <div className="pt-[30px] w-full md:flex-row sm:flex-col sm:gap-5 md:gap-0 flex items-center justify-between">
         <p className="text-[#717171] text-[14px] font-[poppins-regular]">
-          Copyright 2024
+          {dil === "tk"
+            ? "@Ähli hukuklar goralan"
+            : dil === "ru"
+            ? "@Все права защищены"
+            : dil === "tr"
+            ? "@Her hakkı saklıdır"
+            : "@All rights reserved"}{" "}
+          {formattedDate}
         </p>
 
         <div className="flex items-center justify-center gap-[30px] ">

@@ -18,7 +18,7 @@ const Hotels = () => {
 
   useEffect(() => {
     fetchHotels(currentPage);
-  }, [currentPage, dil]); // Add dil to the dependency array
+  }, [currentPage, dil]);
 
   const fetchHotels = async (page = 1) => {
     setLoading(true);
@@ -30,6 +30,7 @@ const Hotels = () => {
         },
       });
       setHotels(response.data.data);
+      console.log(response.data.data);
       setMeta(response.data.meta);
     } catch (error) {
       setError(error);
@@ -42,7 +43,7 @@ const Hotels = () => {
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
-  
+
   return (
     <>
       <Navigation />
@@ -77,8 +78,13 @@ const Hotels = () => {
           </h1>
 
           <p className="sm:text-[12px] md:text-[16px] font-[poppins-regular] sm:w-full md:w-[50%] mb-[48px] mt-4 ">
-            Lorem ipsum dolor sit amet consectetur. Quam placerat viverra
-            phasellus lorem viverra massa purus platea.
+            {dil === "tk"
+              ? "Emin Hyzmat bilen iň gowy otelleri iň amatly bahadan tapyň! Dynç alyşyňyzy rahat we lezzetli bolmagy üçin amatly myhmanhanalary hödürleýäris."
+              : dil === "ru"
+              ? "Найдите лучшие отели по выгодным ценам с туристическим агентством Emin Hyzmat! Мы предлагаем комфортное размещение для вашего удобства и спокойствия."
+              : dil === "tr"
+              ? "Emin Hyzmat seyahat acentesi ile en iyi otelleri en uygun fiyatlarla bulun! Konforlu konaklama seçeneklerimizle seyahatinizi keyifli ve sorunsuz hale getiriyoruz."
+              : "Find the best hotels at the best prices with Emin Hyzmat Travel Agency! We offer comfortable accommodations to make your stay enjoyable and hassle-free."}
           </p>
 
           <div>
@@ -88,7 +94,9 @@ const Hotels = () => {
               })}
             </div>
             <div className="w-full mt-[40px] flex items-center gap-5 justify-center">
-              <Pagination meta={meta} onPageChange={handlePageChange} />
+              {meta && (
+                <Pagination meta={meta} onPageChange={handlePageChange} />
+              )}
             </div>
           </div>
         </div>

@@ -82,14 +82,16 @@ const HotelInner = () => {
             alt="surat"
             className="-z-10 object-cover md:h-[523px] sm:h-[300px] rounded-[23px] w-full "
           />
-          <div className="w-[55%] z-10 absolute bottom-[10%] left-[23%] text-center">
-            <p className="text-white sm:text-[18px] md:text-[30px] xl:text-[60px] font-[poppins-bold] ">
-              {hotel?.name}
-            </p>
-            <p className="text-white sm:text-[12px] md:text-[16px] font-[poppins-regular] ">
-              {/* {hotel?.short_description} */}
-              {fisryt_desc}
-            </p>
+          <div className="w-full h-full text-center flex flex-col rounded-[23px] justify-center items-center py-9 z-10 absolute bottom-0 left-0 bg-custom-teal-gradient-hotel bg-gradient-to-b from-[rgba(0,0,0,0.1)] to to-[rgba(0,0,0,0.4)]">
+            <div className="w-[55%]">
+              <p className="text-white sm:text-[18px] md:text-[30px] xl:text-[60px] font-[poppins-bold] ">
+                {hotel?.name}
+              </p>
+              <p className="text-white sm:text-[12px] md:text-[16px] font-[poppins-regular] ">
+                {/* {hotel?.short_description} */}
+                {fisryt_desc}
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -158,20 +160,20 @@ const HotelInner = () => {
               : "Map"}
           </p>
 
-          {/* <div className="w-full">
+          <div className="w-full">
             <iframe
               className="w-full object-cover sm:h-[260px] rounded-[10px] md:h-[418px]"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3147.036845389377!2d58.33081367570038!3d37.929569671946815!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f700184161f1425%3A0x7d0166571add2197!2sYyldyz%20Hotel!5e0!3m2!1sen!2s!4v1739186619510!5m2!1sen!2s"
+              src={hotel?.map}
               width="600"
               height="450"
               allowfullscreen=""
               loading="lazy"
               referrerpolicy="no-referrer-when-downgrade"
             ></iframe>
-          </div> */}
-          <div>
+          </div>
+          {/* <div>
             <img src={hotel?.map} alt="map" />
-          </div> 
+          </div> */}
         </div>
       </div>
 

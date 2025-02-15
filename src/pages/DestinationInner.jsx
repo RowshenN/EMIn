@@ -119,16 +119,39 @@ const DestinationInner = () => {
             </p> */}
 
             <div className="flex items-center justify-start gap-4 mb-5 ">
-              <img src={map} alt="map" />
+              <img
+                src={map}
+                className="md:w-[18px] sm:w-[14px] h-full object-cover "
+                alt="map"
+              />
               <p className="text-[14px] font-[poppins-regular] ">
                 {destInner?.location}
               </p>
             </div>
 
             <div className="flex items-center justify-start gap-4">
-              <img src={clock} alt="clock" />
+              <img
+                src={clock}
+                className="md:w-[18px] sm:w-[14px] h-full object-cover "
+                alt="clock"
+              />
               <p className=" text-[14px] font-[poppins-regular] ">
-                {days} {days > 0 ? "days" : "day"}
+                {days}{" "}
+                {days > 0
+                  ? dil === "tk"
+                    ? "gün"
+                    : dil === "ru"
+                    ? "дни"
+                    : dil === "tr"
+                    ? "gün"
+                    : "days"
+                  : dil === "tk"
+                  ? "gün"
+                  : dil === "ru"
+                  ? "день"
+                  : dil === "tr"
+                  ? "gün"
+                  : "day"}
               </p>
             </div>
           </div>
@@ -187,7 +210,13 @@ const DestinationInner = () => {
         <div className="sm:w-full md:w-[50%] ">
           <div>
             <p className="sm:text-[18px] md:text-[30px] font-[poppins-semibold] mb-4 ">
-              Included
+              {dil === "tk"
+                ? "Degişli"
+                : dil === "ru"
+                ? "Включено"
+                : dil === "tr"
+                ? "Dahil"
+                : "Included"}
             </p>
             <div className="flex items-baseline flex-col justify-start gap-3 mb-[37px] ">
               {includedItems.map((item, index) => (
@@ -196,7 +225,13 @@ const DestinationInner = () => {
             </div>
 
             <p className="sm:text-[18px] md:text-[30px] font-[poppins-semibold] mb-4 ">
-              Not included
+              {dil === "tk"
+                ? "Degişli däl"
+                : dil === "ru"
+                ? "Не включено"
+                : dil === "tr"
+                ? "Dahil değil"
+                : "Not-included"}
             </p>
             <div className="flex items-baseline flex-col justify-start gap-3">
               {notIncludedItems.map((item, index) => (

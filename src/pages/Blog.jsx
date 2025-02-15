@@ -85,8 +85,13 @@ const Blog = () => {
                     : "Popular"}
                 </p>
                 <p className="sm:text-[12px] md:text-[16px] font-[poppins-regular] sm:mb-[47px] md:mb-[119px]">
-                  Lorem ipsum dolor sit amet consectetur. Quam placerat viverra
-                  phasellus lorem viverra massa purus platea.
+                  {dil === "tk"
+                    ? "Emin Hyzmat syýahat kärhanasyndan syýahat habarlary, wiza täzelikleri we ýörite teklipler bilen tanyş boluň! Täze ýerleri biziň bilen öwreniň."
+                    : dil === "ru"
+                    ? "Будьте в курсе последних новостей о путешествиях, обновлениях виз и специальных предложениях от туристического агентства Emin Hyzmat! Открывайте новые направления вместе с нами."
+                    : dil === "tr"
+                    ? "Emin Hyzmat seyahat acentesinden en son seyahat haberleri, vize güncellemeleri ve özel teklifleri takip edin! Yeni destinasyonları bizimle keşfedin."
+                    : "Stay updated with the latest travel news, visa updates, and special offers from Emin Hyzmat Travel Agency! Explore new destinations with us."}
                 </p>
 
                 <BlogCart item={TopFour[0]} />
@@ -110,7 +115,7 @@ const Blog = () => {
                     <img
                       src={TopFour[1]?.banner}
                       alt="surat"
-                      className="w-full sm:h-[200px] md:h-[497px] rounded-[22px] object-cover"
+                      className="w-full sm:h-[200px] md:h-[530px] rounded-[22px] object-cover"
                     />
                   </div>
                   <p className="sm:text-[18px] md:text-[24px] font-[poppins-semibold]">

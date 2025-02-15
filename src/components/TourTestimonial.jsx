@@ -51,6 +51,8 @@ const TourTestimonial = ({ tour_tests, id }) => {
     return (
       <StarIcon
         key={i}
+        width={20}
+        height={20}
         onClick={() => handleStarClick(i)}
         onMouseEnter={() => handleStarHover(i)}
         onMouseLeave={handleStarLeave}
@@ -212,7 +214,7 @@ const TourTestimonial = ({ tour_tests, id }) => {
           }}
           className="fixed  bg-black/20 z-50 flex items-center justify-center top-0 left-0 bottom-0 right-0"
         >
-          <div className="rounded-[20px] z-30 bg-white py-5 px-[27px] ">
+          <div className="rounded-[20px] z-30 bg-white w-[320px] py-5 sm:px-5 xs:px-[27px] ">
             <div className="w-full flex items-center justify-between mb-4">
               <p className="text-[16px] font-[poppins-semibold] ">
                 Testimonial
@@ -223,7 +225,7 @@ const TourTestimonial = ({ tour_tests, id }) => {
               </div>
             </div>
 
-            <form className="w-[335px] flex flex-col items-baseline justify-center gap-3">
+            <form className="w-full flex flex-col items-baseline justify-center gap-3">
               <textarea
                 value={testimonial.message}
                 onChange={(e) =>

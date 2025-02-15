@@ -5,10 +5,11 @@ import { axiosInstance } from "../../utils/axiosInstance";
 import { countries } from "../../components/Countries";
 import visa_line from "../../images/visa-send-line.svg";
 import { SebedimContext } from "../../context/Context";
+import moment from "moment";
 
 const optionsGender = [
-  { label: "Male", value: "Male" },
-  { label: "Female", value: "Female" },
+  { label: "Male", value: "male" },
+  { label: "Female", value: "female" },
 ];
 
 const labelRender = (props) => {
@@ -39,8 +40,74 @@ const Gelyan = () => {
     notes: "",
   });
 
-  const [passport, setPassport] = useState([]); // Use for DropFileInput
-  const [photo, setPhoto] = useState([]); // Use for DropFileInput
+  const [passport, setPassport] = useState([]);
+  const [photo, setPhoto] = useState([]);
+  const [formErrors, setFormErrors] = useState({});
+
+  const resizeAndConvertImage = (
+    file,
+    maxWidth,
+    maxHeight,
+    targetType = "image/jpeg",
+    quality = 0.7
+  ) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement("canvas");
+          let width = img.width;
+          let height = img.height;
+
+          if (width > maxWidth) {
+            height *= maxWidth / width;
+            width = maxWidth;
+          }
+          if (height > maxHeight) {
+            width *= maxHeight / height;
+            height = maxHeight;
+          }
+
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext("2d");
+          ctx.drawImage(img, 0, 0, width, height);
+
+          canvas.toBlob(
+            (blob) => {
+              const resizedFile = new File([blob], file.name, {
+                type: targetType,
+              });
+              resolve(resizedFile);
+            },
+            targetType,
+            quality
+          );
+        };
+        img.onerror = reject;
+        img.src = event.target.result;
+      };
+      reader.readAsDataURL(file);
+    });
+  };
+
+  const handleImageUpload = async (files, setFilesState, fieldName) => {
+    const resizedFiles = [];
+    for (const file of files) {
+      try {
+        const resizedFile = await resizeAndConvertImage(file, 800, 600);
+        resizedFiles.push(resizedFile);
+      } catch (error) {
+        console.error(`Error resizing ${fieldName} image:`, error);
+        message.error(
+          `Error resizing ${fieldName} image. Using original file.`
+        );
+        resizedFiles.push(file);
+      }
+    }
+    setFilesState(resizedFiles);
+  };
 
   const onFileChangePassport = (files) => {
     setPassport(files);
@@ -50,82 +117,165 @@ const Gelyan = () => {
     setPhoto(files);
   };
 
-  const postMessageIncoming = async () => {
-    if (
-      gelyanInfo.name &&
-      gelyanInfo.surname &&
-      gelyanInfo.gender &&
-      gelyanInfo.birth_date &&
-      gelyanInfo.email &&
-      gelyanInfo.phone &&
-      gelyanInfo.nationality &&
-      gelyanInfo.incoming_country &&
-      gelyanInfo.travel_date &&
-      passport.length > 0 &&
-      photo.length > 0
-    ) {
-      const formData = new FormData(); // Use FormData
+  const validateForm = () => {
+    let errors = {};
+    let isValid = true;
 
-      passport.forEach((file) => formData.append("passport", file));
-      photo.forEach((file) => formData.append("photo", file));
-
-      for (const key in gelyanInfo) {
-        if (key === "birth_date" || key === "travel_date") {
-          formData.append(
-            key,
-            gelyanInfo[key] ? gelyanInfo[key].format("YYYY-MM-DD") : null
-          );
-        } else {
-          formData.append(key, gelyanInfo[key]);
-        }
-      }
-
-      try {
-        const res = await axiosInstance.post("/visas/incoming", formData, {
-          headers: {
-            "Content-Type": "multipart/form-data", // Important!
-          },
-        });
-        console.log(res);
-        message.success("Your message has been sent successfully!");
-        setGelyanInfo({
-          // Reset form
-          name: "",
-          surname: "",
-          patronymic_name: "",
-          gender: "",
-          birth_date: null,
-          email: "",
-          phone: "",
-          nationality: "",
-          incoming_country: "",
-          travel_date: null,
-          notes: "",
-        });
-        setPassport([]);
-        setPhoto([]);
-      } catch (error) {
-        console.error("Error:", error);
-        if (error.response) {
-          console.error("Response data:", error.response.data);
-          console.error("Response status:", error.response.status);
-          console.error("Response headers:", error.response.headers);
-          if (error.response.status === 413) {
-            message.error(
-              "File size too large. Please check the file size limits."
-            );
-          } else {
-            message.error("Error sending message. Please try again.");
-          }
-        } else {
-          message.error("An error occurred. Please try again.");
-        }
-      }
-    } else {
-      message.warning("Please fill all fields and upload documents!");
+    // Validation rules (same as before)
+    if (!gelyanInfo.name) {
+      errors.name = "Name is required";
+      isValid = false;
+    } else if (gelyanInfo.name.length > 255) {
+      errors.name = "Name is too long (max 255 characters)";
+      isValid = false;
     }
+
+    if (!gelyanInfo.surname) {
+      errors.surname = "Surname is required";
+      isValid = false;
+    } else if (gelyanInfo.surname.length > 255) {
+      errors.surname = "Surname is too long (max 255 characters)";
+      isValid = false;
+    }
+    if (gelyanInfo.patronymic_name && gelyanInfo.patronymic_name.length > 255) {
+      errors.patronymic_name =
+        "Patronymic name is too long (max 255 characters)";
+      isValid = false;
+    }
+
+    if (!gelyanInfo.gender) {
+      errors.gender = "Gender is required";
+      isValid = false;
+    }
+
+    if (!gelyanInfo.birth_date) {
+      errors.birth_date = "Birth date is required";
+      isValid = false;
+    }
+
+    if (!gelyanInfo.email) {
+      errors.email = "Email is required";
+      isValid = false;
+    } else if (
+      gelyanInfo.email.length > 255 ||
+      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(gelyanInfo.email)
+    ) {
+      errors.email = "Invalid email format or too long (max 255 characters)";
+      isValid = false;
+    }
+
+    if (!gelyanInfo.phone) {
+      errors.phone = "Phone number is required";
+      isValid = false;
+    } else if (gelyanInfo.phone.length > 20) {
+      errors.phone = "Phone number is too long (max 20 characters)";
+      isValid = false;
+    }
+
+    if (!gelyanInfo.nationality) {
+      errors.nationality = "Nationality is required";
+      isValid = false;
+    } else if (gelyanInfo.nationality.length > 100) {
+      errors.nationality = "Nationality is too long (max 100 characters)";
+      isValid = false;
+    }
+
+    if (!gelyanInfo.incoming_country) {
+      errors.incoming_country = "Incoming country is required";
+      isValid = false;
+    } else if (gelyanInfo.incoming_country.length > 100) {
+      errors.incoming_country =
+        "Incoming country is too long (max 100 characters)";
+      isValid = false;
+    }
+
+    if (!gelyanInfo.travel_date) {
+      errors.travel_date = "Travel date is required";
+      isValid = false;
+    }
+
+    if (passport.length === 0) {
+      errors.passport = "Passport file is required";
+      isValid = false;
+    } else if (passport[0] && passport[0].name.length > 2048) {
+      errors.passport = "Passport filename is too long (max 2048 characters)";
+      isValid = false;
+    }
+
+    if (photo.length === 0) {
+      errors.photo = "Photo file is required";
+      isValid = false;
+    } else if (photo[0] && photo[0].name.length > 2048) {
+      errors.photo = "Photo filename is too long (max 2048 characters)";
+      isValid = false;
+    }
+
+    setFormErrors(errors);
+    return isValid;
   };
 
+  const postMessageIncoming = async () => {
+    if (!validateForm()) {
+      return;
+    }
+
+    const formData = new FormData();
+
+    // 2. Append other form data
+    for (const key in gelyanInfo) {
+      if (key === "birth_date" || key === "travel_date") {
+        const formattedDate = moment(gelyanInfo[key]).format("DD.MM.YYYY"); // Format dates
+        formData.append(key, formattedDate);
+      } else {
+        formData.append(key, gelyanInfo[key]);
+      }
+    }
+
+    // 3. Append the *resized* images
+    passport.forEach((file) => formData.append("passport", file));
+    photo.forEach((file) => formData.append("photo", file));
+
+    try {
+      const res = await axiosInstance.post("/visas/incoming", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      console.log(res);
+      message.success("Incoming visa created successfully!");
+      setGelyanInfo({
+        name: "",
+        surname: "",
+        patronymic_name: "",
+        gender: "",
+        birth_date: null,
+        email: "",
+        phone: "",
+        nationality: "",
+        incoming_country: "",
+        travel_date: null,
+        notes: "",
+      });
+      setPassport([]);
+      setPhoto([]);
+      setFormErrors({});
+    } catch (error) {
+      console.error("Error:", error);
+      if (error.response) {
+        console.error("Response data:", error.response.data);
+        console.error("Response status:", error.response.status);
+        if (error.response.status === 422) {
+          message.error(error.response.data.message);
+        } else if (error.response.status === 413) {
+          message.error(error.response.data.message);
+        } else {
+          message.error("Error sending message. Please try again.");
+        }
+      } else {
+        message.error("An error occurred. Please try again.");
+      }
+    }
+  };
   const handleGelyanGender = (value) =>
     setGelyanInfo({ ...gelyanInfo, gender: value });
   const handleGelyanBirth = (value) =>
@@ -134,8 +284,10 @@ const Gelyan = () => {
     setGelyanInfo({ ...gelyanInfo, nationality: value });
   const handleGelyanCountry = (value) =>
     setGelyanInfo({ ...gelyanInfo, incoming_country: value });
-  const handleGelyanTravel = (value) =>
+  const handleGelyanTravel = (value) => {
     setGelyanInfo({ ...gelyanInfo, travel_date: value });
+    console.log(value);
+  };
 
   return (
     <form>
@@ -304,7 +456,7 @@ const Gelyan = () => {
               value={gelyanInfo.birth_date}
               onChange={handleGelyanBirth}
               placeholder="Saýla"
-              format="YYYY-MM-DD"
+              format="DD.MM.YYYY"
               className="bg-[#FCFCFC] text-[16px] font-[poppins-regular] w-full py-[13px]"
             />
           </div>
@@ -461,7 +613,7 @@ const Gelyan = () => {
                   value={gelyanInfo.travel_date}
                   onChange={handleGelyanTravel}
                   placeholder="Saýla"
-                  format="YYYY-MM-DD"
+                  format="DD.MM.YYYY"
                   className="bg-[#FCFCFC] text-[16px] font-[poppins-regular] w-full py-[13px]"
                 />
               </div>
@@ -555,9 +707,13 @@ const Gelyan = () => {
               </div>
 
               <p className="text-[#878787] text-[16px] font-[poppins-regular] ">
-                Lorem ipsum dolor sit amet consectetur. Arcu mattis amet tellus
-                est vitae molestie volutpat. Turpis montes eu pellentesque sed
-                vulputate hac elementum a sociis.
+                {dil === "tk"
+                  ? "Wizany onlaýn usulda çalt we aňsat almak üçin Emin Hyzmat syýahat agentligi bilen işlemegiňizi maslahat berýäris! Arzaňyzy kynçylyksyz doldurmaga kömek edýäris."
+                  : dil === "ru"
+                  ? "Оформите визу онлайн быстро и удобно с туристическим агентством Emin Hyzmat! Мы поможем вам заполнить заявку без лишних сложностей."
+                  : dil === "tr"
+                  ? "Vizenizi hızlı ve kolay bir şekilde online olarak Emin Hyzmat seyahat acentesi ile alın! Başvurunuzu sorunsuz tamamlamanıza yardımcı oluyoruz."
+                  : "Apply for your visa online quickly and easily with Emin Hyzmat Travel Agency! We assist you in completing your application hassle-free."}
               </p>
             </div>
           </div>
